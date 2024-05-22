@@ -7,10 +7,10 @@
 
 ## Elaborado por:
 
-- Juan Manuel Castaño Sánchez | 1114149092.
-- Juan David Marulanda Castro| 1089931072.
-- Daniel Estupiñán Ramos | 1007882343.
-- Diego Alejandro Giraldo Ascencio | 1004754596.
+- Juan Manuel Castaño Sánchez.
+- Juan David Marulanda Castro.
+- Daniel Estupiñán Ramos.
+- Diego Alejandro Giraldo Ascencio.
 
 
 Pagina web enfocada al desarrollo del proyecto (Sigue en creacion) => https://interesting-heliotrope-bd9.notion.site/Proyecto-final-Programaci-n-4-f22825c2adb84dc0a35f7a28bd45cd34?pvs=4
