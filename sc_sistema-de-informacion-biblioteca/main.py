@@ -1,35 +1,43 @@
-from utils.helpers import *
+# Importamos la clase SistemaBiblioteca del módulo helpers en el paquete utils.
+from utils.helpers import SistemaBiblioteca as sb
 
 def main():
+    """
+    Función principal que ejecuta el menú principal en un bucle continuo hasta que el usuario decida salir.
+    """
     while True:
-        mostrar_menu()
-        opcion = input("Ingrese una opción: ")
+        biblioteca_1 = sb()
+        sb.limpiar_consola(biblioteca_1)
+        sb.mostrar_menu(biblioteca_1)
+        
+        opcion = input("\n\n> Ingrese una opción => ")
+        
         if opcion == '1':
-            gestionar_tesis()
-            system_pause()
+            sb.gestionar_tesis(biblioteca_1)
+            sb.pausar_sistema(biblioteca_1)
         elif opcion == '2':
-            gestionar_articulos()
-            system_pause()
+            sb.gestionar_articulos(biblioteca_1)
+            sb.pausar_sistema(biblioteca_1)
         elif opcion == '3':
-            gestionar_libros()
-            system_pause()
+            sb.gestionar_libros(biblioteca_1)
+            sb.pausar_sistema(biblioteca_1)
         elif opcion == '4':
-            gestionar_categorias()
-            system_pause()
+            sb.gestionar_categorias(biblioteca_1)
+            sb.pausar_sistema(biblioteca_1)
         elif opcion == '5':
-            gestionar_autores()
-            system_pause()
+            sb.gestionar_autores(biblioteca_1)
+            sb.pausar_sistema(biblioteca_1)
         elif opcion == '6':
-            gestionar_lectores()
-            system_pause()
+            sb.gestionar_lectores(biblioteca_1)
+            sb.pausar_sistema(biblioteca_1)
         elif opcion == '7':
-            gestionar_prestamos()
-            system_pause()
+            sb.gestionar_prestamos(biblioteca_1)
+            sb.pausar_sistema(biblioteca_1)
         elif opcion == '8':
-            gestionar_multas()
-            system_pause()
+            sb.gestionar_multas(biblioteca_1)
+            sb.pausar_sistema(biblioteca_1)
         elif opcion == '0':
-            print("Saliendo del sistema...")
+            print("\n\n> Saliendo del sistema...")
             break
         else:
             print("Opción no válida, intente de nuevo.")
