@@ -2,8 +2,7 @@ from datetime import date
 from typing import List
 
 class Tesis:
-    def __init__(self, nombre_autor: List[str], institucion_academica: str, fecha_investigacion: date, 
-                 fecha_presentacion: date, campo_estudio: str, estado: str, numero_paginas: int):
+    def __init__(self, nombre_autor: List[str], institucion_academica: str, fecha_investigacion: date, fecha_presentacion: date, campo_estudio: str, estado: str, numero_paginas: int):
         self.nombre_autor = nombre_autor
         self.institucion_academica = institucion_academica
         self.fecha_investigacion = fecha_investigacion
