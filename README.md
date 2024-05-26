@@ -13,4 +13,4 @@
 - Diego Alejandro Giraldo Ascencio.
 
 
-Pagina web enfocada al desarrollo del proyecto (Sigue en creacion) => https://interesting-heliotrope-bd9.notion.site/Proyecto-final-Programaci-n-4-f22825c2adb84dc0a35f7a28bd45cd34?pvs=4
+Pagina web enfocada al desarrollo del proyecto (Sigue en creacion) => https://diecode24.notion.site/Proyecto-final-Programaci-n-4-f22825c2adb84dc0a35f7a28bd45cd34?pvs=4
