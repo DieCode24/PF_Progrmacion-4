@@ -12,7 +12,7 @@ class Tesis:
         self.numero_paginas = numero_paginas
         
         def __str__(self):
-            return self.nombre_autor
+            return f"Nombre del autor: {self.nombre_autor}\nInstitución académica: {self.institucion_academica}\nFecha de investigación: {self.fecha_investigacion}\nFecha de presentación: {self.fecha_presentacion}\nCampo de estudio: {self.campo_estudio}\nEstado: {self.estado}\nNúmero de páginas: {self.numero_paginas}"
         
 
     def registrar_tesis(self):
