@@ -10,6 +10,10 @@ class Tesis:
         self.campo_estudio = campo_estudio
         self.estado = estado
         self.numero_paginas = numero_paginas
+        
+        def __str__(self):
+            return self.nombre_autor
+        
 
     def registrar_tesis(self):
         pass  # Implementar lógica
