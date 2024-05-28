@@ -3,6 +3,8 @@ class Autor:
         self.nombre = nombre
         self.nacionalidad = nacionalidad
         self.fecha_nacimiento = fecha_nacimiento
+        self.libros = []
+        self.cantidad_libros = len(self.libros)
 
     def __str__(self):
         return self.nombre
