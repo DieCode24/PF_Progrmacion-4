@@ -1,5 +1,4 @@
 # Juan Marulanda
-
 from clases import Autor
 from datetime import datetime 
 
@@ -57,8 +56,3 @@ class AutorManager:
                 return True
         return False
     
-AutorManager = AutorManager()
-
-AutorManager.agregar_autor("Gabriel Garcia Marquez", "Colombiano", "1927-03-06")
-
-listar_autores = AutorManager.listar_autores()
