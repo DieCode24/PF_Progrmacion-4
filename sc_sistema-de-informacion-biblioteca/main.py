@@ -1,12 +1,8 @@
-# Importamos la clase SistemaBiblioteca del módulo helpers en el paquete utils, y lo asocio a la palabra reservada propia sb.
 from utils.helpers import SistemaBiblioteca as sb
-
+from managers.libro_manager import LibroManager
 def main():
-    """
-    Función principal que ejecuta el menú principal en un bucle continuo hasta que el usuario decida salir.
-    """
-    # Se insantica la bibliote a utilizar.
     biblioteca = sb()
+    libroManager = LibroManager()
     
     sb.limpiar_consola(biblioteca)
     
@@ -19,13 +15,12 @@ def main():
             return
         
     while True:
-        
         sb.limpiar_consola(biblioteca)
         
         if rol == "lector":
             sb.mostrar_menu_lector(biblioteca)
         elif rol == "bibliotecario":
-            sb.mostrar_menu_bibliotecario(biblioteca)
+            sb.mostrar_menu_bibliotecario(biblioteca, libroManager)
         elif rol == "administrador":
             sb.mostrar_menu_administrador(biblioteca)
         else:

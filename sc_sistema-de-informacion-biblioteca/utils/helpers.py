@@ -1,6 +1,7 @@
 import os
-
+from managers.libro_manager import LibroManager
 class SistemaBiblioteca:
+    
     def pausar_sistema(self):
         """Pausa el sistema, funciona en Windows y Linux."""
         try:
@@ -19,6 +20,7 @@ class SistemaBiblioteca:
 
     def mostrar_menu_lector(self):
         print("\nMenú de Lector:")
+        print("1. Registrar libro")
         print("1. Buscar libros")
         print("2. Realizar préstamo de libro")
         print("3. Devolver libro")
@@ -26,17 +28,49 @@ class SistemaBiblioteca:
         print("0. Salir")
         SistemaBiblioteca.pausar_sistema(self)
         
-    def mostrar_menu_bibliotecario(self):
+    def mostrar_menu_bibliotecario(self,libroManager: LibroManager):
         print("\nMenú de Bibliotecario:")
         print("1. Registrar nuevo libro")
         print("2. Buscar libros")
         print("3. Modificar libro")
-        print("4. Inhabilitar libro")
+        print("4. lsitado de libro")
         print("5. Registrar nuevo lector")
         print("6. Modificar lector")
         print("7. Buscar lectores")
         print("0. Salir")
         SistemaBiblioteca.pausar_sistema(self)
+        
+                
+        opcion = input("\n\n> Ingrese una opción => ")
+        
+        if opcion == '1':
+            libroManager.registrar_libro()
+        elif opcion == '2':
+            SistemaBiblioteca.gestionar_articulos(self)
+            SistemaBiblioteca.pausar_sistema(self)
+        elif opcion == '3':
+            SistemaBiblioteca.gestionar_libros(self)
+            SistemaBiblioteca.pausar_sistema(self)
+        elif opcion == '4':
+            libroManager.listado_libros()
+            SistemaBiblioteca.pausar_sistema(self)
+        elif opcion == '5':
+            SistemaBiblioteca.gestionar_autores(self)
+            SistemaBiblioteca.pausar_sistema(self)
+        elif opcion == '6':
+            SistemaBiblioteca.gestionar_lectores(self)
+            SistemaBiblioteca.pausar_sistema(self)
+        elif opcion == '7':
+            SistemaBiblioteca.gestionar_prestamos(self)
+            SistemaBiblioteca.pausar_sistema(self)
+        elif opcion == '8':
+            SistemaBiblioteca.gestionar_multas(self)
+            SistemaBiblioteca.pausar_sistema(self)
+        elif opcion == '0':
+            print("\n\n> Saliendo del sistema...")
+            return
+        else:
+            print("Opción no válida, intente de nuevo.")
         
     def mostrar_menu_administrador(self):
         print("Sistema de Información Biblioteca")
