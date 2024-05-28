@@ -7,7 +7,8 @@ class tesis_manager:
     def __init__(self):
         self.tesisL = []
     
-    def add_tesis(self):
+    def agregar_tesis(self):
+        nombre_autor = input("Ingrese el nombre del autor: ")
         institucion_academica = input("Ingrese la institución académica: ")
         fecha_investigacion = input("Ingrese la fecha de investigación: ")
         fecha_presentacion = input("Ingrese la fecha de presentación: ")
@@ -19,17 +20,12 @@ class tesis_manager:
         self.tesisL.append(tesis)
         print("Tesis registrada con éxito.")
         
+        
     def list_tesis(self):
         print("Listado de tesis\n")
-        count = 1
         for tesis in self.tesisL:
             print(tesis)
             
-    def search_tesis(self):
-        estudio = input("Ingrese el campo de estudio: ")
-        for tesis in self.tesisL:
-            if tesis. == estudio:
-                print(tesis)
-                return
-        print("Tesis no encontrada.")
+ 
+    tesis = tesis_manager()
         
