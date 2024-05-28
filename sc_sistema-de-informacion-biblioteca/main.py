@@ -14,9 +14,9 @@ def main():
         
     if rol == "administrador":
         clave = input("Ingrese la clave de administrador: ")
-    if clave != "clave_admin":
-        print("Clave incorrecta. Acceso denegado.")
-        return
+        if clave != "clave_admin":
+            print("Clave incorrecta. Acceso denegado.")
+            return
         
     while True:
         
