@@ -8,11 +8,11 @@ def main():
     
     rol = input("¿Es usted un lector, bibliotecario o administrador? ").lower()
         
-    if rol == "bibliotecario":
-        clave = input("Ingrese la clave de bibliotecario: ")
-    if clave != "clave_admin":
-        print("Clave incorrecta. Acceso denegado.")
-        return
+    if rol == "administrador":
+        clave = input("Ingrese la clave de administrador: ")
+        if clave != "clave_admin":
+            print("Clave incorrecta. Acceso denegado.")
+            return
         
     while True:
         sb.limpiar_consola(biblioteca)

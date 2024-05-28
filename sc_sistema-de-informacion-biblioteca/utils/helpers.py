@@ -26,7 +26,7 @@ class SistemaBiblioteca:
         print("3. Devolver libro")
         print("4. Consultar préstamos")
         print("0. Salir")
-
+        SistemaBiblioteca.pausar_sistema(self)
         
     def mostrar_menu_bibliotecario(self,libroManager: LibroManager):
         print("\nMenú de Bibliotecario:")
@@ -38,6 +38,7 @@ class SistemaBiblioteca:
         print("6. Modificar lector")
         print("7. Buscar lectores")
         print("0. Salir")
+        SistemaBiblioteca.pausar_sistema(self)
         
                 
         opcion = input("\n\n> Ingrese una opción => ")
