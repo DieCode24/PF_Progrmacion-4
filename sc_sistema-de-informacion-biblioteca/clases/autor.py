@@ -8,4 +8,5 @@ class Autor:
         self.habilitado = True
 
     def __str__(self):
-        return self.nombre
+        return print(f"Nombre: {self.nombre}\nNacionalidad: {self.nacionalidad}\nFecha de nacimiento: {self.fecha_nacimiento}\nCantidad de libros: {self.cantidad_libros}\n")
+

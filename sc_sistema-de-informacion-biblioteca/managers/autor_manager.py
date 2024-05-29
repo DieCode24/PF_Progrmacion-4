@@ -1,6 +1,6 @@
 # Juan Marulanda
 from clases.autor import Autor
-from datetime import datetime
+from datetime import datetime, timedelta
 
 class AutorManager:
     def __init__(self):
@@ -86,3 +86,31 @@ class AutorManager:
                 break
             else:
                 print("Opción inválida. Por favor, intente de nuevo.")
+                
+    def habilitar_autor(self):
+        nombre = input("Ingrese el nombre del autor que desea habilitar: ")
+        autor = self.buscar_autor(nombre)
+        if autor:
+            autor.habilitado = True
+            print(f"Autor {nombre} habilitado exitosamente.")
+        else:
+            print("El autor no existe.")
+            
+    def inhabilitar_autor(self):
+        nombre = input("Ingrese el nombre del autor que desea inhabilitar: ")
+        autor = self.buscar_autor(nombre)
+        if autor:
+            autor.habilitado = False
+            print(f"Autor {nombre} inhabilitado exitosamente.")
+        else:
+            print("El autor no existe.")
+            
+    def pasar_dia(self):
+        fecha_actual = "2021-01-01"
+        fecha_actual = datetime.strptime(fecha_actual, "%Y-%m-%d")
+        
+        fecha_actual += timedelta(days=1)
+        
+        print (f"Fecha actualizada: {fecha_actual}")
+
+        print("Se ha pasado un día a todos los autores.")
