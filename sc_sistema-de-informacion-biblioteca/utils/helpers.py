@@ -163,37 +163,35 @@ class SistemaBiblioteca:
         print("0. Volver al menú principal")
 
     def gestionar_autores(self, AutorManager: AutorManager):
-        print("Gestión de Autores")
-        print("1. Crear Autor")
-        print("2. Modificar Autor")
-        print("3. Listar Autores")
-        print("4. Habilitar Autor")
-        print("5. Inhabilitar Autor")
-        print("0. Volver al menú principal")
-        
-        opcion = input("\n\n> Ingrese una opción => ")
-        
-        if opcion == '1':
-            AutorManager.registrar_autor()
-            SistemaBiblioteca.pausar_sistema(self)
-        elif opcion == '2':
-            AutorManager.modificar_autor()
-            SistemaBiblioteca.pausar_sistema(self)
-        elif opcion == '3':
-            AutorManager.listas_d_autores()
-            SistemaBiblioteca.pausar_sistema(self)
-        elif opcion == '4':
-            AutorManager.habilitar_autor()
-            SistemaBiblioteca.pausar_sistema(self)
-        elif opcion == '5':
-            AutorManager.inhabilitar_autor()
-            SistemaBiblioteca.pausar_sistema(self)
-            
-        elif opcion == '0':
-            print("\n\n> Saliendo del sistema...")
-            return
-        else:
-            print("Opción no válida, intente de nuevo.")
+        opcion = None
+        while opcion != '0':
+            SistemaBiblioteca.limpiar_consola(self)
+            print("Gestión de Autores")
+            print("1. Crear Autor")
+            print("2. Modificar Autor")
+            print("3. Listar Autores")
+            print("4. Habilitar Autor")
+            print("5. Inhabilitar Autor")
+            print("0. Volver al menú principal")
+            opcion = input("\n\n> Ingrese una opción => ")
+
+            if opcion == '1':
+                AutorManager.registrar_autor()
+            elif opcion == '2':
+                AutorManager.modificar_autor()
+            elif opcion == '3':
+                AutorManager.listas_d_autores()
+            elif opcion == '4':
+                AutorManager.habilitar_autor()
+            elif opcion == '5':
+                AutorManager.inhabilitar_autor()
+            elif opcion == '0':
+                print("\n\n> Saliendo del sistema...")
+            else:
+                print("Opción no válida, intente de nuevo.")
+
+            if opcion != '0':
+                SistemaBiblioteca.pausar_sistema(self)
 
     def gestionar_lectores(self):
         print("Gestión de Lectores")
