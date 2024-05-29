@@ -10,8 +10,7 @@ class ArticuloCientifico:
     Clase que representa un artículo científico en el sistema de información de la biblioteca.
     """
 
-    def __init__(self, titulo: str, doi: str, editor: str, fecha_publicacion: date, periodicidad: str, volumen: int, campo_interes: str, 
-                 estado: str = Estado.DISPONIBLE):
+    def __init__(self, titulo: str, doi: str, editor: str, fecha_publicacion: date, periodicidad: str, volumen: int, campo_interes: str, estado: str = Estado.DISPONIBLE):
         """
         Inicializa una nueva instancia de ArticuloCientifico.
         
@@ -39,9 +38,19 @@ class ArticuloCientifico:
         
         :return: Una cadena que representa el artículo científico.
         """
-        return (f"ArticuloCientifico(titulo={self.titulo}, doi={self.doi}, editor={self.editor}, "
-                f"fecha_publicacion={self.fecha_publicacion}, periodicidad={self.periodicidad}, "
-                f"volumen={self.volumen}, campo_interes={self.campo_interes}, estado={self.estado})")
+        return (
+            f"ArticuloCientifico(\n"
+            f"  titulo={self.titulo},\n"
+            f"  doi={self.doi},\n"
+            f"  editor={self.editor},\n"
+            f"  fecha_publicacion={self.fecha_publicacion},\n"
+            f"  periodicidad={self.periodicidad},\n"
+            f"  volumen={self.volumen},\n"
+            f"  campo_interes={self.campo_interes},\n"
+            f"  estado={self.estado}\n"
+            f")"
+        )
+
 
     def actualizar_estado(self, nuevo_estado: str):
         """
