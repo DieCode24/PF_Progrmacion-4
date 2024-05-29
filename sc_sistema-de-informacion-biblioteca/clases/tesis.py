@@ -12,10 +12,6 @@ class Tesis:
         self._estado= estado
         self._paginas = paginas
         
-    def __str__(self):
-        return f"Autor(es): {self._autores}\nInstitucion: {self._institucion}\nFecha de investigacion: {self._f_investigacion}\nFecha de presentacion: {self._f_presentacion}\nCampo de estudio: {self._campo_estudio}\nEstado: {self._estado}\nPaginas: {self._paginas}\n"
-        
-        
         
         
     def get_Autores(self):
