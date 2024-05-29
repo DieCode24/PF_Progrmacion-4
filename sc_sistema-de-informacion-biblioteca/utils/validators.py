@@ -1,3 +1,12 @@
+from datetime import datetime
+
+def validar_fecha(fecha_str):
+    try:
+        datetime.strptime(fecha_str, "%Y-%m-%d")
+        return True
+    except ValueError:
+        return False
+
 def validar_input(prompt: str, expected_type: type, separator=None):
     while True:
         try:
@@ -9,6 +18,9 @@ def validar_input(prompt: str, expected_type: type, separator=None):
             elif expected_type == str:
                 if user_input.isdigit():
                     raise ValueError("Entrada no válida. Se esperaba una cadena de texto, no un número.")
+                if expected_type == str and prompt.lower().find("fecha") != -1:
+                    if not validar_fecha(user_input):
+                        raise ValueError("Formato de fecha inválido. Ingrese la fecha en el formato YYYY-MM-DD.")
                 return user_input
             else:
                 return expected_type(user_input)

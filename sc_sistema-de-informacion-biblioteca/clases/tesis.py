@@ -1,40 +1,69 @@
 from datetime import date
 from typing import List
+from clases.estado import Estado
 
 class Tesis:
-    def __init__(self, nombre_autor: List[str], institucion_academica: str, fecha_investigacion: date, fecha_presentacion: date, campo_estudio: str, estado: str, numero_paginas: int):
-        self.nombre_autor = nombre_autor
-        self.institucion_academica = institucion_academica
-        self.fecha_investigacion = fecha_investigacion
-        self.fecha_presentacion = fecha_presentacion
-        self.campo_estudio = campo_estudio
-        self.estado = estado
-        self.numero_paginas = numero_paginas
+    def __init__(self, autores: List[str], institucion: str, f_investigacion: date, f_presentacion: date, campo_estudio: str, estado: str, paginas: int):
+        self._autores = autores
+        self._institucion = institucion
+        self._f_investigacion = f_investigacion
+        self._f_presentacion = f_presentacion
+        self._campo_estudio = campo_estudio
+        self._estado= estado
+        self._paginas = paginas
         
-        def __str__(self):
-            return self.nombre_autor
         
+        
+    def get_Autores(self):
+        return self._autores
+    
+    def set_Autores(self, autores):
+        self._autores = autores
+        
+        
+    def get_Institucion(self):
+        return self._institucion
+    
+    def set_Institucion(self, institucion):
+        self._institucion = institucion
+        
+        
+    def get_Finvestigacion(self):
+        return self._f_investigacion
+    
+    def set_Finvestigacion(self, f_investigacion):
+        self._f_investigacion = f_investigacion
+        
+        
+    def get_Fpresentacion(self):
+        return self._f_presentacion
+    
+    def set_Fpresentacion(self, f_presentacion):
+        self._f_presentacion = f_presentacion
+        
+        
+    def get_CampoEstudio(self):
+        return self._campo_estudio
+    
+    def set_CampoEstudio(self, campo_estudio):
+        self._campo_estudio = campo_estudio
+        
+        
+    def get_Estado(self):
+        return self._estado
+    
+    def set_Estado(self, estado):
+        self._estado = estado        
 
-    def registrar_tesis(self):
-        pass  # Implementar lógica
 
-    def buscar_tesis(self):
-        pass  # Implementar lógica
+    def get_Paginas(self):
+        return self._paginas
+    
+    def set_Paginas(self, paginas):
+        self._paginas = paginas
+    
+        
+        
+    
 
-    def modificar_tesis(self):
-        pass  # Implementar lógica
 
-    def eliminar_tesis(self):
-        pass  # Implementar lógica
-
-    def realizar_prestamo_tesis(self):
-        pass  # Implementar lógica
-
-    def devolver_tesis(self):
-        pass  # Implementar lógica
-
-    def generar_multa(self):
-        pass  # Implementar lógica
-
-    def levantar_multa(self):
-        pass  # Implementar lógica

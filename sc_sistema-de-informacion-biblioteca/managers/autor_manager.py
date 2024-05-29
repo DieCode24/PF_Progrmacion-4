@@ -1,15 +1,16 @@
 # Juan Marulanda
 from clases.autor import Autor
-from datetime import datetime
+from datetime import datetime, timedelta
+from utils.validators import validar_input
 
 class AutorManager:
     def __init__(self):
         self.autores = []
 
     def registrar_autor(self):
-        nombre = input("Ingrese el nombre del autor: ")
-        nacionalidad = input("Ingrese la nacionalidad del autor: ")
-        fecha_nacimiento = input("Ingrese la fecha de nacimiento del autor (YYYY-MM-DD): ")
+        nombre = validar_input("Ingrese el nombre del autor: ", str)
+        nacionalidad = validar_input("Ingrese la nacionalidad del autor: ", str)
+        fecha_nacimiento = validar_input("Ingrese la fecha de nacimiento del autor (YYYY-MM-DD): ", str)
         self.agregar_autor(nombre, nacionalidad, fecha_nacimiento)
         print(f"Autor {nombre} registrado exitosamente.")
 
@@ -23,6 +24,8 @@ class AutorManager:
             if autor.nombre == nombre:
                 return autor
         return None
+
+##solo se puede modificar si esta habilitado  correguir
 
     def modificar_autor(self):
         nombre = input("Ingrese el nombre del autor que desea modificar: ")
@@ -86,3 +89,36 @@ class AutorManager:
                 break
             else:
                 print("Opción inválida. Por favor, intente de nuevo.")
+                
+    def habilitar_autor(self):
+        nombre = input("Ingrese el nombre del autor que desea habilitar: ")
+        autor = self.buscar_autor(nombre)
+        if autor:
+            autor.habilitado = True
+            print(f"Autor {nombre} habilitado exitosamente.")
+        else:
+            print("El autor no existe.")
+            
+    def inhabilitar_autor(self):
+        nombre = input("Ingrese el nombre del autor que desea inhabilitar: ")
+        autor = self.buscar_autor(nombre)
+        if autor:
+            autor.habilitado = False
+            print(f"Autor {nombre} inhabilitado exitosamente.")
+        else:
+            print("El autor no existe.")
+            
+    def pasar_dia(self):
+        
+        
+        fecha_actual = "2021-01-01"
+        fecha_actual = datetime.strptime(fecha_actual, "%Y-%m-%d")
+        
+        fecha_actual += timedelta(days=1)
+        
+        print (f"Fecha actualizada: {fecha_actual}")
+
+        print("Se ha pasado un día a todos los autores.")
+        
+        
+##agregar lista de autores por numeros para el cacorro de daniel 

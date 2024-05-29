@@ -1,6 +1,8 @@
 import os
-#from managers.libro_manager import LibroManager
+from managers.libro_manager import LibroManager
 from managers.autor_manager import AutorManager
+from managers.articulo_cientifico_manager import ArticuloCientificoManager
+from managers.tesis_manager import TesisManager
 class SistemaBiblioteca:
     
     def pausar_sistema(self):
@@ -29,32 +31,36 @@ class SistemaBiblioteca:
         print("0. Salir")
         SistemaBiblioteca.pausar_sistema(self)
         
-    def mostrar_menu_bibliotecario(self):#,libroManager: LibroManager):
-        print("\nMenú de Bibliotecario:")
-        print("1. Registrar nuevo libro")
-        print("2. Buscar libros")
-        print("3. Modificar libro")
-        print("4. lsitado de libro")
-        print("5. Registrar nuevo lector")
-        print("6. Modificar lector")
-        print("7. Buscar lectores")
+    def mostrar_menu_bibliotecario (self,libroManager: LibroManager, articuloManager: ArticuloCientificoManager, AutorManager: AutorManager, TesisManager: TesisManager):
+        print("menu de bibliotecario")
+        print("\nMenú de Administrador:")
+        print("Seleccione una opción:")
+        print("1. Gestión de Tesis")
+        print("2. Gestión de Artículos Científicos")
+        print("3. Gestión de Libros")
+        print("4. Gestión de Categorías")
+        print("5. Gestión de Autores")
+        print("6. Gestión de Lectores")
+        print("7. Gestión de Préstamos")
+        print("8. Gestión de Multas")
         print("0. Salir")
-                
+        
         opcion = input("\n\n> Ingrese una opción => ")
         
         if opcion == '1':
-            libroManager.registrar_libro()
+            SistemaBiblioteca.gestionar_tesis(self, TesisManager)
+            SistemaBiblioteca.pausar_sistema(self)
         elif opcion == '2':
-            SistemaBiblioteca.gestionar_articulos(self)
+            SistemaBiblioteca.gestionar_articulos(self, articuloManager)
             SistemaBiblioteca.pausar_sistema(self)
         elif opcion == '3':
-            SistemaBiblioteca.gestionar_libros(self)
+            SistemaBiblioteca.gestionar_libros(self, libroManager)
             SistemaBiblioteca.pausar_sistema(self)
         elif opcion == '4':
-            libroManager.listado_libros()
+            SistemaBiblioteca.gestionar_categorias(self)
             SistemaBiblioteca.pausar_sistema(self)
         elif opcion == '5':
-            SistemaBiblioteca.gestionar_autores(self)
+            SistemaBiblioteca.gestionar_autores(self, AutorManager)
             SistemaBiblioteca.pausar_sistema(self)
         elif opcion == '6':
             SistemaBiblioteca.gestionar_lectores(self)
@@ -71,7 +77,7 @@ class SistemaBiblioteca:
         else:
             print("Opción no válida, intente de nuevo.")
         
-    def mostrar_menu_administrador(self,  AutorManager: AutorManager):
+    def mostrar_menu_administrador(self,  AutorManager: AutorManager, LibroManager: LibroManager, ArticuloCientificoManager: ArticuloCientificoManager, TesisManager: TesisManager):
         print("Sistema de Información Biblioteca")
         print("\nMenú de Administrador:")
         print("Seleccione una opción:")
@@ -88,13 +94,13 @@ class SistemaBiblioteca:
         opcion = input("\n\n> Ingrese una opción => ")
         
         if opcion == '1':
-            SistemaBiblioteca.gestionar_tesis(self)
+            SistemaBiblioteca.gestionar_tesis(self, TesisManager)
             SistemaBiblioteca.pausar_sistema(self)
         elif opcion == '2':
-            SistemaBiblioteca.gestionar_articulos(self)
+            SistemaBiblioteca.gestionar_articulos(self, ArticuloCientificoManager)
             SistemaBiblioteca.pausar_sistema(self)
         elif opcion == '3':
-            SistemaBiblioteca.gestionar_libros(self)
+            SistemaBiblioteca.gestionar_libros(self, LibroManager)
             SistemaBiblioteca.pausar_sistema(self)
         elif opcion == '4':
             SistemaBiblioteca.gestionar_categorias(self)
@@ -117,19 +123,42 @@ class SistemaBiblioteca:
         else:
             print("Opción no válida, intente de nuevo.")
 
-    def gestionar_tesis(self):
-        print("Gestión de Tesis")
-        print("1. Registrar Tesis")
-        print("2. Buscar Tesis")
-        print("3. Modificar Tesis")
-        print("4. Eliminar Tesis")
-        print("5. Realizar Préstamo de Tesis")
-        print("6. Devolver Tesis")
-        print("7. Generar Multa")
-        print("8. Levantar Multa")
-        print("0. Volver al menú principal")
+    def gestionar_tesis(self, TesisManager: TesisManager):
+        SistemaBiblioteca.limpiar_consola(self)
+        opcion = None
+        while opcion != '0':
+            print("Gestión de Tesis")
+            print("1. Registrar Tesis")
+            print("2. Lista Tesis")
+            print("3. Buscar Tesis")
+            print("4. Eliminar Tesis")
+            print("5. Realizar Préstamo de Tesis")
+            print("6. Devolver Tesis")
+            print("7. Generar Multa")
+            print("8. Levantar Multa")
+            print("0. Volver al menú principal")
+            opcion = input("\n\n> Ingrese una opción => ")
+            
+            if opcion == '1':
+                SistemaBiblioteca.limpiar_consola(self)
+                TesisManager.agregar_tesis()
+            elif opcion == '2':
+                SistemaBiblioteca.limpiar_consola(self)
+                TesisManager.listar_tesis()
+            elif opcion == '3':
+                SistemaBiblioteca.limpiar_consola(self)
+                TesisManager.buscar_tesis()
+            elif opcion == '4':
+                SistemaBiblioteca.limpiar_consola(self)
+                TesisManager.eliminar_tesis()  
+            elif opcion == '0':
+                print("\n\n> Saliendo del sistema...")
+            else:
+                print("Opción no válida, intente de nuevo.")
+            if opcion != '0':
+                SistemaBiblioteca.pausar_sistema(self)
 
-    def gestionar_articulos(self):
+    def gestionar_articulos(self, ArticuloManager: ArticuloCientificoManager):
         print("Gestión de Artículos Científicos")
         print("1. Registrar Artículo")
         print("2. Buscar Artículo")
@@ -141,7 +170,7 @@ class SistemaBiblioteca:
         print("8. Levantar Multa")
         print("0. Volver al menú principal")
 
-    def gestionar_libros(self):
+    def gestionar_libros(self, LibroManager: LibroManager):
         print("Gestión de Libros")
         print("1. Registrar Libro")
         print("2. Buscar Libro")
@@ -153,6 +182,40 @@ class SistemaBiblioteca:
         print("8. Generar Multa")
         print("9. Levantar Multa")
         print("0. Volver al menú principal")
+        
+        opcion = input("\n\n> Ingrese una opción => ")
+        
+        if opcion == '1':
+            LibroManager.registrar_libro()
+        elif opcion == '2':
+            LibroManager.buscar_libro()
+            SistemaBiblioteca.pausar_sistema(self)
+        elif opcion == '3':
+            LibroManager.modificar_libro()
+            SistemaBiblioteca.pausar_sistema(self)
+        elif opcion == '4':
+            LibroManager.habilitar_libro()
+            SistemaBiblioteca.pausar_sistema(self)
+        elif opcion == '5':
+            LibroManager.inhabilitar_libro()
+            SistemaBiblioteca.pausar_sistema(self)
+        elif opcion == '6':
+            LibroManager.realizar_prestamo_libro()
+            SistemaBiblioteca.pausar_sistema(self)
+        elif opcion == '7':
+            LibroManager.devolver_libro()
+            SistemaBiblioteca.pausar_sistema(self)
+        elif opcion == '8':
+            LibroManager.generar_multa()
+            SistemaBiblioteca.pausar_sistema(self)
+        elif opcion == '9':
+            LibroManager.levantar_multa()
+            SistemaBiblioteca.pausar_sistema(self)
+        elif opcion == '0':
+            print("\n\n> Saliendo del sistema...")
+            return
+        else:
+            print("Opción no válida, intente de nuevo.")
 
     def gestionar_categorias(self):
         print("Gestión de Categorías")
@@ -172,6 +235,7 @@ class SistemaBiblioteca:
             print("3. Listar Autores")
             print("4. Habilitar Autor")
             print("5. Inhabilitar Autor")
+            print("6. Pasar dia")
             print("0. Volver al menú principal")
             opcion = input("\n\n> Ingrese una opción => ")
 
@@ -185,6 +249,8 @@ class SistemaBiblioteca:
                 AutorManager.habilitar_autor()
             elif opcion == '5':
                 AutorManager.inhabilitar_autor()
+            elif opcion == '6':
+                AutorManager.pasar_dia()
             elif opcion == '0':
                 print("\n\n> Saliendo del sistema...")
             else:
