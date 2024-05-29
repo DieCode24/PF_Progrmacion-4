@@ -1,6 +1,6 @@
 # Juan Marulanda
 
-from clases import Autor
+from clases.autor import Autor
 from datetime import datetime 
 
 class AutorManager:
