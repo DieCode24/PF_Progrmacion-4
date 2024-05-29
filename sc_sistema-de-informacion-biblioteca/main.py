@@ -1,8 +1,15 @@
 from utils.helpers import SistemaBiblioteca as sb
-from managers.libro_manager import LibroManager
+#from managers.libro_manager import LibroManager
+from managers.articulo_cientifico_manager import ArticuloCientificoManager
+from managers.autor_manager import AutorManager
+
 def main():
     biblioteca = sb()
-    libroManager = LibroManager()
+    #libro_manager = LibroManager()
+    articulo_manager = ArticuloCientificoManager()
+    Autor  = AutorManager()
+
+    
     
     sb.limpiar_consola(biblioteca)
     
@@ -20,9 +27,9 @@ def main():
         if rol == "lector":
             sb.mostrar_menu_lector(biblioteca)
         elif rol == "bibliotecario":
-            sb.mostrar_menu_bibliotecario(biblioteca, libroManager)
+            sb.mostrar_menu_bibliotecario(biblioteca, libro_manager, articulo_manager)
         elif rol == "administrador":
-            sb.mostrar_menu_administrador(biblioteca)
+            sb.mostrar_menu_administrador(biblioteca, Autor)
         else:
             print("Rol no reconocido. Intente de nuevo.")
             break
