@@ -29,7 +29,7 @@ def main():
         elif rol == "bibliotecario":
             sb.mostrar_menu_bibliotecario(biblioteca, libro_manager, articulo_manager)
         elif rol == "administrador":
-            sb.mostrar_menu_administrador(biblioteca, Autor)
+            sb.mostrar_menu_administrador(biblioteca, Autor, libro_manager, articulo_manager)
         else:
             print("Rol no reconocido. Intente de nuevo.")
             break

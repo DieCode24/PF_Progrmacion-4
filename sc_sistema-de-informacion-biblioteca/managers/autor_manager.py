@@ -1,15 +1,16 @@
 # Juan Marulanda
 from clases.autor import Autor
 from datetime import datetime, timedelta
+from utils.validators import validar_input
 
 class AutorManager:
     def __init__(self):
         self.autores = []
 
     def registrar_autor(self):
-        nombre = input("Ingrese el nombre del autor: ")
-        nacionalidad = input("Ingrese la nacionalidad del autor: ")
-        fecha_nacimiento = input("Ingrese la fecha de nacimiento del autor (YYYY-MM-DD): ")
+        nombre = validar_input("Ingrese el nombre del autor: ", str)
+        nacionalidad = validar_input("Ingrese la nacionalidad del autor: ", str)
+        fecha_nacimiento = validar_input("Ingrese la fecha de nacimiento del autor (YYYY-MM-DD): ", str)
         self.agregar_autor(nombre, nacionalidad, fecha_nacimiento)
         print(f"Autor {nombre} registrado exitosamente.")
 
