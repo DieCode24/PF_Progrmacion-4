@@ -1,31 +1,50 @@
-# Juan Castanio
 import os
 from clases.tesis import Tesis
 from clases.estado import Estado
+from utils.validators import validar_input
 
-class tesis_manager:
+class TesisManager:
     def __init__(self):
-        self.tesisL = []
+        self.tesis = []
+        estadoi = Estado() 
     
-    def agregar_tesis(self):
-        nombre_autor = input("Ingrese el nombre del autor: ")
-        institucion_academica = input("Ingrese la institución académica: ")
-        fecha_investigacion = input("Ingrese la fecha de investigación: ")
-        fecha_presentacion = input("Ingrese la fecha de presentación: ")
-        campo_estudio = input("Ingrese el campo de estudio: ")
-        
-        numero_paginas = int(input("Ingrese el número de páginas: "))
-        tesis = Tesis(institucion_academica, fecha_investigacion, fecha_presentacion, campo_estudio, numero_paginas)
-        
-        self.tesisL.append(tesis)
-        print("Tesis registrada con éxito.")
+    def agregar_tesis(self, autores: list, institucion: str, f_investigacion: str, f_presentacion: str, campo_estudio: str, estado: str, paginas: int):
+        nueva_tesis = Tesis(autores, institucion, f_investigacion, f_presentacion, campo_estudio, estado, paginas)
+        self.tesis.append(nueva_tesis)
         
         
-    def list_tesis(self):
-        print("Listado de tesis\n")
-        for tesis in self.tesisL:
-            print(tesis)
+        
+    def listar_tesis(self):
+        print("LISTA DE TESIS\n")
+        for tesis in self.tesis:
+            print(tesis)   
             
- 
-    tesis = tesis_manager()
+            
+    def buscar_tesis(self): 
+        print("Como desea buscar la tesis?")
+        print("1. Por autor")
+        print("2. Por campo de estudio")
+        op = input("Ingrese la opcion: ")
         
+        if op == '1':
+            self.buscar_por_autor()
+            
+        elif op == '2':
+            self.buscar_por_campo()
+        
+    def buscar_por_autor(self):
+        autor = input("Ingrese el autor: ")
+        for tesis in self.tesis:
+            if autor in tesis.get_Autores():
+                print(tesis)
+                    
+    def buscar_por_campo(self):
+        campo = input("Ingrese el campo de estudio: ")
+        for tesis in self.tesis:
+            if campo in tesis.get_CampoEstudio():
+                print(tesis)
+        
+        
+
+    
+    
