@@ -1,6 +1,7 @@
 import os
-#from managers.libro_manager import LibroManager
+from managers.libro_manager import LibroManager
 from managers.autor_manager import AutorManager
+from managers.articulo_cientifico_manager import ArticuloCientificoManager
 class SistemaBiblioteca:
     
     def pausar_sistema(self):
@@ -29,7 +30,7 @@ class SistemaBiblioteca:
         print("0. Salir")
         SistemaBiblioteca.pausar_sistema(self)
         
-    def mostrar_menu_bibliotecario(self):#,libroManager: LibroManager):
+    def mostrar_menu_bibliotecario (self,libroManager: LibroManager, articuloManager: ArticuloCientificoManager):
         print("\nMenú de Bibliotecario:")
         print("1. Registrar nuevo libro")
         print("2. Buscar libros")
