@@ -1,11 +1,14 @@
 from utils.helpers import SistemaBiblioteca as sb
-from managers.libro_manager import LibroManager
+#from managers.libro_manager import LibroManager
 from managers.articulo_cientifico_manager import ArticuloCientificoManager
+from managers.autor_manager import AutorManager
 
 def main():
     biblioteca = sb()
-    libro_manager = LibroManager()
+    #libro_manager = LibroManager()
     articulo_manager = ArticuloCientificoManager()
+    Autor  = AutorManager()
+
     
     
     sb.limpiar_consola(biblioteca)
