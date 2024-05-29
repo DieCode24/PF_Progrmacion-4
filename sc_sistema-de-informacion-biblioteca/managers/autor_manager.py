@@ -1,20 +1,22 @@
 # Juan Marulanda
-
-from clases import Autor
-from datetime import datetime 
+from clases.autor import Autor
+from datetime import datetime
 
 class AutorManager:
     def __init__(self):
         self.autores = []
 
+    def registrar_autor(self):
+        nombre = input("Ingrese el nombre del autor: ")
+        nacionalidad = input("Ingrese la nacionalidad del autor: ")
+        fecha_nacimiento = input("Ingrese la fecha de nacimiento del autor (YYYY-MM-DD): ")
+        self.agregar_autor(nombre, nacionalidad, fecha_nacimiento)
+        print(f"Autor {nombre} registrado exitosamente.")
+
     def agregar_autor(self, nombre: str, nacionalidad: str, fecha_nacimiento: str):
         fecha_nacimiento = datetime.strptime(fecha_nacimiento, "%Y-%m-%d")
         autor = Autor(nombre, nacionalidad, fecha_nacimiento)
         self.autores.append(autor)
-
-    def listar_autores(self):
-        for autor in self.autores:
-            print(autor)
 
     def buscar_autor(self, nombre: str):
         for autor in self.autores:
@@ -22,43 +24,65 @@ class AutorManager:
                 return autor
         return None
 
-
-    def agregar_libro(self, nombre_autor: str, libro):
-        autor = self.buscar_autor(nombre_autor)
+    def modificar_autor(self):
+        nombre = input("Ingrese el nombre del autor que desea modificar: ")
+        autor = self.buscar_autor(nombre)
         if autor:
-            autor.libros.append(libro)
-            autor.cantidad_libros = len(autor.libros)
-            return True
-        return False
+            nacionalidad = input("Ingrese la nueva nacionalidad del autor: ")
+            fecha_nacimiento = input("Ingrese la nueva fecha de nacimiento del autor (YYYY-MM-DD): ")
+            self.actualizar_autor(autor, nacionalidad, fecha_nacimiento)
+            print(f"Autor {nombre} modificado exitosamente.")
+        else:
+            print("El autor no existe.")
 
-    def listar_libros(self, nombre_autor: str):
-        autor = self.buscar_autor(nombre_autor)
+    def actualizar_autor(self, autor: Autor, nacionalidad: str, fecha_nacimiento: str):
+        autor.nacionalidad = nacionalidad
+        autor.fecha_nacimiento = datetime.strptime(fecha_nacimiento, "%Y-%m-%d")
+
+    def mostrar_informacion_autor(self, nombre: str):
+        autor = self.buscar_autor(nombre)
         if autor:
+            print(f"Información Actual de {autor.nombre}:")
+            print(f"Nacionalidad: {autor.nacionalidad}")
+            print(f"Fecha de nacimiento: {autor.fecha_nacimiento.strftime('%Y-%m-%d')}")
+            print("Libros:")
             for libro in autor.libros:
                 print(libro)
         else:
             print("El autor no existe")
 
-    def buscar_libro(self, nombre_autor: str, nombre_libro: str):
-        autor = self.buscar_autor(nombre_autor)
-        if autor:
-            for libro in autor.libros:
-                if libro.nombre == nombre_libro:
-                    return libro
-        return None
+    def see_authors(self, bool=None):
+        if bool is None:
+            print("Autores:")
+            for autor in self.autores:
+                print(autor)
+        elif bool:
+            print("Autores Habilitados:")
+            for autor in self.autores:
+                if autor.habilitado:
+                    print(autor)
+        else:
+            print("Autores Inhabilitados:")
+            for autor in self.autores:
+                if not autor.habilitado:
+                    print(autor)
 
-    def eliminar_libro(self, nombre_autor: str, nombre_libro: str):
-        autor = self.buscar_autor(nombre_autor)
-        if autor:
-            libro = self.buscar_libro(nombre_autor, nombre_libro)
-            if libro:
-                autor.libros.remove(libro)
-                autor.cantidad_libros = len(autor.libros)
-                return True
-        return False
-    
-AutorManager = AutorManager()
+    def listas_d_autores(self):
+        while True:
+            print("\nSeleccione una opción:")
+            print("1. Todos los autores")
+            print("2. Autores habilitados")
+            print("3. Autores inhabilitados")
+            print("0. Salir")
+            opcion = input("Ingrese el número de la opción deseada: ")
 
-AutorManager.agregar_autor("Gabriel Garcia Marquez", "Colombiano", "1927-03-06")
-
-listar_autores = AutorManager.listar_autores()
+            if opcion == "1":
+                self.see_authors()
+            elif opcion == "2":
+                self.see_authors(True)
+            elif opcion == "3":
+                self.see_authors(False)
+            elif opcion == "0":
+                break
+            else:
+                print("Opción inválida. Por favor, intente de nuevo.")

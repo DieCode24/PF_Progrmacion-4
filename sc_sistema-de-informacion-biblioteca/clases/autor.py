@@ -5,6 +5,7 @@ class Autor:
         self.fecha_nacimiento = fecha_nacimiento
         self.libros = []
         self.cantidad_libros = len(self.libros)
+        self.habilitado = True
 
     def __str__(self):
         return self.nombre
