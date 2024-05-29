@@ -1,6 +1,7 @@
 from clases.articulo_cientifico import ArticuloCientifico
 from datetime import date
 from typing import List, Optional
+from clases.estado import Estado
 
 class ArticuloCientificoManager:
     """
@@ -13,8 +14,7 @@ class ArticuloCientificoManager:
         """
         self.articulos = []
 
-    def registrar_articulo(self, titulo: str, doi: str, editor: str, fecha_publicacion: date, 
-                           periodicidad: str, volumen: int, campo_interes: str, estado: str = "Disponible"):
+    def registrar_articulo(self, titulo: str, doi: str, editor: str, fecha_publicacion: date, periodicidad: str, volumen: int, campo_interes: str, estado: str = Estado.DISPONIBLE):
         """
         Registra un nuevo artículo científico en el sistema.
         
@@ -28,8 +28,7 @@ class ArticuloCientificoManager:
         :param estado: Estado del artículo (predeterminado a "Disponible").
         :return: El artículo científico recién creado.
         """
-        nuevo_articulo = ArticuloCientifico(titulo, doi, editor, fecha_publicacion, periodicidad, 
-                                            volumen, campo_interes, estado)
+        nuevo_articulo = ArticuloCientifico(titulo, doi, editor, fecha_publicacion, periodicidad, volumen, campo_interes, estado)
         self.articulos.append(nuevo_articulo)
         return nuevo_articulo
 

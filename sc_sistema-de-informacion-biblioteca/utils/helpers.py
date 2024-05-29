@@ -1,5 +1,7 @@
 import os
 from managers.libro_manager import LibroManager
+from managers.articulo_cientifico_manager import ArticuloCientificoManager
+
 class SistemaBiblioteca:
     
     def pausar_sistema(self):
@@ -28,7 +30,7 @@ class SistemaBiblioteca:
         print("0. Salir")
         SistemaBiblioteca.pausar_sistema(self)
         
-    def mostrar_menu_bibliotecario(self,libroManager: LibroManager):
+    def mostrar_menu_bibliotecario(self,libroManager: LibroManager, articulo_manager: ArticuloCientificoManager):
         print("\nMenú de Bibliotecario:")
         print("1. Registrar nuevo libro")
         print("2. Buscar libros")
@@ -38,8 +40,6 @@ class SistemaBiblioteca:
         print("6. Modificar lector")
         print("7. Buscar lectores")
         print("0. Salir")
-        SistemaBiblioteca.pausar_sistema(self)
-        
                 
         opcion = input("\n\n> Ingrese una opción => ")
         
