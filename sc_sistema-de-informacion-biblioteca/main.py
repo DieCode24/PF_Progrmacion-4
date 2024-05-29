@@ -7,7 +7,7 @@ def main():
     biblioteca = sb()
     #libro_manager = LibroManager()
     articulo_manager = ArticuloCientificoManager()
-    Autor  = AutorManager()
+    Autor = AutorManager()
 
     
     
