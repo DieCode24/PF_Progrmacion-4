@@ -26,13 +26,17 @@ class TesisManager:
         print("LISTA DE TESIS\n")
         counter = 1;
         for tesis in self.tesis:
-            print(counter, + " Campo: ", tesis.get_CampoEstudio + "\n" + "Autores: ", tesis.get_Autores())
+            print(counter, " Campo: ", tesis.get_CampoEstudio(), "\n" + 
+                "   Autores: ", tesis.get_Autores(),"\n" + 
+                "   Páginas: ", tesis.get_Paginas(),"\n" + 
+                "   Fecha publicacion: ", tesis.get_Fpresentacion(),"\n\n")
             counter += 1
             
     def buscar_tesis(self): 
         print("Como desea buscar la tesis?")
         print("1. Por autor")
         print("2. Por campo de estudio")
+        
         op = input("Ingrese la opcion: ")
         
         if op == '1':
@@ -42,16 +46,23 @@ class TesisManager:
             self.buscar_por_campo()
         
     def buscar_por_autor(self):
-        autor = validar_input("Ingrese el autor: ", str)
+        autor = validar_input("Ingrese el autor: ", str).lower()
         for tesis in self.tesis:
             if autor in tesis.get_Autores():
-                print(tesis)
+                print(" Campo: ", tesis.get_CampoEstudio(), "\n" + 
+                      "   Autores: ", tesis.get_Autores(),"\n" + 
+                      "   Páginas: ", tesis.get_Paginas(),"\n" + 
+                      "   Fecha publicacion: ", tesis.get_Fpresentacion(),"\n\n")
+
                     
     def buscar_por_campo(self):
-        campo = validar_input("Ingrese el campo de estudio: ", str)
+        campo = validar_input("Ingrese el campo de estudio: ", str).lower()
         for tesis in self.tesis:
-            if campo in tesis.get_CampoEstudio():
-                print(tesis)
+            if campo in tesis.get_CampoEstudio().lower():
+                print(" Campo: ", tesis.get_CampoEstudio(), "\n" + 
+                      "   Autores: ", tesis.get_Autores(),"\n" + 
+                      "   Páginas: ", tesis.get_Paginas(),"\n" + 
+                      "   Fecha publicacion: ", tesis.get_Fpresentacion(),"\n\n")
                 
                 
     def eliminar_tesis(self):
@@ -76,13 +87,6 @@ class TesisManager:
         else:
             print("Operación de eliminación cancelada.")
         
-        
-        
     
 
-    
-if __name__ == "__main__":
-    manager = TesisManager()
-    
-    
     

@@ -2,6 +2,7 @@ import os
 from managers.libro_manager import LibroManager
 from managers.autor_manager import AutorManager
 from managers.articulo_cientifico_manager import ArticuloCientificoManager
+from managers.tesis_manager import TesisManager
 class SistemaBiblioteca:
     
     def pausar_sistema(self):
@@ -72,7 +73,7 @@ class SistemaBiblioteca:
         else:
             print("Opción no válida, intente de nuevo.")
         
-    def mostrar_menu_administrador(self,  AutorManager: AutorManager):
+    def mostrar_menu_administrador(self,  AutorManager: AutorManager, TesisManager: TesisManager):
         print("Sistema de Información Biblioteca")
         print("\nMenú de Administrador:")
         print("Seleccione una opción:")
@@ -89,7 +90,7 @@ class SistemaBiblioteca:
         opcion = input("\n\n> Ingrese una opción => ")
         
         if opcion == '1':
-            SistemaBiblioteca.gestionar_tesis(self)
+            SistemaBiblioteca.gestionar_tesis(self, TesisManager)
             SistemaBiblioteca.pausar_sistema(self)
         elif opcion == '2':
             SistemaBiblioteca.gestionar_articulos(self)
@@ -118,17 +119,40 @@ class SistemaBiblioteca:
         else:
             print("Opción no válida, intente de nuevo.")
 
-    def gestionar_tesis(self):
-        print("Gestión de Tesis")
-        print("1. Registrar Tesis")
-        print("2. Buscar Tesis")
-        print("3. Modificar Tesis")
-        print("4. Eliminar Tesis")
-        print("5. Realizar Préstamo de Tesis")
-        print("6. Devolver Tesis")
-        print("7. Generar Multa")
-        print("8. Levantar Multa")
-        print("0. Volver al menú principal")
+    def gestionar_tesis(self, TesisManager: TesisManager):
+        SistemaBiblioteca.limpiar_consola(self)
+        opcion = None
+        while opcion != '0':
+            print("Gestión de Tesis")
+            print("1. Registrar Tesis")
+            print("2. Lista Tesis")
+            print("3. Buscar Tesis")
+            print("4. Eliminar Tesis")
+            print("5. Realizar Préstamo de Tesis")
+            print("6. Devolver Tesis")
+            print("7. Generar Multa")
+            print("8. Levantar Multa")
+            print("0. Volver al menú principal")
+            opcion = input("\n\n> Ingrese una opción => ")
+            
+            if opcion == '1':
+                SistemaBiblioteca.limpiar_consola(self)
+                TesisManager.agregar_tesis()
+            elif opcion == '2':
+                SistemaBiblioteca.limpiar_consola(self)
+                TesisManager.listar_tesis()
+            elif opcion == '3':
+                SistemaBiblioteca.limpiar_consola(self)
+                TesisManager.buscar_tesis()
+            elif opcion == '4':
+                SistemaBiblioteca.limpiar_consola(self)
+                TesisManager.eliminar_tesis()  
+            elif opcion == '0':
+                print("\n\n> Saliendo del sistema...")
+            else:
+                print("Opción no válida, intente de nuevo.")
+            if opcion != '0':
+                SistemaBiblioteca.pausar_sistema(self)
 
     def gestionar_articulos(self):
         print("Gestión de Artículos Científicos")
