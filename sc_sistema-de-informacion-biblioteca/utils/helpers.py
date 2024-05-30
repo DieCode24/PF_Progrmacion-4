@@ -3,6 +3,7 @@ from managers.libro_manager import LibroManager
 from managers.autor_manager import AutorManager
 from managers.articulo_cientifico_manager import ArticuloCientificoManager
 from managers.tesis_manager import TesisManager
+
 class SistemaBiblioteca:
     
     def print_brand_sistema(self):
@@ -131,7 +132,7 @@ class SistemaBiblioteca:
             SistemaBiblioteca.gestionar_categorias(self)
             SistemaBiblioteca.pausar_sistema(self)
         elif opcion == '5':
-            SistemaBiblioteca.gestionar_autores(self, AutorManager)
+            SistemaBiblioteca.gestionar_autores(self, AutorManager, FECHA_ACTUAL)
             SistemaBiblioteca.pausar_sistema(self)
         elif opcion == '6':
             SistemaBiblioteca.gestionar_lectores(self)
@@ -265,7 +266,7 @@ class SistemaBiblioteca:
         print("> [4] Eliminar Categoría")
         print("> [0] Volver al menú principal")
 
-    def gestionar_autores(self, AutorManager: AutorManager):
+    def gestionar_autores(self, AutorManager: AutorManager, FECHA_ACTUAL: str):
         opcion = None
         while opcion != '0':
             SistemaBiblioteca.limpiar_consola(self)
@@ -290,7 +291,7 @@ class SistemaBiblioteca:
             elif opcion == '5':
                 AutorManager.inhabilitar_autor()
             elif opcion == '6':
-                AutorManager.pasar_dia()
+                AutorManager.pasar_dia(FECHA_ACTUAL)
             elif opcion == '0':
                 print("\n\n> Saliendo del sistema...")
             else:
