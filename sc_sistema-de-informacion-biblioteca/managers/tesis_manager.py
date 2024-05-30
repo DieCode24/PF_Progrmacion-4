@@ -4,13 +4,13 @@ from utils.validators import validar_input
 from managers.autor_manager import AutorManager
 
 class TesisManager:
+
     def __init__(self):
         self.tesis = [ 
             Tesis(["juan", "pedro"], "utp", "2020-01-04", "2024-01-01", "Ciencia", Estado.DISPONIBLE, 100),
             Tesis(["maria", "luis"], "utp", "2020-01-04", "2024-01-01", "Matematicas", Estado.DISPONIBLE, 200),
             Tesis(["juan", "mateo"], "utp", "2020-01-04", "2024-01-01", "Ciencia", Estado.DISPONIBLE, 100),
             ]
-        autor = AutorManager()
     
     def agregar_tesis(self):
         institucion = validar_input("Ingrese la institución de la tesis: ", str).capitalize()
@@ -20,6 +20,7 @@ class TesisManager:
         estado = Estado.DISPONIBLE
         paginas = validar_input("Ingrese el número de páginas de la tesis: ", int)
         
+        AutorManager.see_authors(True)
         
         autores = validar_input("Ingrese los autores de la tesis (separados por coma): ", list, separator=",")
 
