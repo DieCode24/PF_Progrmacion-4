@@ -3,6 +3,7 @@ from clases.estado import Estado
 from utils.validators import validar_input
 from managers.autor_manager import AutorManager
 
+
 class TesisManager:
 
     def __init__(self):
@@ -13,6 +14,7 @@ class TesisManager:
             ]
     
     def agregar_tesis(self):
+        autor = AutorManager()
         institucion = validar_input("Ingrese la institución de la tesis: ", str).capitalize()
         f_investigacion = validar_input("Ingrese la fecha de investigación de la tesis (YYYY-MM-DD): ", str)
         f_presentacion = validar_input("Ingrese la fecha de presentación de la tesis (YYYY-MM-DD): ", str)
@@ -20,9 +22,14 @@ class TesisManager:
         estado = Estado.DISPONIBLE
         paginas = validar_input("Ingrese el número de páginas de la tesis: ", int)
         
-        AutorManager.see_authors(True)
         
-        autores = validar_input("Ingrese los autores de la tesis (separados por coma): ", list, separator=",")
+        if not autor.see_authors():
+            print("No hay autores registrados")
+            print("Registrando autor\n\n")
+            autor.registrar_autor()
+             
+        
+        
 
         tesis = Tesis(autores, institucion, f_investigacion, f_presentacion, campo_estudio, estado, paginas)
         self.tesis.append(tesis)
