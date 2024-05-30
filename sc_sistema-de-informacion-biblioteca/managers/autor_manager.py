@@ -155,5 +155,27 @@ class AutorManager:
         else:
             print("El autor no existe.")
             
+    def mock(self):
+        self.agregar_autor("Gabriel Garcia Marquez", "Colombiano", "1927-03-06")
+        self.agregar_autor("Julio Cortazar", "Argentino", "1914-08-26")
+        self.agregar_autor("Jorge Luis Borges", "Argentino", "1899-08-24")
+        self.agregar_autor("Mario Vargas Llosa", "Peruano", "1936-03-28")
+        self.agregar_autor("Isabel Allende", "Chilena", "1942-08-02")
+        self.agregar_autor("Pablo Neruda", "Chileno", "1904-07-12")
+        self.agregar_autor("Pablo Coelho", "Brasileño", "1947-08-24")
+        self.agregar_autor("Laura Esquivel", "Mexicana", "1950-09-30")
+        self.agregar_autor("Carlos Fuentes", "Mexicano", "1928-11-11")
+        self.agregar_autor("Carlos Ruiz Zafon", "Español", "1964-09-25")
+        self.agregar_autor("Isabel Allende", "Chilena", "1942-08-02")
+        self.agregar_autor("Pablo Neruda", "Chileno", "1904-07-12")
+        self.agregar_autor("Pablo Coelho", "Brasileño", "1947-08-24")
+        self.agregar_autor("Laura Esquivel", "Mexicana", "1950-09-30")
+        self.agregar_autor("Carlos Fuentes", "Mexicano", "1928-11-11")
+        self.agregar_autor("Carlos Ruiz Zafon", "Español", "1964-09-25")
+        self.agregar_autor("Isabel Allende", "Chilena", "1942-08-02")
+        self.agregar_autor("Pablo Neruda", "Chileno", "1904-07-12")
+        self.agregar_autor("Pablo Coelho", "Brasileño", "1947-08-24")
+        
+            
 
     
