@@ -25,3 +25,9 @@ class Autor:
     
     def fecha_nacimiento(self): 
         return self.fecha_nacimiento
+    
+    def cantidad_libros(self):
+        return self.cantidad_libros
+    
+    def habilitado(self):
+        return self.habilitado

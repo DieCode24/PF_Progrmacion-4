@@ -66,7 +66,7 @@ class SistemaBiblioteca:
         else:
             print("Opción no válida, intente de nuevo.")
         
-    def mostrar_menu_bibliotecario (self,libroManager: LibroManager, ArticuloManager: ArticuloCientificoManager, AutorManager: AutorManager, TesisManager: TesisManager):
+    def mostrar_menu_bibliotecario (self,libroManager: LibroManager,  AutorManager: AutorManager,ArticuloManager: ArticuloCientificoManager, TesisManager: TesisManager):
         SistemaBiblioteca.limpiar_consola(self)
         SistemaBiblioteca.print_brand_sistema(self)
         print("# Menú de opciones | Bibliotecario")
@@ -324,8 +324,6 @@ class SistemaBiblioteca:
                 AutorManager.habilitar_autor()
             elif opcion == '5':
                 AutorManager.inhabilitar_autor()
-            elif opcion == '6':
-                AutorManager.pasar_dia(FECHA_ACTUAL)
             elif opcion == '0':
                 input("\n\n> Volviendo al menú principal...")
                 if menu_llamador == 'bibliotecario':

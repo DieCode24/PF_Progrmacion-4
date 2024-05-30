@@ -8,7 +8,6 @@ from datetime import datetime
 
 
 def main():
-    FECHA_ACTUAL = datetime.now().date()
     biblioteca = sb()
     libro_manager = LibroManager()
     articulo_manager = ArticuloCientificoManager()
@@ -36,7 +35,7 @@ def main():
             sb.mostrar_menu_lector(biblioteca)
             return False
         elif rol == "bibliotecario":
-            sb.mostrar_menu_bibliotecario(biblioteca, Autor, libro_manager, articulo_manager, Tesis, FECHA_ACTUAL)
+            sb.mostrar_menu_bibliotecario(biblioteca, Autor, libro_manager, articulo_manager, Tesis)
             return False
         elif rol == "administrador":
             sb.mostrar_menu_administrador(biblioteca, Autor, libro_manager, articulo_manager, Tesis)
