@@ -97,9 +97,7 @@ class SistemaBiblioteca:
         print("> [7] Gestión de Préstamos")
         print("> [8] Gestión de Multas")
         print("> [0] Salir")
-        
-        opcion = input("\n> Ingrese una opción => ")
-        
+                
         opcion = input("\n\n> Ingrese una opción => ")
         
         if opcion == '1':
