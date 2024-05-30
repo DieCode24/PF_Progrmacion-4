@@ -257,7 +257,7 @@ class SistemaBiblioteca:
             SistemaBiblioteca.limpiar_consola(self)
             SistemaBiblioteca.print_brand_sistema(self)
         
-            SistemaBiblioteca.gestionar_tesis(self, TesisManager, 'administrador')
+            SistemaBiblioteca.gestionar_tesis(self, TesisManager, AutorManager, 'administrador')
         
         elif opcion == '2':
             SistemaBiblioteca.limpiar_consola(self)
@@ -326,7 +326,7 @@ class SistemaBiblioteca:
             print("Opción no válida, intente de nuevo.")
 
 
-    def gestionar_tesis(self, TesisManager:TesisManager, menu_llamador, LibroManager:LibroManager = None, ArticuloManager:ArticuloCientificoManager = None, AutorManager:AutorManager = None, LectorManager:LectorManager = None):
+    def gestionar_tesis(self, TesisManager:TesisManager, AutorManager:AutorManager, menu_llamador, LibroManager:LibroManager = None, ArticuloManager:ArticuloCientificoManager = None, LectorManager:LectorManager = None):
         opcion = None
         
         while opcion != '0':
@@ -344,7 +344,7 @@ class SistemaBiblioteca:
             
             if opcion == '1':
                 SistemaBiblioteca.limpiar_consola(self)
-                TesisManager.agregar_tesis()
+                TesisManager.agregar_tesis(AutorManager)
         
             elif opcion == '2':
                 SistemaBiblioteca.limpiar_consola(self)

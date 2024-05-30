@@ -1,7 +1,6 @@
 from clases.tesis import Tesis
 from clases.estado import Estado
 from utils.validators import validar_input
-from managers.autor_manager import AutorManager
 
 class TesisManager:
 
@@ -12,20 +11,19 @@ class TesisManager:
             Tesis(["juan", "mateo"], "utp", "2020-01-04", "2024-01-01", "Ciencia", Estado.DISPONIBLE, 100),
             ]
     
-    def agregar_tesis(self):
-        autor_manager = AutorManager()
-
+    def agregar_tesis(self, AutorManager):
         institucion = validar_input("Ingrese la institución de la tesis: ", str).capitalize()
         f_investigacion = validar_input("Ingrese la fecha de investigación de la tesis (YYYY-MM-DD): ", str)
         f_presentacion = validar_input("Ingrese la fecha de presentación de la tesis (YYYY-MM-DD): ", str)
-        campo_estudio = validar_input("Ingrese el campo de estudio de la tesis: ", str)
+        campo_estudio = validar_input("Ingrese el campo de estudio de la tesis: ", str).capitalize()
         estado = Estado.DISPONIBLE
         paginas = validar_input("Ingrese el número de páginas de la tesis: ", int)
-        if not autor_manager.see_authors():
-            print("No hay autores registrados. Registrando un nuevo autor.")
-            autor_manager.registrar_autor()
-            autores = autor_manager.see_authors()
+        AutorManager.see_authors()
         
+        autores = validar_input("Ingrese los autores de la tesis (separados por coma): ", list, separator=",")
+        
+        
+
         tesis = Tesis(autores, institucion, f_investigacion, f_presentacion, campo_estudio, estado, paginas)
         self.tesis.append(tesis)
         print("Tesis agregada exitosamente.")
@@ -49,30 +47,33 @@ class TesisManager:
         
         op = validar_input("\n> Ingrese una opción => ", int)
         
-        if op == '1':
+        if op == 1:
             self.buscar_por_autor()
-            
-        elif op == '2':
+        elif op == 2:
             self.buscar_por_campo()
+        else:
+            print("Opción no válida")
+            return
         
     def buscar_por_autor(self):
         autor = validar_input("Ingrese el autor: ", str).capitalize()
         for tesis in self.tesis:
-            if autor in tesis.get_Autores().capitalize():
-                print(" Campo: ", tesis.get_CampoEstudio(), "\n" + 
-                    "   Autores: ", tesis.get_Autores(),"\n" + 
-                    "   Páginas: ", tesis.get_Paginas(),"\n" + 
-                    "   Fecha publicación: ", tesis.get_Fpresentacion(),"\n\n")
+            if autor in tesis.get_Autores():
+                print("\n\n Campo: ", tesis.get_CampoEstudio(), "\n" + 
+                    " Autores: ", tesis.get_Autores(),"\n" + 
+                    " Páginas: ", tesis.get_Paginas(),"\n" + 
+                    " Fecha publicación: ", tesis.get_Fpresentacion())
+
 
                     
     def buscar_por_campo(self):
         campo = validar_input("Ingrese el campo de estudio: ", str).capitalize()
         for tesis in self.tesis:
-            if campo in tesis.get_CampoEstudio().capitalize():
-                print(" Campo: ", tesis.get_CampoEstudio(), "\n" + 
-                    "   Autores: ", tesis.get_Autores(),"\n" + 
-                    "   Páginas: ", tesis.get_Paginas(),"\n" + 
-                    "   Fecha publicación: ", tesis.get_Fpresentacion(),"\n\n")
+            if campo in tesis.get_CampoEstudio():
+                print("\n\n Campo: ", tesis.get_CampoEstudio(), "\n" + 
+                    " Autores: ", tesis.get_Autores(),"\n" + 
+                    " Páginas: ", tesis.get_Paginas(),"\n" + 
+                    " Fecha publicación: ", tesis.get_Fpresentacion())
                 
                 
     def eliminar_tesis(self):

@@ -1,6 +1,5 @@
 from datetime import date
 from typing import List
-from clases.estado import Estado
 
 class Tesis:
     def __init__(self, autores: List[str], institucion: str, f_investigacion: date, f_presentacion: date, campo_estudio: str, estado: str, paginas: int):
