@@ -524,7 +524,7 @@ class SistemaBiblioteca:
 
 
     def gestionar_lectores(self, LectorManager: LectorManager, menu_llamador, LibroManager:LibroManager = None, ArticuloManager: ArticuloCientificoManager = None, TesisManager:TesisManager= None, AutorManager: AutorManager = None):
-        lector_manager = LectorManager
+        lector_manager = LectorManager()
         self.limpiar_consola()
         self.print_brand_sistema()
         print("# Gestión de Lectores")
@@ -549,7 +549,7 @@ class SistemaBiblioteca:
             self.pausar_sistema()
         
         elif opcion == '3':
-            lector_manager.modificar_lector_desde_consola(self)
+            lector_manager.modificar_lector_desde_consola()
             self.pausar_sistema()
         
         elif opcion == '4':
