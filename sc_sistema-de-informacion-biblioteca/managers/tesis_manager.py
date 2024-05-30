@@ -1,5 +1,7 @@
 from clases.tesis import Tesis
 from clases.estado import Estado
+from clases.autor import Autor
+from managers.autor_manager import AutorManager
 from utils.validators import validar_input
 
 class TesisManager:
@@ -11,24 +13,18 @@ class TesisManager:
             Tesis(["juan", "mateo"], "utp", "2020-01-04", "2024-01-01", "Ciencia", Estado.DISPONIBLE, 100),
             ]
     
-    def agregar_tesis(self, AutorManager):
+    def agregar_tesis(self, autores):
         institucion = validar_input("Ingrese la institución de la tesis: ", str).capitalize()
         f_investigacion = validar_input("Ingrese la fecha de investigación de la tesis (YYYY-MM-DD): ", str)
         f_presentacion = validar_input("Ingrese la fecha de presentación de la tesis (YYYY-MM-DD): ", str)
         campo_estudio = validar_input("Ingrese el campo de estudio de la tesis: ", str).capitalize()
         estado = Estado.DISPONIBLE
         paginas = validar_input("Ingrese el número de páginas de la tesis: ", int)
-        AutorManager.see_authors()
-        
-        autores = validar_input("Ingrese los autores de la tesis (separados por coma): ", list, separator=",")
-        
-        
 
         tesis = Tesis(autores, institucion, f_investigacion, f_presentacion, campo_estudio, estado, paginas)
         self.tesis.append(tesis)
         print("Tesis agregada exitosamente.")
-        
-        
+                
         
     def listar_tesis(self):
         print("LISTA DE TESIS\n")
