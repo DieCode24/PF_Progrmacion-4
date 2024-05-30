@@ -31,7 +31,7 @@ class SistemaBiblioteca:
         print("0. Salir")
         SistemaBiblioteca.pausar_sistema(self)
         
-    def mostrar_menu_bibliotecario (self,libroManager: LibroManager, articuloManager: ArticuloCientificoManager, AutorManager: AutorManager):
+    def mostrar_menu_bibliotecario (self,libroManager: LibroManager, articuloManager: ArticuloCientificoManager, AutorManager: AutorManager, TesisManager: TesisManager):
         print("menu de bibliotecario")
         print("\nMenú de Administrador:")
         print("Seleccione una opción:")
@@ -48,7 +48,7 @@ class SistemaBiblioteca:
         opcion = input("\n\n> Ingrese una opción => ")
         
         if opcion == '1':
-            SistemaBiblioteca.gestionar_tesis(self)
+            SistemaBiblioteca.gestionar_tesis(self, TesisManager)
             SistemaBiblioteca.pausar_sistema(self)
         elif opcion == '2':
             SistemaBiblioteca.gestionar_articulos(self, articuloManager)

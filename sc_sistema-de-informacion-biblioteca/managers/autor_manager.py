@@ -25,6 +25,8 @@ class AutorManager:
                 return autor
         return None
 
+##solo se puede modificar si esta habilitado  correguir
+
     def modificar_autor(self):
         nombre = input("Ingrese el nombre del autor que desea modificar: ")
         autor = self.buscar_autor(nombre)
@@ -107,6 +109,8 @@ class AutorManager:
             print("El autor no existe.")
             
     def pasar_dia(self):
+        
+        
         fecha_actual = "2021-01-01"
         fecha_actual = datetime.strptime(fecha_actual, "%Y-%m-%d")
         
@@ -115,3 +119,6 @@ class AutorManager:
         print (f"Fecha actualizada: {fecha_actual}")
 
         print("Se ha pasado un día a todos los autores.")
+        
+        
+##agregar lista de autores por numeros para el cacorro de daniel 
