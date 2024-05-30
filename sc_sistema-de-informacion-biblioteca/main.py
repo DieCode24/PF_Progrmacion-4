@@ -3,14 +3,17 @@ from managers.libro_manager import LibroManager
 from managers.articulo_cientifico_manager import ArticuloCientificoManager
 from managers.tesis_manager import TesisManager
 from managers.autor_manager import AutorManager
+from managers.lector_manager import LectorManager
+
 from datetime import date
 
 def main():
-    biblioteca = sb()
     libro_manager = LibroManager()
     articulo_manager = ArticuloCientificoManager()
     Autor = AutorManager()
     Tesis = TesisManager()
+    lector_manager = LectorManager()
+    biblioteca = sb()
 
     sb.limpiar_consola(biblioteca)
     sb.print_brand_sistema(biblioteca)
@@ -34,11 +37,11 @@ def main():
             return False
         
         elif rol == "bibliotecario":
-            sb.mostrar_menu_bibliotecario(biblioteca, Autor, libro_manager, articulo_manager, Tesis)
+            sb.mostrar_menu_bibliotecario(biblioteca, Autor, libro_manager, articulo_manager, Tesis, lector_manager)
             return False
         
         elif rol == "administrador":
-            sb.mostrar_menu_administrador(biblioteca, Autor, libro_manager, articulo_manager, Tesis)
+            sb.mostrar_menu_administrador(biblioteca, Autor, libro_manager, articulo_manager, Tesis, lector_manager)
             return False
 
 
