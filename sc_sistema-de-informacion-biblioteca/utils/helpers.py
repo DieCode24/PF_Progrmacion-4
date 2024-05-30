@@ -321,7 +321,7 @@ class SistemaBiblioteca:
             elif opcion == '5':
                 AutorManager.inhabilitar_autor()
             elif opcion == '6':
-                AutorManager.pasar_dia(FECHA_ACTUAL)
+                AutorManager.pasar_dia()
             elif opcion == '0':
                 print("\n\n> Saliendo del sistema...")
             else:

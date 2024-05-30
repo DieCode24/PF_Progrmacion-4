@@ -67,38 +67,24 @@ class AutorManager:
             for autor in self.autores:
                 print(f"{count}. {autor.nombre}")
                 count += 1
-                if mas_info is not None:
-                    print("Desea saber más información de un autor?")
-                    respuesta = validar_input("0 \ 1 ", int)
-                    if respuesta == 0:
-                        nombre = ("Ingrese el nombre del autor: ").capitalize()
-                        self.mostrar_informacion_autor(nombre)
-            
+                
         elif bool:
             print("Autores Habilitados:")
             for autor in self.autores:
                 if autor.habilitado:
                     print(f"{count}. {autor.nombre}")
                     count += 1
-                    if mas_info is not None:
-                        print("Desea saber más información de un autor?")
-                        respuesta = input("Si/No: ").lower()
-                        if respuesta == "si":
-                            nombre = ("Ingrese el nombre del autor: ").capitalize()
-                            self.mostrar_informacion_autor(nombre)
+                    
         else:
             print("Autores Inhabilitados:")
             for autor in self.autores:
                 if not autor.habilitado:
                     print(f"{count}. {autor.nombre}")
                     count += 1
-                    if mas_info is not None:
-                        print("Desea saber más información de un autor?")
-                        respuesta = input("Si/No: ").lower()
-                        if respuesta == "si":
-                            nombre = ("Ingrese el nombre del autor: ").capitalize()
-                            self.mostrar_informacion_autor(nombre)
-                            
+                    
+        if mas_info:
+            nombre = input("Ingrese el nombre del autor del que desea ver más información: ").capitalize()
+            self.mostrar_informacion_autor(nombre)            
                             
     def listas_d_autores(self):
         while True:
