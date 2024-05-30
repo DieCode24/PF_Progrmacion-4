@@ -8,26 +8,32 @@ class SistemaBiblioteca:
     
     def print_brand_sistema(self):
         print("\tSistema de Información Biblioteca\n\n")
+
     
     def pausar_sistema(self):
         """Pausa el sistema, funciona en Windows y Linux."""
         try:
             command_pause = 'pause' if os.name == 'nt' else 'read -n 1 -s -r -p "Presione cualquier tecla para continuar..."'
             os.system(command_pause)
+
         except Exception as e:
             print(f"Error al pausar el sistema: {e}")
+
     
     def limpiar_consola(self):
         """Limpia la consola, funciona en Windows y Linux."""
         try:
             comando = 'cls' if os.name == 'nt' else 'clear'
             os.system(comando)
+
         except Exception as e:
             print(f"Error al limpiar la consola: {e}")
+
 
     def mostrar_menu_lector(self):
         SistemaBiblioteca.limpiar_consola(self)
         SistemaBiblioteca.print_brand_sistema(self)
+
         print("# Menú de opciones | Lector")
         print("---------------------------------------------------")
         print("Seleccione una opción:")
@@ -42,33 +48,48 @@ class SistemaBiblioteca:
         if opcion == '1':
             SistemaBiblioteca.limpiar_consola(self)
             SistemaBiblioteca.print_brand_sistema(self)
+        
             # [1] Buscar libros
+        
             SistemaBiblioteca.pausar_sistema(self)
+        
         elif opcion == '2':
             SistemaBiblioteca.limpiar_consola(self)
             SistemaBiblioteca.print_brand_sistema(self)
+        
             # [2] Realizar préstamo de libro
+        
             SistemaBiblioteca.pausar_sistema(self)
+        
         elif opcion == '3':
             SistemaBiblioteca.limpiar_consola(self)
             SistemaBiblioteca.print_brand_sistema(self)
+        
             # [3] Devolver libro
+        
             SistemaBiblioteca.pausar_sistema(self)
+        
         elif opcion == '4':
             SistemaBiblioteca.limpiar_consola(self)
             SistemaBiblioteca.print_brand_sistema(self)
+        
             # [4] Consultar préstamos
+        
             SistemaBiblioteca.pausar_sistema(self)
+        
         elif opcion == '0':
             print("\n\n> Saliendo del sistema...")
             SistemaBiblioteca.pausar_sistema(self)
             return
+        
         else:
             print("Opción no válida, intente de nuevo.")
         
-    def mostrar_menu_bibliotecario (self,libroManager: LibroManager,  AutorManager: AutorManager,ArticuloManager: ArticuloCientificoManager, TesisManager: TesisManager):
+        
+    def mostrar_menu_bibliotecario (self,LibroManager: LibroManager,  AutorManager: AutorManager,ArticuloManager: ArticuloCientificoManager, TesisManager: TesisManager):
         SistemaBiblioteca.limpiar_consola(self)
         SistemaBiblioteca.print_brand_sistema(self)
+        
         print("# Menú de opciones | Bibliotecario")
         print("---------------------------------------------------")
         print("Seleccione una opción:")
@@ -87,48 +108,73 @@ class SistemaBiblioteca:
         if opcion == '1':
             SistemaBiblioteca.limpiar_consola(self)
             SistemaBiblioteca.print_brand_sistema(self)
+        
             SistemaBiblioteca.gestionar_tesis(self, TesisManager, 'bibliotecario')
+        
         elif opcion == '2':
             SistemaBiblioteca.limpiar_consola(self)
             SistemaBiblioteca.print_brand_sistema(self)
+        
             SistemaBiblioteca.gestionar_articulos(self, ArticuloManager)
+        
             SistemaBiblioteca.pausar_sistema(self)
+        
         elif opcion == '3':
             SistemaBiblioteca.limpiar_consola(self)
             SistemaBiblioteca.print_brand_sistema(self)
-            SistemaBiblioteca.gestionar_libros(self, libroManager, 'bibliotecario')
-            SistemaBiblioteca.pausar_sistema(self)
+        
+            SistemaBiblioteca.gestionar_libros(self, LibroManager, 'bibliotecario')
+        
+            SistemaBiblioteca.pausar_sistema(self)        
+        
         elif opcion == '4':
             SistemaBiblioteca.limpiar_consola(self)
             SistemaBiblioteca.print_brand_sistema(self)
+        
             SistemaBiblioteca.gestionar_categorias(self)
+        
             SistemaBiblioteca.pausar_sistema(self)
+        
         elif opcion == '5':
             SistemaBiblioteca.limpiar_consola(self)
             SistemaBiblioteca.print_brand_sistema(self)
+        
             SistemaBiblioteca.gestionar_autores(self, AutorManager, 'bibliotecario')
+        
             SistemaBiblioteca.pausar_sistema(self)
+        
         elif opcion == '6':
             SistemaBiblioteca.limpiar_consola(self)
             SistemaBiblioteca.print_brand_sistema(self)
+        
             SistemaBiblioteca.gestionar_lectores(self)
+        
             SistemaBiblioteca.pausar_sistema(self)
+        
         elif opcion == '7':
             SistemaBiblioteca.limpiar_consola(self)
             SistemaBiblioteca.print_brand_sistema(self)
+        
             SistemaBiblioteca.gestionar_prestamos(self)
+        
             SistemaBiblioteca.pausar_sistema(self)
+        
         elif opcion == '8':
             SistemaBiblioteca.limpiar_consola(self)
             SistemaBiblioteca.print_brand_sistema(self)
+        
             SistemaBiblioteca.gestionar_multas(self)
+        
             SistemaBiblioteca.pausar_sistema(self)
+        
         elif opcion == '0':
             print("\n\n> Saliendo del sistema...")
             SistemaBiblioteca.pausar_sistema(self)
             return
+        
         else:
             print("Opción no válida, intente de nuevo.")
+        
         
     def mostrar_menu_administrador(self,  AutorManager: AutorManager, LibroManager: LibroManager, ArticuloCientificoManager: ArticuloCientificoManager, TesisManager: TesisManager):
         SistemaBiblioteca.print_brand_sistema(self)
@@ -151,27 +197,63 @@ class SistemaBiblioteca:
         if opcion == '1':
             SistemaBiblioteca.limpiar_consola(self)
             SistemaBiblioteca.print_brand_sistema(self)
+        
             SistemaBiblioteca.gestionar_tesis(self, TesisManager, 'administrador')
+        
         elif opcion == '2':
+            SistemaBiblioteca.limpiar_consola(self)
+            SistemaBiblioteca.print_brand_sistema(self)
+            
             SistemaBiblioteca.gestionar_articulos(self, ArticuloCientificoManager)
+            
             SistemaBiblioteca.pausar_sistema(self)
+        
         elif opcion == '3':
+            SistemaBiblioteca.limpiar_consola(self)
+            SistemaBiblioteca.print_brand_sistema(self)
+            
             SistemaBiblioteca.gestionar_libros(self, LibroManager, 'administrador')
+            
             SistemaBiblioteca.pausar_sistema(self)
+        
         elif opcion == '4':
+            SistemaBiblioteca.limpiar_consola(self)
+            SistemaBiblioteca.print_brand_sistema(self)
+            
             SistemaBiblioteca.gestionar_categorias(self)
+            
             SistemaBiblioteca.pausar_sistema(self)
+        
         elif opcion == '5':
+            SistemaBiblioteca.limpiar_consola(self)
+            SistemaBiblioteca.print_brand_sistema(self)
+            
             SistemaBiblioteca.gestionar_autores(self, AutorManager, 'administrador')
+            
             SistemaBiblioteca.pausar_sistema(self)
+        
         elif opcion == '6':
+            SistemaBiblioteca.limpiar_consola(self)
+            SistemaBiblioteca.print_brand_sistema(self)
+            
             SistemaBiblioteca.gestionar_lectores(self)
+            
             SistemaBiblioteca.pausar_sistema(self)
+        
         elif opcion == '7':
+            SistemaBiblioteca.limpiar_consola(self)
+            SistemaBiblioteca.print_brand_sistema(self)
+            
             SistemaBiblioteca.gestionar_prestamos(self)
+            
             SistemaBiblioteca.pausar_sistema(self)
+        
         elif opcion == '8':
+            SistemaBiblioteca.limpiar_consola(self)
+            SistemaBiblioteca.print_brand_sistema(self)
+            
             SistemaBiblioteca.gestionar_multas(self)
+            
             SistemaBiblioteca.pausar_sistema(self)
         elif opcion == '0':
             print("\n\n> Saliendo del sistema...")
@@ -180,8 +262,10 @@ class SistemaBiblioteca:
         else:
             print("Opción no válida, intente de nuevo.")
 
+
     def gestionar_tesis(self, TesisManager:TesisManager, menu_llamador, LibroManager:LibroManager = None, ArticuloManager:ArticuloCientificoManager = None, AutorManager:AutorManager = None):
         opcion = None
+        
         while opcion != '0':
             print("# Gestión de Tesis")
             print("---------------------------------------------------")
@@ -198,31 +282,41 @@ class SistemaBiblioteca:
             if opcion == '1':
                 SistemaBiblioteca.limpiar_consola(self)
                 TesisManager.agregar_tesis()
+        
             elif opcion == '2':
                 SistemaBiblioteca.limpiar_consola(self)
                 TesisManager.listar_tesis()
+        
             elif opcion == '3':
                 SistemaBiblioteca.limpiar_consola(self)
                 TesisManager.buscar_tesis()
+        
             elif opcion == '4':
                 SistemaBiblioteca.limpiar_consola(self)
                 TesisManager.eliminar_tesis()
+        
             elif opcion == '5':
                 SistemaBiblioteca.limpiar_consola(self)
                 TesisManager.modificar_tesis()
+        
             elif opcion == '0':
                 input("\n\n> Volviendo al menú principal...")
+        
                 if menu_llamador == 'bibliotecario':
                     self.mostrar_menu_bibliotecario(LibroManager, ArticuloManager, AutorManager, TesisManager)
+        
                 elif menu_llamador == 'administrador':
                     self.mostrar_menu_administrador(AutorManager, LibroManager, ArticuloManager, TesisManager)
+                
                 return
+        
             else:
                 print("Opción no válida, intente de nuevo.")
             
             if opcion != '0':
                 SistemaBiblioteca.pausar_sistema(self)
                 SistemaBiblioteca.limpiar_consola(self)
+
 
     def gestionar_articulos(self, ArticuloManager: ArticuloCientificoManager):
         print("# Gestión de Artículos Científicos")
@@ -237,6 +331,7 @@ class SistemaBiblioteca:
         print("> [7] Generar Multa")
         print("> [8] Levantar Multa")
         print("> [0] Volver al menú principal")
+
 
     def gestionar_libros(self, LibroManager: LibroManager, menu_llamador, ArticuloManager=None, AutorManager=None, TesisManager= None):
         print("# Gestión de Libros")
@@ -257,39 +352,53 @@ class SistemaBiblioteca:
         
         if opcion == '1':
             LibroManager.registrar_libro()
+
         elif opcion == '2':
             LibroManager.buscar_libro()
             SistemaBiblioteca.pausar_sistema(self)
+
         elif opcion == '3':
             LibroManager.modificar_libro()
             SistemaBiblioteca.pausar_sistema(self)
+
         elif opcion == '4':
             LibroManager.habilitar_libro()
             SistemaBiblioteca.pausar_sistema(self)
+
         elif opcion == '5':
             LibroManager.inhabilitar_libro()
             SistemaBiblioteca.pausar_sistema(self)
+
         elif opcion == '6':
             LibroManager.realizar_prestamo_libro()
             SistemaBiblioteca.pausar_sistema(self)
+
         elif opcion == '7':
             LibroManager.devolver_libro()
             SistemaBiblioteca.pausar_sistema(self)
+
         elif opcion == '8':
             LibroManager.generar_multa()
             SistemaBiblioteca.pausar_sistema(self)
+
         elif opcion == '9':
             LibroManager.levantar_multa()
             SistemaBiblioteca.pausar_sistema(self)
+
         elif opcion == '0':
-                input("\n\n> Volviendo al menú principal...")
-                if menu_llamador == 'bibliotecario':
-                    self.mostrar_menu_bibliotecario(LibroManager, ArticuloManager, AutorManager, TesisManager)
-                elif menu_llamador == 'administrador':
-                    self.mostrar_menu_administrador(AutorManager, LibroManager, ArticuloManager, TesisManager)
-                return
+            input("\n\n> Volviendo al menú principal...")
+        
+            if menu_llamador == 'bibliotecario':
+                self.mostrar_menu_bibliotecario(LibroManager, ArticuloManager, AutorManager, TesisManager)
+        
+            elif menu_llamador == 'administrador':
+                self.mostrar_menu_administrador(AutorManager, LibroManager, ArticuloManager, TesisManager)
+        
+            return
+        
         else:
             print("Opción no válida, intente de nuevo.")
+
 
     def gestionar_categorias(self):
         print("# Gestión de Categorías")
@@ -300,8 +409,10 @@ class SistemaBiblioteca:
         print("> [4] Eliminar Categoría")
         print("> [0] Volver al menú principal")
 
-    def gestionar_autores(self, AutorManager: AutorManager, menu_llamador, LibroManager:LibroManager = None, ArticuloManager: ArticuloCientificoManager = None, TesisManager= None):
+
+    def gestionar_autores(self, AutorManager: AutorManager, menu_llamador, LibroManager:LibroManager = None, ArticuloManager: ArticuloCientificoManager = None, TesisManager:TesisManager= None):
         opcion = None
+
         while opcion != '0':
             SistemaBiblioteca.limpiar_consola(self)
             print("Gestión de Autores")
@@ -316,26 +427,36 @@ class SistemaBiblioteca:
 
             if opcion == '1':
                 AutorManager.registrar_autor()
+
             elif opcion == '2':
                 AutorManager.modificar_autor()
+
             elif opcion == '3':
                 AutorManager.listas_d_autores()
+
             elif opcion == '4':
                 AutorManager.habilitar_autor()
+
             elif opcion == '5':
                 AutorManager.inhabilitar_autor()
+
             elif opcion == '0':
                 input("\n\n> Volviendo al menú principal...")
+
                 if menu_llamador == 'bibliotecario':
                     self.mostrar_menu_bibliotecario(LibroManager, ArticuloManager, AutorManager, TesisManager)
+
                 elif menu_llamador == 'administrador':
                     self.mostrar_menu_administrador(AutorManager, LibroManager, ArticuloManager, TesisManager)
+
                 return
+
             else:
                 print("Opción no válida, intente de nuevo.")
 
             if opcion != '0':
                 SistemaBiblioteca.pausar_sistema(self)
+
 
     def gestionar_lectores(self):
         print("Gestión de Lectores")
@@ -346,12 +467,14 @@ class SistemaBiblioteca:
         print("5. Inhabilitar Lector")
         print("0. Volver al menú principal")
 
+
     def gestionar_prestamos(self):
         print("Gestión de Préstamos")
         print("1. Registrar Préstamo")
         print("2. Consultar Préstamo")
         print("3. Calcular Fecha de Entrega")
         print("0. Volver al menú principal")
+
 
     def gestionar_multas(self):
         print("Gestión de Multas")
