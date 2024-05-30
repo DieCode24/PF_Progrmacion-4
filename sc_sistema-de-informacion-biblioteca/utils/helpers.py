@@ -5,10 +5,8 @@ from managers.articulo_cientifico_manager import ArticuloCientificoManager
 from managers.tesis_manager import TesisManager
 
 class SistemaBiblioteca:
-    
-    def print_brand_sistema(self):
-        print("\tSistema de Información Biblioteca\n\n")
-
+    def __init__(self):
+        self.rol_actual = None
     
     def pausar_sistema(self):
         """Pausa el sistema, funciona en Windows y Linux."""
@@ -28,6 +26,56 @@ class SistemaBiblioteca:
 
         except Exception as e:
             print(f"Error al limpiar la consola: {e}")
+    
+    def print_brand_sistema(self):
+        print("\tSistema de Información Biblioteca\n\n")
+        
+    def verificar_acceso_administrador(self, rol):
+        clave_admin = "clave_admin"  # Clave de administrador predeterminada
+
+        if rol == "administrador":
+            clave = input("Ingrese la clave de administrador: ")
+            if clave != clave_admin:
+                print("Clave incorrecta. Acceso denegado.")
+                return
+
+    def cambiar_rol(self, libro_manager:LibroManager, autor_manager:AutorManager, articulo_manager:ArticuloCientificoManager, tesis_manager:TesisManager):
+        """Permite cambiar el rol actual del usuario."""
+        self.limpiar_consola()
+        self.print_brand_sistema()
+        print("> Seleccione el rol:")
+        print("\n> [1] Lector")
+        print("> [2] Bibliotecario")
+        print("> [3] Administrador")
+        print("> [0] Salir")
+        opcion = input("\n> Ingrese una opción => ")
+        
+        if opcion == '1':
+            self.rol_actual = 'lector'
+            self.mostrar_menu_lector()
+            return
+        
+        elif opcion == '2':
+            self.rol_actual = 'bibliotecario'
+            self.mostrar_menu_bibliotecario(libro_manager, autor_manager, articulo_manager, tesis_manager)
+            return
+        
+        elif opcion == '3':
+            self.rol_actual = 'administrador'
+            self.verificar_acceso_administrador(self.rol_actual)
+            self.mostrar_menu_administrador(autor_manager, libro_manager, articulo_manager, tesis_manager)
+            return
+        
+        elif opcion == '0':
+            print("\n\n> Saliendo del sistema...")
+            self.pausar_sistema(self)
+            return
+        
+        else:
+            input("Opción no válida, intente de nuevo.")
+            self.cambiar_rol()
+    
+    
 
 
     def mostrar_menu_lector(self):
@@ -41,6 +89,7 @@ class SistemaBiblioteca:
         print("> [2] Realizar préstamo de libro")
         print("> [3] Devolver libro")
         print("> [4] Consultar préstamos")
+        print("> [5] Cambiar de rol")
         print("> [0] Salir")
         
         opcion = input("\n> Ingrese una opción => ")
@@ -77,6 +126,9 @@ class SistemaBiblioteca:
         
             SistemaBiblioteca.pausar_sistema(self)
         
+        elif opcion == '5':
+            self.cambiar_rol(LibroManager, AutorManager, ArticuloCientificoManager, TesisManager)
+            
         elif opcion == '0':
             print("\n\n> Saliendo del sistema...")
             SistemaBiblioteca.pausar_sistema(self)
@@ -101,6 +153,7 @@ class SistemaBiblioteca:
         print("> [6] Gestión de Lectores")
         print("> [7] Gestión de Préstamos")
         print("> [8] Gestión de Multas")
+        print("> [9] Cambiar de rol")
         print("> [0] Salir")
         
         opcion = input("\n> Ingrese una opción => ")
@@ -167,6 +220,9 @@ class SistemaBiblioteca:
         
             SistemaBiblioteca.pausar_sistema(self)
         
+        elif opcion == '9':
+            self.cambiar_rol(LibroManager, AutorManager, ArticuloCientificoManager, TesisManager)
+        
         elif opcion == '0':
             print("\n\n> Saliendo del sistema...")
             SistemaBiblioteca.pausar_sistema(self)
@@ -177,6 +233,7 @@ class SistemaBiblioteca:
         
         
     def mostrar_menu_administrador(self,  AutorManager: AutorManager, LibroManager: LibroManager, ArticuloCientificoManager: ArticuloCientificoManager, TesisManager: TesisManager):
+        SistemaBiblioteca.limpiar_consola(self)
         SistemaBiblioteca.print_brand_sistema(self)
         
         print("# Menu de opciones | Administrador")
@@ -190,6 +247,7 @@ class SistemaBiblioteca:
         print("> [6] Gestión de Lectores")
         print("> [7] Gestión de Préstamos")
         print("> [8] Gestión de Multas")
+        print("> [9] Cambiar de rol")
         print("> [0] Salir")
         
         opcion = input("\n> Ingrese una opción => ")
@@ -255,6 +313,10 @@ class SistemaBiblioteca:
             SistemaBiblioteca.gestionar_multas(self)
             
             SistemaBiblioteca.pausar_sistema(self)
+            
+        elif opcion == '9':
+            self.cambiar_rol(LibroManager, AutorManager, ArticuloCientificoManager, TesisManager)
+        
         elif opcion == '0':
             print("\n\n> Saliendo del sistema...")
             SistemaBiblioteca.pausar_sistema(self)

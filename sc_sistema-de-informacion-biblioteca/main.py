@@ -24,13 +24,10 @@ def main():
         if rol not in roles_validos:
             print("Rol no reconocido. Intente de nuevo.")
             
-    if rol == "administrador":
-        clave = input("Ingrese la clave de administrador: ")
-
-        if clave != "clave_admin":
-            print("Clave incorrecta. Acceso denegado.")
-            return
-        
+    sb.verificar_acceso_administrador(biblioteca, rol)
+    
+    biblioteca.rol_actual = rol  # Asignar el rol actual
+    
     while True:
         if rol == "lector":
             sb.mostrar_menu_lector(biblioteca)
