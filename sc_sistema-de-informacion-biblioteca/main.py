@@ -19,15 +19,18 @@ def main():
 
     roles_validos = ["lector", "bibliotecario", "administrador"]
     rol = None
+    
     while rol not in roles_validos:
         rol = input("¿Es usted un lector, bibliotecario o administrador? ").lower()
         if rol not in roles_validos:
             print("Rol no reconocido. Intente de nuevo.")
+            
     if rol == "administrador":
         clave = input("Ingrese la clave de administrador: ")
         if clave != "clave_admin":
             print("Clave incorrecta. Acceso denegado.")
             return
+        
     while True:
         if rol == "lector":
             sb.mostrar_menu_lector(biblioteca)
