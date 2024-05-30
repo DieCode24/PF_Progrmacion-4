@@ -5,6 +5,7 @@ from managers.tesis_manager import TesisManager
 from managers.autor_manager import AutorManager
 
 def main():
+    
     biblioteca = sb()
     libro_manager = LibroManager()
     articulo_manager = ArticuloCientificoManager()
