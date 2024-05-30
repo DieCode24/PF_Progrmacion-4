@@ -1,3 +1,6 @@
+from typing import Any
+
+
 class Autor:
     def __init__(self, nombre: str, nacionalidad: str, fecha_nacimiento: str):
         self.nombre = nombre
@@ -10,3 +13,5 @@ class Autor:
     def __str__(self):
         return print(f"Nombre: {self.nombre}\nNacionalidad: {self.nacionalidad}\nFecha de nacimiento: {self.fecha_nacimiento}\nCantidad de libros: {self.cantidad_libros}\n")
 
+    def __getattribute__(self, name: str) -> Any:
+        pass
