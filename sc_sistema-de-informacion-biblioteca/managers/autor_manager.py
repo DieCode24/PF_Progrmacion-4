@@ -7,15 +7,11 @@ class AutorManager:
     def __init__(self):
         self.autores = []
 
-    def registrar_autor(self, bool=None, param = None):
+    def registrar_autor(self):
         nombre = validar_input("Ingrese el nombre del autor: ", str).capitalize()
         nacionalidad = validar_input("Ingrese la nacionalidad del autor: ", str).capitalize()
         fecha_nacimiento = validar_input("Ingrese la fecha de nacimiento del autor (YYYY-MM-DD): ", str)
-        retorna = self.agregar_autor(nombre, nacionalidad, fecha_nacimiento)
-        if bool is not True:
-            print(f"Autor {nombre} registrado exitosamente.")
-            return retorna.__getattribute__(param)
-            
+        self.agregar_autor(nombre, nacionalidad, fecha_nacimiento)
         print(f"Autor {nombre} registrado exitosamente.")
 
     def agregar_autor(self, nombre: str, nacionalidad: str, fecha_nacimiento: str):
@@ -69,12 +65,12 @@ class AutorManager:
         if bool is None:
             print("Autores:")
             for autor in self.autores:
-                print(f"{count}. {autor}")
+                print(f"{count}. {autor.nombre}")
                 count += 1
                 if mas_info is not None:
                     print("Desea saber más información de un autor?")
-                    respuesta = input("Si/No: ").lower()
-                    if respuesta == "si":
+                    respuesta = validar_input("0 \ 1 ", int)
+                    if respuesta == 0:
                         nombre = ("Ingrese el nombre del autor: ").capitalize()
                         self.mostrar_informacion_autor(nombre)
             
@@ -82,7 +78,7 @@ class AutorManager:
             print("Autores Habilitados:")
             for autor in self.autores:
                 if autor.habilitado:
-                    print(f"{count}. {autor}")
+                    print(f"{count}. {autor.nombre}")
                     count += 1
                     if mas_info is not None:
                         print("Desea saber más información de un autor?")
@@ -94,7 +90,7 @@ class AutorManager:
             print("Autores Inhabilitados:")
             for autor in self.autores:
                 if not autor.habilitado:
-                    print(f"{count}. {autor}")
+                    print(f"{count}. {autor.nombre}")
                     count += 1
                     if mas_info is not None:
                         print("Desea saber más información de un autor?")

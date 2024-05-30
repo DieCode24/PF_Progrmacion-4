@@ -26,6 +26,8 @@ class SistemaBiblioteca:
             print(f"Error al limpiar la consola: {e}")
 
     def mostrar_menu_lector(self):
+        SistemaBiblioteca.limpiar_consola(self)
+        SistemaBiblioteca.print_brand_sistema(self)
         print("# Menú de opciones | Lector")
         print("---------------------------------------------------")
         print("Seleccione una opción:")
@@ -34,7 +36,35 @@ class SistemaBiblioteca:
         print("> [3] Devolver libro")
         print("> [4] Consultar préstamos")
         print("> [0] Salir")
-        SistemaBiblioteca.pausar_sistema(self)
+        
+        opcion = input("\n> Ingrese una opción => ")
+        
+        if opcion == '1':
+            SistemaBiblioteca.limpiar_consola(self)
+            SistemaBiblioteca.print_brand_sistema(self)
+            # [1] Buscar libros
+            SistemaBiblioteca.pausar_sistema(self)
+        elif opcion == '2':
+            SistemaBiblioteca.limpiar_consola(self)
+            SistemaBiblioteca.print_brand_sistema(self)
+            # [2] Realizar préstamo de libro
+            SistemaBiblioteca.pausar_sistema(self)
+        elif opcion == '3':
+            SistemaBiblioteca.limpiar_consola(self)
+            SistemaBiblioteca.print_brand_sistema(self)
+            # [3] Devolver libro
+            SistemaBiblioteca.pausar_sistema(self)
+        elif opcion == '4':
+            SistemaBiblioteca.limpiar_consola(self)
+            SistemaBiblioteca.print_brand_sistema(self)
+            # [4] Consultar préstamos
+            SistemaBiblioteca.pausar_sistema(self)
+        elif opcion == '0':
+            print("\n\n> Saliendo del sistema...")
+            SistemaBiblioteca.pausar_sistema(self)
+            return
+        else:
+            print("Opción no válida, intente de nuevo.")
         
     def mostrar_menu_bibliotecario (self,libroManager: LibroManager, ArticuloManager: ArticuloCientificoManager, AutorManager: AutorManager, TesisManager: TesisManager):
         SistemaBiblioteca.limpiar_consola(self)
@@ -55,9 +85,9 @@ class SistemaBiblioteca:
         opcion = input("\n> Ingrese una opción => ")
         
         if opcion == '1':
-                SistemaBiblioteca.limpiar_consola(self)
-                SistemaBiblioteca.print_brand_sistema(self)
-                SistemaBiblioteca.gestionar_tesis(self, TesisManager, 'bibliotecario')
+            SistemaBiblioteca.limpiar_consola(self)
+            SistemaBiblioteca.print_brand_sistema(self)
+            SistemaBiblioteca.gestionar_tesis(self, TesisManager, 'bibliotecario')
         elif opcion == '2':
             SistemaBiblioteca.limpiar_consola(self)
             SistemaBiblioteca.print_brand_sistema(self)
@@ -132,7 +162,7 @@ class SistemaBiblioteca:
             SistemaBiblioteca.gestionar_categorias(self)
             SistemaBiblioteca.pausar_sistema(self)
         elif opcion == '5':
-            SistemaBiblioteca.gestionar_autores(self, AutorManager, FECHA_ACTUAL)
+            SistemaBiblioteca.gestionar_autores(self, AutorManager)
             SistemaBiblioteca.pausar_sistema(self)
         elif opcion == '6':
             SistemaBiblioteca.gestionar_lectores(self)
@@ -266,7 +296,7 @@ class SistemaBiblioteca:
         print("> [4] Eliminar Categoría")
         print("> [0] Volver al menú principal")
 
-    def gestionar_autores(self, AutorManager: AutorManager, FECHA_ACTUAL: str):
+    def gestionar_autores(self, AutorManager: AutorManager):
         opcion = None
         while opcion != '0':
             SistemaBiblioteca.limpiar_consola(self)
