@@ -10,14 +10,17 @@ class TesisManager:
             Tesis(["maria", "luis"], "utp", "2020-01-04", "2024-01-01", "Matematicas", Estado.DISPONIBLE, 200),
             Tesis(["juan", "mateo"], "utp", "2020-01-04", "2024-01-01", "Ciencia", Estado.DISPONIBLE, 100),
             ]
+        autor = AutorManager()
     
     def agregar_tesis(self):
-        institucion = validar_input("Ingrese la institución de la tesis: ", str)
+        institucion = validar_input("Ingrese la institución de la tesis: ", str).capitalize()
         f_investigacion = validar_input("Ingrese la fecha de investigación de la tesis (YYYY-MM-DD): ", str)
         f_presentacion = validar_input("Ingrese la fecha de presentación de la tesis (YYYY-MM-DD): ", str)
         campo_estudio = validar_input("Ingrese el campo de estudio de la tesis: ", str)
         estado = Estado.DISPONIBLE
         paginas = validar_input("Ingrese el número de páginas de la tesis: ", int)
+        
+        
         autores = validar_input("Ingrese los autores de la tesis (separados por coma): ", list, separator=",")
 
         tesis = Tesis(autores, institucion, f_investigacion, f_presentacion, campo_estudio, estado, paginas)
@@ -49,9 +52,9 @@ class TesisManager:
             self.buscar_por_campo()
         
     def buscar_por_autor(self):
-        autor = validar_input("Ingrese el autor: ", str).lower()
+        autor = validar_input("Ingrese el autor: ", str).capitalize()
         for tesis in self.tesis:
-            if autor in tesis.get_Autores():
+            if autor in tesis.get_Autores().capitalize():
                 print(" Campo: ", tesis.get_CampoEstudio(), "\n" + 
                     "   Autores: ", tesis.get_Autores(),"\n" + 
                     "   Páginas: ", tesis.get_Paginas(),"\n" + 
@@ -59,9 +62,9 @@ class TesisManager:
 
                     
     def buscar_por_campo(self):
-        campo = validar_input("Ingrese el campo de estudio: ", str).lower()
+        campo = validar_input("Ingrese el campo de estudio: ", str).capitalize()
         for tesis in self.tesis:
-            if campo in tesis.get_CampoEstudio().lower():
+            if campo in tesis.get_CampoEstudio().capitalize():
                 print(" Campo: ", tesis.get_CampoEstudio(), "\n" + 
                     "   Autores: ", tesis.get_Autores(),"\n" + 
                     "   Páginas: ", tesis.get_Paginas(),"\n" + 
@@ -103,7 +106,7 @@ class TesisManager:
         print("Datos nuevos de la tesis\n")
 
         autores = validar_input("Ingrese los autores de la tesis (separados por coma): ", list, separator=",")
-        institucion = validar_input("Ingrese la institución de la tesis: ", str)
+        institucion = validar_input("Ingrese la institución de la tesis: ", str).capitalize()
         f_investigacion = validar_input("Ingrese la fecha de investigación de la tesis (YYYY-MM-DD): ", str)
         f_presentacion = validar_input("Ingrese la fecha de presentación de la tesis (YYYY-MM-DD): ", str)
         campo_estudio = validar_input("Ingrese el campo de estudio de la tesis: ", str)
