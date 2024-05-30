@@ -27,14 +27,15 @@ def main():
             print("Clave incorrecta. Acceso denegado.")
             return
     while True:
-        sb.limpiar_consola(biblioteca)
         if rol == "lector":
-            sb.mostrar_menu_lector(biblioteca, FECHA_ACTUAL)
+            sb.mostrar_menu_lector(biblioteca)
+            return False
         elif rol == "bibliotecario":
             sb.mostrar_menu_bibliotecario(biblioteca, Autor, libro_manager, articulo_manager, Tesis, FECHA_ACTUAL)
             return False
         elif rol == "administrador":
-            sb.mostrar_menu_administrador(biblioteca, Autor, libro_manager, articulo_manager, Tesis, FECHA_ACTUAL)
+            sb.mostrar_menu_administrador(biblioteca, Autor, libro_manager, articulo_manager, Tesis)
+            return False
 
 if __name__ == "__main__":
     main()
