@@ -269,7 +269,7 @@ class SistemaBiblioteca:
         elif opcion == '3':
             SistemaBiblioteca.limpiar_consola(self)
             SistemaBiblioteca.print_brand_sistema(self)
-            SistemaBiblioteca.gestionar_libros(self, LibroManager, 'administrador')
+            SistemaBiblioteca.gestionar_libros(self, LibroManager, 'administrador', AutorManager, ArticuloCientificoManager, TesisManager, lector_manager)
             SistemaBiblioteca.pausar_sistema(self)
         
         elif opcion == '4':

@@ -162,19 +162,7 @@ class AutorManager:
         self.agregar_autor("Mario Vargas Llosa", "Peruano", "1936-03-28")
         self.agregar_autor("Isabel Allende", "Chilena", "1942-08-02")
         self.agregar_autor("Pablo Neruda", "Chileno", "1904-07-12")
-        self.agregar_autor("Pablo Coelho", "Brasileño", "1947-08-24")
-        self.agregar_autor("Laura Esquivel", "Mexicana", "1950-09-30")
-        self.agregar_autor("Carlos Fuentes", "Mexicano", "1928-11-11")
-        self.agregar_autor("Carlos Ruiz Zafon", "Español", "1964-09-25")
-        self.agregar_autor("Isabel Allende", "Chilena", "1942-08-02")
-        self.agregar_autor("Pablo Neruda", "Chileno", "1904-07-12")
-        self.agregar_autor("Pablo Coelho", "Brasileño", "1947-08-24")
-        self.agregar_autor("Laura Esquivel", "Mexicana", "1950-09-30")
-        self.agregar_autor("Carlos Fuentes", "Mexicano", "1928-11-11")
-        self.agregar_autor("Carlos Ruiz Zafon", "Español", "1964-09-25")
-        self.agregar_autor("Isabel Allende", "Chilena", "1942-08-02")
-        self.agregar_autor("Pablo Neruda", "Chileno", "1904-07-12")
-        self.agregar_autor("Pablo Coelho", "Brasileño", "1947-08-24")
+        
         
             
 
