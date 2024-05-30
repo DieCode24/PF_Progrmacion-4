@@ -258,7 +258,7 @@ class SistemaBiblioteca:
         if opcion == '1':
             SistemaBiblioteca.limpiar_consola(self)
             SistemaBiblioteca.print_brand_sistema(self)
-            SistemaBiblioteca.gestionar_tesis(self, TesisManager, 'administrador')
+            SistemaBiblioteca.gestionar_tesis(self, TesisManager, 'administrador', AutorManager)
         
         elif opcion == '2':
             SistemaBiblioteca.limpiar_consola(self)
@@ -313,7 +313,7 @@ class SistemaBiblioteca:
 
 
 
-    def gestionar_tesis(self, TesisManager:TesisManager, menu_llamador, LibroManager: LibroManager = None, ArticuloManager: ArticuloCientificoManager = None, AutorManager: AutorManager = None, LectorManager: LectorManager = None):
+    def gestionar_tesis(self, TesisManager:TesisManager, menu_llamador, AutorManager: AutorManager, LibroManager = None, ArticuloManager = None, LectorManager = None):
         opcion = None
         
         while opcion != '0':

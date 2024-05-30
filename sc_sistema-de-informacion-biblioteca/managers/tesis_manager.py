@@ -2,6 +2,7 @@ from clases.tesis import Tesis
 from clases.estado import Estado
 from clases.autor import Autor
 from managers.autor_manager import AutorManager
+from typing import List
 from utils.validators import validar_input
 
 class TesisManager:
@@ -20,11 +21,8 @@ class TesisManager:
         campo_estudio = validar_input("Ingrese el campo de estudio de la tesis: ", str).capitalize()
         estado = Estado.DISPONIBLE
         paginas = validar_input("Ingrese el número de páginas de la tesis: ", int)
-
-        tesis = Tesis(autores, institucion, f_investigacion, f_presentacion, campo_estudio, estado, paginas)
-        self.tesis.append(tesis)
-        print("Tesis agregada exitosamente.")
-                
+        tesis  = Tesis(autores, institucion, f_investigacion, f_presentacion, campo_estudio, estado, paginas)
+        self.tesis.append(tesis)             
         
     def listar_tesis(self):
         print("LISTA DE TESIS\n")
@@ -124,6 +122,4 @@ class TesisManager:
         
         print("Tesis modificada correctamente.")
         
-    
-
     
