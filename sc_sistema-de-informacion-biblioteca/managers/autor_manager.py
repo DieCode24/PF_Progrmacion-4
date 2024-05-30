@@ -84,7 +84,8 @@ class AutorManager:
                     
         if mas_info:
             nombre = input("Ingrese el nombre del autor del que desea ver más información: ").capitalize()
-            self.mostrar_informacion_autor(nombre)            
+            self.mostrar_informacion_autor(nombre)   
+                     
                             
     def listas_d_autores(self):
         while True:
@@ -124,14 +125,5 @@ class AutorManager:
         else:
             print("El autor no existe.")
             
-    def pasar_dia(self, FECHA_ACTUAL: datetime):
-        print (f"Fecha actual: {FECHA_ACTUAL}")
-        FECHA_ACTUAL += timedelta(days=1)
-        
-        print (f"Fecha actualizada: {FECHA_ACTUAL}")
-        
-        FECHA_ACTUAL += timedelta(days=1)
-        
-        print (f"Fecha actualizada: {FECHA_ACTUAL}")
-        return FECHA_ACTUAL
+
     
