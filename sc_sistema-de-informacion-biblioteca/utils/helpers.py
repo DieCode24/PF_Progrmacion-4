@@ -136,7 +136,7 @@ class SistemaBiblioteca:
         print("# Menu de opciones | Administrador")
         print("---------------------------------------------------")
         print("Seleccione una opción:")
-        print("\n> [1] Gestión de Tesis")
+        print("> [1] Gestión de Tesis")
         print("> [2] Gestión de Artículos Científicos")
         print("> [3] Gestión de Libros")
         print("> [4] Gestión de Categorías")
