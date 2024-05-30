@@ -1,7 +1,7 @@
 from clases.tesis import Tesis
 from clases.estado import Estado
 from utils.validators import validar_input
-from clases.autor import Autor
+from managers.autor_manager import AutorManager
 
 class TesisManager:
     def __init__(self):
