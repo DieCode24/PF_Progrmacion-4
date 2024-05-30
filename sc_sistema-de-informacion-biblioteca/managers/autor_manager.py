@@ -8,8 +8,8 @@ class AutorManager:
         self.autores = []
 
     def registrar_autor(self):
-        nombre = validar_input("Ingrese el nombre del autor: ", str)
-        nacionalidad = validar_input("Ingrese la nacionalidad del autor: ", str)
+        nombre = validar_input("Ingrese el nombre del autor: ", str).capitalize()
+        nacionalidad = validar_input("Ingrese la nacionalidad del autor: ", str).capitalize()
         fecha_nacimiento = validar_input("Ingrese la fecha de nacimiento del autor (YYYY-MM-DD): ", str)
         self.agregar_autor(nombre, nacionalidad, fecha_nacimiento)
         print(f"Autor {nombre} registrado exitosamente.")
@@ -18,6 +18,7 @@ class AutorManager:
         fecha_nacimiento = datetime.strptime(fecha_nacimiento, "%Y-%m-%d")
         autor = Autor(nombre, nacionalidad, fecha_nacimiento)
         self.autores.append(autor)
+        return autor
 
     def buscar_autor(self, nombre: str):
         for autor in self.autores:
@@ -25,14 +26,19 @@ class AutorManager:
                 return autor
         return None
 
-##solo se puede modificar si esta habilitado  correguir
+
 
     def modificar_autor(self):
-        nombre = input("Ingrese el nombre del autor que desea modificar: ")
+        nombre = validar_input("Ingrese el nombre del autor que desea modificar: ", str).capitalize()
         autor = self.buscar_autor(nombre)
+        
+        if autor.__getattribute__("habilitado") == False:
+            print("No se puede modificar un autor inhabilitado")
+            return
+         
         if autor:
-            nacionalidad = input("Ingrese la nueva nacionalidad del autor: ")
-            fecha_nacimiento = input("Ingrese la nueva fecha de nacimiento del autor (YYYY-MM-DD): ")
+            nacionalidad = validar_input("Ingrese la nueva nacionalidad del autor: ", str).capitalize()
+            fecha_nacimiento = validar_input("Ingrese la nueva fecha de nacimiento del autor (YYYY-MM-DD): ", str)
             self.actualizar_autor(autor, nacionalidad, fecha_nacimiento)
             print(f"Autor {nombre} modificado exitosamente.")
         else:
@@ -54,22 +60,33 @@ class AutorManager:
         else:
             print("El autor no existe")
 
-    def see_authors(self, bool=None):
+    def see_authors(self, bool=None, mas_info=None):
+        count = 1
         if bool is None:
             print("Autores:")
             for autor in self.autores:
-                print(autor)
+                print(f"{count}. {autor.nombre}")
+                count += 1
+                
         elif bool:
             print("Autores Habilitados:")
             for autor in self.autores:
                 if autor.habilitado:
-                    print(autor)
+                    print(f"{count}. {autor.nombre}")
+                    count += 1
+                    
         else:
             print("Autores Inhabilitados:")
             for autor in self.autores:
                 if not autor.habilitado:
-                    print(autor)
-
+                    print(f"{count}. {autor.nombre}")
+                    count += 1
+                    
+        if mas_info:
+            nombre = input("Ingrese el nombre del autor del que desea ver más información: ").capitalize()
+            self.mostrar_informacion_autor(nombre)   
+                     
+                            
     def listas_d_autores(self):
         while True:
             print("\nSeleccione una opción:")
@@ -80,11 +97,11 @@ class AutorManager:
             opcion = input("Ingrese el número de la opción deseada: ")
 
             if opcion == "1":
-                self.see_authors()
+                self.see_authors(None, True)
             elif opcion == "2":
-                self.see_authors(True)
+                self.see_authors(True, True)
             elif opcion == "3":
-                self.see_authors(False)
+                self.see_authors(False, True)
             elif opcion == "0":
                 break
             else:
@@ -138,17 +155,5 @@ class AutorManager:
         else:
             print("El autor no existe.")
             
-    def pasar_dia(self):
-        
-        
-        fecha_actual = "2021-01-01"
-        fecha_actual = datetime.strptime(fecha_actual, "%Y-%m-%d")
-        
-        fecha_actual += timedelta(days=1)
-        
-        print (f"Fecha actualizada: {fecha_actual}")
 
-        print("Se ha pasado un día a todos los autores.")
-        
-        
-##agregar lista de autores por numeros para el cacorro de daniel 
+    

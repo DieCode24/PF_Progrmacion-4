@@ -10,6 +10,9 @@ class ArticuloCientifico:
     Clase que representa un artículo científico en el sistema de información de la biblioteca.
     """
 
+    # Definir constantes para los valores permitidos de periodicidad
+    PERIODICIDADES_PERMITIDAS = ["Mensual", "Semanal"]
+
     def __init__(self, titulo: str, doi: str, editor: str, fecha_publicacion: date, periodicidad: str, volumen: int, campo_interes: str, estado: str = Estado.DISPONIBLE):
         """
         Inicializa una nueva instancia de ArticuloCientifico.
@@ -18,11 +21,16 @@ class ArticuloCientifico:
         :param doi: Identificador único del artículo (DOI).
         :param editor: Nombre del editor del artículo.
         :param fecha_publicacion: Fecha de publicación del artículo.
-        :param periodicidad: Periodicidad de la publicación (mensual, semanal, etc.).
+        :param periodicidad: Periodicidad de la publicación (Mensual, Semanal).
         :param volumen: Número de volumen del artículo.
         :param campo_interes: Campo de interés del artículo.
         :param estado: Estado del artículo (predeterminado a "Disponible").
+        :raise ValueError: Si la periodicidad no es válida.
         """
+        # Verificar si la periodicidad es válida
+        if periodicidad not in self.PERIODICIDADES_PERMITIDAS:
+            raise ValueError(f"Periodicidad no válida. Debe ser una de las siguientes: {', '.join(self.PERIODICIDADES_PERMITIDAS)}")
+        
         self.titulo = titulo
         self.doi = doi
         self.editor = editor
@@ -51,7 +59,6 @@ class ArticuloCientifico:
             f")"
         )
 
-
     def actualizar_estado(self, nuevo_estado: str):
         """
         Actualiza el estado del artículo científico.
@@ -77,6 +84,7 @@ class ArticuloCientifico:
         :param periodicidad: Nueva periodicidad de la publicación del artículo (opcional).
         :param volumen: Nuevo volumen del artículo (opcional).
         :param campo_interes: Nuevo campo de interés del artículo (opcional).
+        :raise ValueError: Si la nueva periodicidad no es válida.
         """
         if titulo:
             self.titulo = titulo
@@ -85,6 +93,8 @@ class ArticuloCientifico:
         if fecha_publicacion:
             self.fecha_publicacion = fecha_publicacion
         if periodicidad:
+            if periodicidad not in self.PERIODICIDADES_PERMITIDAS:
+                raise ValueError(f"Periodicidad no válida. Debe ser una de las siguientes: {', '.join(self.PERIODICIDADES_PERMITIDAS)}")
             self.periodicidad = periodicidad
         if volumen is not None:
             self.volumen = volumen
