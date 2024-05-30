@@ -27,9 +27,6 @@ class TesisManager:
             print("No hay autores registrados")
             print("Registrando autor\n\n")
             autor.registrar_autor()
-             
-        
-        
 
         tesis = Tesis(autores, institucion, f_investigacion, f_presentacion, campo_estudio, estado, paginas)
         self.tesis.append(tesis)
