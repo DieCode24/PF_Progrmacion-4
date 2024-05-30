@@ -7,17 +7,22 @@ class AutorManager:
     def __init__(self):
         self.autores = []
 
-    def registrar_autor(self):
+    def registrar_autor(self, bool=None, param = None):
         nombre = validar_input("Ingrese el nombre del autor: ", str).capitalize()
         nacionalidad = validar_input("Ingrese la nacionalidad del autor: ", str).capitalize()
         fecha_nacimiento = validar_input("Ingrese la fecha de nacimiento del autor (YYYY-MM-DD): ", str)
-        self.agregar_autor(nombre, nacionalidad, fecha_nacimiento)
+        retorna = self.agregar_autor(nombre, nacionalidad, fecha_nacimiento)
+        if bool is not True:
+            print(f"Autor {nombre} registrado exitosamente.")
+            return retorna.__getattribute__(param)
+            
         print(f"Autor {nombre} registrado exitosamente.")
 
     def agregar_autor(self, nombre: str, nacionalidad: str, fecha_nacimiento: str):
         fecha_nacimiento = datetime.strptime(fecha_nacimiento, "%Y-%m-%d")
         autor = Autor(nombre, nacionalidad, fecha_nacimiento)
         self.autores.append(autor)
+        return autor
 
     def buscar_autor(self, nombre: str):
         for autor in self.autores:
