@@ -37,11 +37,11 @@ def main():
             return False
         
         elif rol == "bibliotecario":
-            sb.mostrar_menu_bibliotecario(biblioteca,libro_manager, autor_manager , articulo_manager, tesis_manager, lector_manager)
+            sb.mostrar_menu_bibliotecario(biblioteca, libro_manager, autor_manager , articulo_manager, tesis_manager, lector_manager)
             return False
         
         elif rol == "administrador":
-            sb.mostrar_menu_administrador(biblioteca, libro_manager, autor_manager, libro_manager, articulo_manager, tesis_manager, lector_manager)
+            sb.mostrar_menu_administrador(biblioteca, autor_manager, libro_manager, articulo_manager, tesis_manager, lector_manager)
             return False
 
 if __name__ == "__main__":

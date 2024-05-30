@@ -8,8 +8,8 @@ class AutorManager:
         self.autores = []
 
     def registrar_autor(self):
-        nombre = validar_input("Ingrese el nombre del autor: ", str).capitalize()
-        nacionalidad = validar_input("Ingrese la nacionalidad del autor: ", str).capitalize()
+        nombre = validar_input("Ingrese el nombre del autor: ", str).title()
+        nacionalidad = validar_input("Ingrese la nacionalidad del autor: ", str).title()
         fecha_nacimiento = validar_input("Ingrese la fecha de nacimiento del autor (YYYY-MM-DD): ", str)
         self.agregar_autor(nombre, nacionalidad, fecha_nacimiento)
         print(f"Autor {nombre} registrado exitosamente.")
@@ -29,15 +29,15 @@ class AutorManager:
 
 
     def modificar_autor(self):
-        nombre = validar_input("Ingrese el nombre del autor que desea modificar: ", str).capitalize()
+        nombre = validar_input("Ingrese el nombre del autor que desea modificar: ", str).title()
         autor = self.buscar_autor(nombre)
         
-        if autor.__getattribute__("habilitado") == False:
+        if autor.habilitado() == False:
             print("No se puede modificar un autor inhabilitado")
             return
          
         if autor:
-            nacionalidad = validar_input("Ingrese la nueva nacionalidad del autor: ", str).capitalize()
+            nacionalidad = validar_input("Ingrese la nueva nacionalidad del autor: ", str).title()
             fecha_nacimiento = validar_input("Ingrese la nueva fecha de nacimiento del autor (YYYY-MM-DD): ", str)
             self.actualizar_autor(autor, nacionalidad, fecha_nacimiento)
             print(f"Autor {nombre} modificado exitosamente.")
@@ -83,7 +83,7 @@ class AutorManager:
                     count += 1
                     
         if mas_info:
-            nombre = input("Ingrese el nombre del autor del que desea ver más información: ").capitalize()
+            nombre = input("Ingrese el nombre del autor del que desea ver más información: ").title()
             self.mostrar_informacion_autor(nombre)   
                      
                             
