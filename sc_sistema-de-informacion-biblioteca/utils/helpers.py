@@ -156,7 +156,7 @@ class SistemaBiblioteca:
             print("# Gestión de Tesis")
             print("---------------------------------------------------")
             print("Seleccione una opción:")
-            print("\n> [1] Registrar Tesis")
+            print("> [1] Registrar Tesis")
             print("> [2] Lista Tesis")
             print("> [3] Buscar Tesis")
             print("> [4] Eliminar Tesis")
