@@ -74,7 +74,7 @@ class SistemaBiblioteca:
         
         else:
             input("Opción no válida, intente de nuevo.")
-            self.cambiar_rol()
+            self.cambiar_rol(libro_manager, autor_manager, articulo_manager, tesis_manager, lector_manager)
     
     
 
@@ -136,10 +136,12 @@ class SistemaBiblioteca:
             return
         
         else:
-            print("Opción no válida, intente de nuevo.")
+            input("Opción no válida, intente de nuevo.")
+            
+            self.mostrar_menu_lector()
         
         
-    def mostrar_menu_bibliotecario (self,LibroManager: LibroManager,  AutorManager: AutorManager,ArticuloManager: ArticuloCientificoManager, TesisManager: TesisManager, LectorManager: LectorManager):
+    def mostrar_menu_bibliotecario (self,LibroManager: LibroManager,  AutorManager: AutorManager,ArticuloManager: ArticuloCientificoManager, TesisManager: TesisManager, lector_manager: LectorManager):
         SistemaBiblioteca.limpiar_consola(self)
         SistemaBiblioteca.print_brand_sistema(self)
         
@@ -201,7 +203,7 @@ class SistemaBiblioteca:
             SistemaBiblioteca.limpiar_consola(self)
             SistemaBiblioteca.print_brand_sistema(self)
         
-            SistemaBiblioteca.gestionar_lectores(self, LectorManager, 'bibliotecario')
+            SistemaBiblioteca.gestionar_lectores(self, lector_manager, 'bibliotecario')
         
             SistemaBiblioteca.pausar_sistema(self)
         
@@ -521,7 +523,8 @@ class SistemaBiblioteca:
                 SistemaBiblioteca.pausar_sistema(self)
 
 
-    def gestionar_lectores(self, LectorManager:LectorManager, menu_llamador, LibroManager:LibroManager = None, ArticuloManager: ArticuloCientificoManager = None, TesisManager:TesisManager= None, AutorManager: AutorManager = None):
+    def gestionar_lectores(self, LectorManager: LectorManager, menu_llamador, LibroManager:LibroManager = None, ArticuloManager: ArticuloCientificoManager = None, TesisManager:TesisManager= None, AutorManager: AutorManager = None):
+        lector_manager = LectorManager
         self.limpiar_consola()
         self.print_brand_sistema()
         print("# Gestión de Lectores")
@@ -538,21 +541,21 @@ class SistemaBiblioteca:
         opcion = input("\n> Ingrese una opción => ")
         
         if opcion == '1':
-            LectorManager.lector_manager.registrar_lector_desde_consola()
+            lector_manager.registrar_lector_desde_consola()
             self.pausar_sistema()
         
         elif opcion == '2':
-            LectorManager.lector_manager.buscar_lector_desde_consola()
+            lector_manager.buscar_lector_desde_consola()
             self.pausar_sistema()
         
         elif opcion == '3':
-            LectorManager.lector_manager.modificar_lector_desde_consola()
+            lector_manager.modificar_lector_desde_consola(self)
             self.pausar_sistema()
         
         elif opcion == '4':
             id_lector = int(input("Ingrese el ID del lector a habilitar: "))
             try:
-                LectorManager.lector_manager.habilitar_lector(id_lector)
+                lector_manager.habilitar_lector(id_lector)
                 print("Lector habilitado exitosamente.")
             except ValueError as e:
                 print(e)
@@ -561,20 +564,28 @@ class SistemaBiblioteca:
         elif opcion == '5':
             id_lector = int(input("Ingrese el ID del lector a inhabilitar: "))
             try:
-                LectorManager.lector_manager.inhabilitar_lector(id_lector)
+                lector_manager.inhabilitar_lector(id_lector)
                 print("Lector inhabilitado exitosamente.")
             except ValueError as e:
                 print(e)
             self.pausar_sistema()
         
         elif opcion == '6':
-            lectores = LectorManager.lector_manager.listar_lectores()
+            lectores = lector_manager.listar_lectores()
             for lector in lectores:
                 print(lector)
             self.pausar_sistema()
         
         elif opcion == '0':
-            return
+            input("\n\n> Volviendo al menú principal...")
+
+            if menu_llamador == 'bibliotecario':
+                self.mostrar_menu_bibliotecario(LibroManager, ArticuloManager, AutorManager, TesisManager, LectorManager)
+
+            elif menu_llamador == 'administrador':
+                self.mostrar_menu_administrador(AutorManager, LibroManager, ArticuloManager, TesisManager, LectorManager)
+
+                return
         
         else:
             print("Opción no válida, intente de nuevo.")

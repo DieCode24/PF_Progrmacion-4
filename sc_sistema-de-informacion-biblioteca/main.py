@@ -8,12 +8,12 @@ from managers.lector_manager import LectorManager
 from datetime import date
 
 def main():
+    biblioteca = sb()
     libro_manager = LibroManager()
     articulo_manager = ArticuloCientificoManager()
     Autor = AutorManager()
     Tesis = TesisManager()
     lector_manager = LectorManager()
-    biblioteca = sb()
 
     sb.limpiar_consola(biblioteca)
     sb.print_brand_sistema(biblioteca)
