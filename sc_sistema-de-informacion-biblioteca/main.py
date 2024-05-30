@@ -14,6 +14,7 @@ def main():
     
     
     sb.limpiar_consola(biblioteca)
+    sb.print_brand_sistema(biblioteca)
 
     roles_validos = ["lector", "bibliotecario", "administrador"]
     rol = None
