@@ -11,10 +11,10 @@ def main():
     biblioteca = sb()
     libro_manager = LibroManager()
     articulo_manager = ArticuloCientificoManager()
-    Autor = AutorManager()
-    Tesis = TesisManager()
+    autor_manager = AutorManager()
+    tesis_manager = TesisManager()
     lector_manager = LectorManager()
-
+    
     sb.limpiar_consola(biblioteca)
     sb.print_brand_sistema(biblioteca)
 
@@ -37,13 +37,12 @@ def main():
             return False
         
         elif rol == "bibliotecario":
-            sb.mostrar_menu_bibliotecario(biblioteca, Autor, libro_manager, articulo_manager, Tesis, lector_manager)
+            sb.mostrar_menu_bibliotecario(biblioteca, autor_manager, libro_manager, articulo_manager, tesis_manager, lector_manager)
             return False
         
         elif rol == "administrador":
-            sb.mostrar_menu_administrador(biblioteca, Autor, libro_manager, articulo_manager, Tesis, lector_manager)
+            sb.mostrar_menu_administrador(biblioteca, autor_manager, libro_manager, articulo_manager, tesis_manager, lector_manager)
             return False
-
 
 if __name__ == "__main__":
     main()

@@ -91,9 +91,11 @@ class LectorManager:
         id = int(input("Ingrese el ID del lector: "))
         telefono = input("Ingrese el número de teléfono del lector: ")
         direccion = input("Ingrese la dirección del lector: ")
+        estado = Estado.NORMAL
 
-        lector = LectorManager.registrar_lector(self, nombre, id, telefono, direccion)
-        print("Lector registrado exitosamente.")
+        lector = self.registrar_lector(nombre, id, telefono, direccion, estado)
+        input(f"Lector registrado: {lector}")
+        
 
     def buscar_lector_desde_consola(self):
         """
