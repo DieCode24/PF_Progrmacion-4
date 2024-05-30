@@ -313,7 +313,7 @@ class SistemaBiblioteca:
 
 
 
-    def gestionar_tesis(self, TesisManager:TesisManager, menu_llamador, LibroManager:LibroManager = None, ArticuloManager:ArticuloCientificoManager = None, AutorManager:AutorManager = None, LectorManager:LectorManager = None):
+    def gestionar_tesis(self, TesisManager:TesisManager, menu_llamador, LibroManager:LibroManager, ArticuloManager:ArticuloCientificoManager, AutorManager:AutorManager, LectorManager:LectorManager):
         opcion = None
         
         while opcion != '0':
@@ -472,7 +472,7 @@ class SistemaBiblioteca:
             print("3. Listar Autores")
             print("4. Habilitar Autor")
             print("5. Inhabilitar Autor")
-            print("6. Pasar dia")
+            print("6. Mock de Autores")
             print("0. Volver al menú principal")
             opcion = input("\n\n> Ingrese una opción => ")
 
@@ -490,6 +490,9 @@ class SistemaBiblioteca:
 
             elif opcion == '5':
                 AutorManager.inhabilitar_autor()
+                
+            elif opcion == '6':
+                AutorManager.mock()
 
             elif opcion == '0':
                 input("\n\n> Volviendo al menú principal...")
