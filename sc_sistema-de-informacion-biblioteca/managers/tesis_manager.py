@@ -7,7 +7,9 @@ class TesisManager:
     def __init__(self):
         self.tesis = [ 
             Tesis(["juan", "pedro"], "utp", "2020-01-04", "2024-01-01", "Ciencia", Estado.DISPONIBLE, 100),
-                      ]
+            Tesis(["maria", "luis"], "utp", "2020-01-04", "2024-01-01", "Matematicas", Estado.DISPONIBLE, 200),
+            Tesis(["juan", "mateo"], "utp", "2020-01-04", "2024-01-01", "Ciencia", Estado.DISPONIBLE, 100),
+            ]
     
     def agregar_tesis(self):
         autores = validar_input("Ingrese los autores de la tesis (separados por coma): ", list, separator=",")
@@ -71,21 +73,51 @@ class TesisManager:
             print("No hay tesis registradas")
             return
         
-        num_tesis = len(self.tesis)
-        opcion = validar_input(f"Ingrese el número de la tesis que desea eliminar (1-{num_tesis}): ", int)
-    
-        if opcion < 1 or opcion > num_tesis:
-            print("Número de tesis no válido.")
-            return
+        opcion = validar_input(f"Ingrese el número de la tesis que desea eliminar: ", int)
 
         tesis_a_eliminar = self.tesis[opcion - 1]
+        self.tesis.remove(tesis_a_eliminar) 
+        print("Tesis eliminada correctamente.")
+            
+        
+    def modificar_tesis(self):
+        self.listar_tesis()
+        if not self.tesis:
+            print("No hay tesis registradas")
+            return
+        
+        opcion = validar_input(f"Ingrese el número de la tesis que desea modificar: ", int)
+    
 
-        confirmacion = input(f"¿Está seguro que desea eliminar la siguiente tesis?\n{tesis_a_eliminar}\n(s/n): ")
-        if confirmacion.lower() == "s":
-            del self.tesis[opcion - 1]
-            print("Tesis eliminada correctamente.")
-        else:
-            print("Operación de eliminación cancelada.")
+        tesis_a_modificar = self.tesis[opcion - 1]
+        
+        print("Datos actuales de la tesis\n")
+        print(" Campo: ", tesis_a_modificar.get_CampoEstudio(), "\n" + 
+                      "   Autores: ", tesis_a_modificar.get_Autores(),"\n" + 
+                      "   Páginas: ", tesis_a_modificar.get_Paginas(),"\n" + 
+                      "   Fecha publicacion: ", tesis_a_modificar.get_Fpresentacion(),"\n" +
+                      "   Fecha investigacion: ", tesis_a_modificar.get_Finvestigacion(),"\n" +
+                      "   Institucion: ", tesis_a_modificar.get_Institucion(),"\n\n")
+        
+        print("Datos nuevos de la tesis\n")
+
+        autores = validar_input("Ingrese los autores de la tesis (separados por coma): ", list, separator=",")
+        institucion = validar_input("Ingrese la institucion de la tesis: ", str)
+        f_investigacion = validar_input("Ingrese la fecha de investigacion de la tesis (YYYY-MM-DD): ", str)
+        f_presentacion = validar_input("Ingrese la fecha de presentacion de la tesis (YYYY-MM-DD): ", str)
+        campo_estudio = validar_input("Ingrese el campo de estudio de la tesis: ", str)
+        estado = Estado.DISPONIBLE
+        paginas = validar_input("Ingrese el numero de paginas de la tesis: ", int)
+        
+        tesis_a_modificar.set_Autores(autores)
+        tesis_a_modificar.set_Institucion(institucion)
+        tesis_a_modificar.set_Finvestigacion(f_investigacion)
+        tesis_a_modificar.set_Fpresentacion(f_presentacion)
+        tesis_a_modificar.set_CampoEstudio(campo_estudio)
+        tesis_a_modificar.set_Estado(estado)
+        tesis_a_modificar.set_Paginas(paginas)
+        
+        print("Tesis modificada correctamente.")
         
     
 
