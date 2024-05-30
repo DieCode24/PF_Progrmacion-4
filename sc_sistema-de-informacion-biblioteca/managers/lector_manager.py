@@ -18,7 +18,7 @@ class LectorManager:
         :return: El objeto Lector recién creado.
         """
         lector = Lector(nombre, id, telefono, direccion, estado)
-        LectorManager.lectores.append(lector)
+        self.lectores.append(lector)
         return lector
 
     def buscar_lector(self, id: int) -> Optional[Lector]:
@@ -42,7 +42,7 @@ class LectorManager:
         :return: El objeto Lector modificado.
         :raise ValueError: Si el lector no se encuentra.
         """
-        lector = self.buscar_lector(id)
+        lector = LectorManager.buscar_lector(id)
         if lector:
             lector.actualizar_informacion(**kwargs)
             return lector
@@ -56,7 +56,7 @@ class LectorManager:
         :param id: ID del lector a habilitar.
         :raise ValueError: Si el lector no se encuentra.
         """
-        lector = self.buscar_lector(id)
+        lector = LectorManager.buscar_lector(id)
         if lector:
             lector.rehabilitar()
         else:
@@ -69,7 +69,7 @@ class LectorManager:
         :param id: ID del lector a inhabilitar.
         :raise ValueError: Si el lector no se encuentra.
         """
-        lector = self.buscar_lector(id)
+        lector = LectorManager.buscar_lector(id)
         if lector:
             lector.suspender()
         else:
@@ -91,16 +91,18 @@ class LectorManager:
         id = int(input("Ingrese el ID del lector: "))
         telefono = input("Ingrese el número de teléfono del lector: ")
         direccion = input("Ingrese la dirección del lector: ")
+        estado = Estado.NORMAL
 
-        lector = LectorManager.registrar_lector(self, nombre, id, telefono, direccion)
-        print("Lector registrado exitosamente.")
+        lector = self.registrar_lector(nombre, id, telefono, direccion, estado)
+        input(f"Lector registrado: {lector}")
+        
 
     def buscar_lector_desde_consola(self):
         """
         Busca un lector desde la consola, solicitando el ID al usuario.
         """
         id_lector = int(input("Ingrese el ID del lector a buscar: "))
-        lectores_encontrados = self.buscar_lector(id_lector)
+        lectores_encontrados = LectorManager.buscar_lector(id_lector)
 
         if lectores_encontrados:
             print(lectores_encontrados)
@@ -114,7 +116,7 @@ class LectorManager:
         Modifica un lector desde la consola, solicitando el ID y los nuevos datos al usuario.
         """
         id_lector = int(input("Ingrese el ID del lector a modificar: "))
-        lector_a_modificar = self.buscar_lector(id_lector)
+        lector_a_modificar = LectorManager.buscar_lector(id_lector)
 
         if lector_a_modificar:
             nuevo_nombre = input("Ingrese el nuevo nombre del lector (dejar en blanco para no cambiar): ")
@@ -129,7 +131,7 @@ class LectorManager:
             if nueva_direccion:
                 kwargs['direccion'] = nueva_direccion
 
-            lector_modificado = self.modificar_lector(id_lector, **kwargs)
+            lector_modificado = LectorManager.modificar_lector(id_lector, **kwargs)
             print("Lector modificado exitosamente.")
         else:
             print("No se encontró ningún lector con ese ID.")

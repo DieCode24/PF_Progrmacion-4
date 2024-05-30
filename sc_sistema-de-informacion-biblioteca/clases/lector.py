@@ -14,7 +14,7 @@ class Lector:
         self.tiene_multa = False
 
     def __str__(self):
-        return f"Lector: {self.nombre}, ID: {self.id}, Estado: {self.estado}"
+        return f"Lector: {self.nombre}, ID: {self.id}, Estado: {self.estado}\n"
 
     def agregar_libro_prestado(self, libro: str):
         self.libros_prestados.append(libro)

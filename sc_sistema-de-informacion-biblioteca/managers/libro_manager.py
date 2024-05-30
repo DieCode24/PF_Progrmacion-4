@@ -3,6 +3,7 @@ from clases.libro import Libro
 from clases.libro import Estado
 from clases.autor import Autor
 from utils.validators import validar_input
+from managers.autor_manager import AutorManager
 
 class LibroManager():
     def __init__(self):
@@ -10,14 +11,12 @@ class LibroManager():
             Libro("Ciencia", "Libro de Ciencia", "Primera", 2020, "Editorial Uno", [Autor("Autor Uno", "Nacionalidad Uno", "Fecha Nacimiento Uno"), Autor("Autor Dos", "Nacionalidad Dos", "Fecha Nacimiento Dos")], Estado.DISPONIBLE, "123-456-789", ["Español"], 5)
         ]
 
-    def registrar_libro(self):
+    def registrar_libro(self, autores):
         genero = validar_input("Ingrese el género del libro: ", str)
         titulo = validar_input("Ingrese el título del libro: ", str)
         edicion = validar_input("Ingrese la edición del libro: ", str)
         anio_publicacion = validar_input("Ingrese el año de publicación del libro: ", int)
         editorial = validar_input("Ingrese la editorial del libro: ", str)
-        autores = validar_input("Ingrese los autores del libro (separados por coma): ", list, separator=",")
-        autores = validar_input("Ingrese los autores del libro (separados por coma): ", list, separator=",")
         estado = Estado.DISPONIBLE
         isbn = validar_input("Ingrese el ISBN del libro: ", str)
         idiomas = validar_input("Ingrese los idiomas del libro (separados por coma): ", list, separator=",")
@@ -28,9 +27,25 @@ class LibroManager():
     def listado_libros(self):
         for libro in self.libros:
             print("Título:", libro.titulo + "\n" + "ISBN:", libro.isbn)
+            print("Autores:")
+            for autor in libro.autores:
+                print(autor.nombre)
+            
         
     def buscar_libro(self, query: str) -> List[Libro]:
-        return [libro for libro in self.libros if query in libro.titulo or query in libro.isbn]
+        # buscar libro por título o ISBN y mostrar información
+        resultados = []
+        for libro in self.libros:
+            if query.lower() in libro.titulo.lower() or query in libro.isbn:
+                resultados.append(libro)
+        print("Resultados de la búsqueda:")
+        for libro in resultados:
+            print("Título:", libro.titulo)
+            print("ISBN:", libro.isbn)
+            print("Autores:")
+            for autor in libro.autores:
+                print(autor.nombre)
+        return resultados
 
     def modificar_libro(self, isbn: str, **kwargs):
         libro = self.get_libro_by_isbn(isbn)
