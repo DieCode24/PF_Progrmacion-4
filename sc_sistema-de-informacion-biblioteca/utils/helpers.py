@@ -142,10 +142,7 @@ class SistemaBiblioteca:
             print("2. Lista Tesis")
             print("3. Buscar Tesis")
             print("4. Eliminar Tesis")
-            print("5. Realizar Préstamo de Tesis")
-            print("6. Devolver Tesis")
-            print("7. Generar Multa")
-            print("8. Levantar Multa")
+            print("5. Modificar Tesis")
             print("0. Volver al menú principal")
             opcion = input("\n\n> Ingrese una opción => ")
             
@@ -161,12 +158,16 @@ class SistemaBiblioteca:
             elif opcion == '4':
                 SistemaBiblioteca.limpiar_consola(self)
                 TesisManager.eliminar_tesis()  
+            elif opcion == '5':
+                SistemaBiblioteca.limpiar_consola(self)
+                TesisManager.modificar_tesis()
             elif opcion == '0':
                 print("\n\n> Saliendo del sistema...")
             else:
                 print("Opción no válida, intente de nuevo.")
             if opcion != '0':
                 SistemaBiblioteca.pausar_sistema(self)
+                SistemaBiblioteca.limpiar_consola(self)
 
     def gestionar_articulos(self, ArticuloManager: ArticuloCientificoManager):
         print("Gestión de Artículos Científicos")
