@@ -96,7 +96,7 @@ class SistemaBiblioteca:
         elif opcion == '3':
             SistemaBiblioteca.limpiar_consola(self)
             SistemaBiblioteca.print_brand_sistema(self)
-            SistemaBiblioteca.gestionar_libros(self, libroManager)
+            SistemaBiblioteca.gestionar_libros(self, libroManager, 'bibliotecario')
             SistemaBiblioteca.pausar_sistema(self)
         elif opcion == '4':
             SistemaBiblioteca.limpiar_consola(self)
@@ -106,7 +106,7 @@ class SistemaBiblioteca:
         elif opcion == '5':
             SistemaBiblioteca.limpiar_consola(self)
             SistemaBiblioteca.print_brand_sistema(self)
-            SistemaBiblioteca.gestionar_autores(self, AutorManager)
+            SistemaBiblioteca.gestionar_autores(self, AutorManager, 'bibliotecario')
             SistemaBiblioteca.pausar_sistema(self)
         elif opcion == '6':
             SistemaBiblioteca.limpiar_consola(self)
@@ -156,13 +156,13 @@ class SistemaBiblioteca:
             SistemaBiblioteca.gestionar_articulos(self, ArticuloCientificoManager)
             SistemaBiblioteca.pausar_sistema(self)
         elif opcion == '3':
-            SistemaBiblioteca.gestionar_libros(self, LibroManager)
+            SistemaBiblioteca.gestionar_libros(self, LibroManager, 'administrador')
             SistemaBiblioteca.pausar_sistema(self)
         elif opcion == '4':
             SistemaBiblioteca.gestionar_categorias(self)
             SistemaBiblioteca.pausar_sistema(self)
         elif opcion == '5':
-            SistemaBiblioteca.gestionar_autores(self, AutorManager)
+            SistemaBiblioteca.gestionar_autores(self, AutorManager, 'administrador')
             SistemaBiblioteca.pausar_sistema(self)
         elif opcion == '6':
             SistemaBiblioteca.gestionar_lectores(self)
@@ -238,7 +238,7 @@ class SistemaBiblioteca:
         print("> [8] Levantar Multa")
         print("> [0] Volver al menú principal")
 
-    def gestionar_libros(self, LibroManager: LibroManager):
+    def gestionar_libros(self, LibroManager: LibroManager, menu_llamador, ArticuloManager=None, AutorManager=None):
         print("# Gestión de Libros")
         print("---------------------------------------------------")
         print("Seleccione una opción:")
@@ -282,8 +282,12 @@ class SistemaBiblioteca:
             LibroManager.levantar_multa()
             SistemaBiblioteca.pausar_sistema(self)
         elif opcion == '0':
-            print("\n\n> Saliendo del sistema...")
-            return
+                input("\n\n> Volviendo al menú principal...")
+                if menu_llamador == 'bibliotecario':
+                    self.mostrar_menu_bibliotecario(LibroManager, ArticuloManager, AutorManager, TesisManager)
+                elif menu_llamador == 'administrador':
+                    self.mostrar_menu_administrador(AutorManager, LibroManager, ArticuloManager, TesisManager)
+                return
         else:
             print("Opción no válida, intente de nuevo.")
 
@@ -296,7 +300,7 @@ class SistemaBiblioteca:
         print("> [4] Eliminar Categoría")
         print("> [0] Volver al menú principal")
 
-    def gestionar_autores(self, AutorManager: AutorManager):
+    def gestionar_autores(self, AutorManager: AutorManager, menu_llamador, libroManager=None, ArticuloManager=None):
         opcion = None
         while opcion != '0':
             SistemaBiblioteca.limpiar_consola(self)
@@ -323,7 +327,12 @@ class SistemaBiblioteca:
             elif opcion == '6':
                 AutorManager.pasar_dia(FECHA_ACTUAL)
             elif opcion == '0':
-                print("\n\n> Saliendo del sistema...")
+                input("\n\n> Volviendo al menú principal...")
+                if menu_llamador == 'bibliotecario':
+                    self.mostrar_menu_bibliotecario(libroManager, ArticuloManager, AutorManager, TesisManager)
+                elif menu_llamador == 'administrador':
+                    self.mostrar_menu_administrador(AutorManager, libroManager, ArticuloManager, TesisManager)
+                return
             else:
                 print("Opción no válida, intente de nuevo.")
 
