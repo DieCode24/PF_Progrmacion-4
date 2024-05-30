@@ -29,14 +29,15 @@ def main():
             return
 
     while True:
-        sb.limpiar_consola(biblioteca)
         if rol == "lector":
             sb.mostrar_menu_lector(biblioteca)
+            return False
         elif rol == "bibliotecario":
             sb.mostrar_menu_bibliotecario(biblioteca, Autor, libro_manager, articulo_manager, Tesis)
             return False
         elif rol == "administrador":
             sb.mostrar_menu_administrador(biblioteca, Autor, libro_manager, articulo_manager, Tesis)
+            return False
 
 if __name__ == "__main__":
     main()
