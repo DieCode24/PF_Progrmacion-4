@@ -162,7 +162,7 @@ class SistemaBiblioteca:
             SistemaBiblioteca.gestionar_categorias(self)
             SistemaBiblioteca.pausar_sistema(self)
         elif opcion == '5':
-            SistemaBiblioteca.gestionar_autores(self, AutorManager, FECHA_ACTUAL)
+            SistemaBiblioteca.gestionar_autores(self, AutorManager)
             SistemaBiblioteca.pausar_sistema(self)
         elif opcion == '6':
             SistemaBiblioteca.gestionar_lectores(self)
@@ -296,7 +296,7 @@ class SistemaBiblioteca:
         print("> [4] Eliminar Categoría")
         print("> [0] Volver al menú principal")
 
-    def gestionar_autores(self, AutorManager: AutorManager, FECHA_ACTUAL: str):
+    def gestionar_autores(self, AutorManager: AutorManager):
         opcion = None
         while opcion != '0':
             SistemaBiblioteca.limpiar_consola(self)

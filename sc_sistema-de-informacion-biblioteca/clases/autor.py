@@ -17,5 +17,11 @@ class Autor:
         self.libros.append(libro)
         self.cantidad_libros += 1
         
-    def __getattribute__(self, name: str) -> Any:
-        pass
+    def nombre(self):
+        return self.nombre
+    
+    def nacionalidad(self):
+        return self.nacionalidad
+    
+    def fecha_nacimiento(self): 
+        return self.fecha_nacimiento
