@@ -55,21 +55,24 @@ class AutorManager:
             print("El autor no existe")
 
     def see_authors(self, bool=None):
+        count = 1
         if bool is None:
             print("Autores:")
             for autor in self.autores:
-                print(autor)
+                print(f"{count}. {autor}")
+                count += 1
         elif bool:
             print("Autores Habilitados:")
             for autor in self.autores:
                 if autor.habilitado:
-                    print(autor)
+                    print(f"{count}. {autor}")
+                    count += 1
         else:
             print("Autores Inhabilitados:")
             for autor in self.autores:
                 if not autor.habilitado:
-                    print(autor)
-
+                    print(f"{count}. {autor}")
+                    count += 1
     def listas_d_autores(self):
         while True:
             print("\nSeleccione una opción:")
