@@ -137,14 +137,14 @@ class AutorManager:
         else:
             print("El autor no existe.")
             
-    def pasar_dia(self):
+    def pasar_dia(self, FECHA_ACTUAL: datetime):
+        print (f"Fecha actual: {FECHA_ACTUAL}")
+        FECHA_ACTUAL += timedelta(days=1)
         
-        fecha_actual = "2021-01-01"
-        fecha_actual = datetime.strptime(fecha_actual, "%Y-%m-%d")
+        print (f"Fecha actualizada: {FECHA_ACTUAL}")
         
-        fecha_actual += timedelta(days=1)
+        FECHA_ACTUAL += timedelta(days=1)
         
-        print (f"Fecha actualizada: {fecha_actual}")
-
-        print("Se ha pasado un día a todos los autores.")
+        print (f"Fecha actualizada: {FECHA_ACTUAL}")
+        return FECHA_ACTUAL
     
