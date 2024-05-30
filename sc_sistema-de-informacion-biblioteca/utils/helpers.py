@@ -180,7 +180,7 @@ class SistemaBiblioteca:
         else:
             print("Opción no válida, intente de nuevo.")
 
-    def gestionar_tesis(self, TesisManager, menu_llamador, libroManager=None, ArticuloManager=None, AutorManager=None):
+    def gestionar_tesis(self, TesisManager:TesisManager, menu_llamador, LibroManager:LibroManager = None, ArticuloManager:ArticuloCientificoManager = None, AutorManager:AutorManager = None):
         opcion = None
         while opcion != '0':
             print("# Gestión de Tesis")
@@ -213,9 +213,9 @@ class SistemaBiblioteca:
             elif opcion == '0':
                 input("\n\n> Volviendo al menú principal...")
                 if menu_llamador == 'bibliotecario':
-                    self.mostrar_menu_bibliotecario(libroManager, ArticuloManager, AutorManager, TesisManager)
+                    self.mostrar_menu_bibliotecario(LibroManager, ArticuloManager, AutorManager, TesisManager)
                 elif menu_llamador == 'administrador':
-                    self.mostrar_menu_administrador(AutorManager, libroManager, ArticuloManager, TesisManager)
+                    self.mostrar_menu_administrador(AutorManager, LibroManager, ArticuloManager, TesisManager)
                 return
             else:
                 print("Opción no válida, intente de nuevo.")
@@ -238,7 +238,7 @@ class SistemaBiblioteca:
         print("> [8] Levantar Multa")
         print("> [0] Volver al menú principal")
 
-    def gestionar_libros(self, LibroManager: LibroManager, menu_llamador, ArticuloManager=None, AutorManager=None):
+    def gestionar_libros(self, LibroManager: LibroManager, menu_llamador, ArticuloManager=None, AutorManager=None, TesisManager= None):
         print("# Gestión de Libros")
         print("---------------------------------------------------")
         print("Seleccione una opción:")
@@ -300,7 +300,7 @@ class SistemaBiblioteca:
         print("> [4] Eliminar Categoría")
         print("> [0] Volver al menú principal")
 
-    def gestionar_autores(self, AutorManager: AutorManager, menu_llamador, libroManager=None, ArticuloManager=None):
+    def gestionar_autores(self, AutorManager: AutorManager, menu_llamador, LibroManager:LibroManager = None, ArticuloManager: ArticuloCientificoManager = None, TesisManager= None):
         opcion = None
         while opcion != '0':
             SistemaBiblioteca.limpiar_consola(self)
@@ -327,9 +327,9 @@ class SistemaBiblioteca:
             elif opcion == '0':
                 input("\n\n> Volviendo al menú principal...")
                 if menu_llamador == 'bibliotecario':
-                    self.mostrar_menu_bibliotecario(libroManager, ArticuloManager, AutorManager, TesisManager)
+                    self.mostrar_menu_bibliotecario(LibroManager, ArticuloManager, AutorManager, TesisManager)
                 elif menu_llamador == 'administrador':
-                    self.mostrar_menu_administrador(AutorManager, libroManager, ArticuloManager, TesisManager)
+                    self.mostrar_menu_administrador(AutorManager, LibroManager, ArticuloManager, TesisManager)
                 return
             else:
                 print("Opción no válida, intente de nuevo.")
