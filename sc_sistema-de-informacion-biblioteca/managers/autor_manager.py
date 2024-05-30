@@ -138,7 +138,7 @@ class AutorManager:
 
                 
     def habilitar_autor(self):
-        nombre = input("Ingrese el nombre del autor que desea habilitar: ")
+        nombre = input("Ingrese el nombre del autor que desea habilitar: ").title()
         autor = self.buscar_autor(nombre)
         if autor:
             autor.habilitado = True
@@ -147,7 +147,7 @@ class AutorManager:
             print("El autor no existe.")
             
     def inhabilitar_autor(self):
-        nombre = input("Ingrese el nombre del autor que desea inhabilitar: ")
+        nombre = input("Ingrese el nombre del autor que desea inhabilitar: ").title()
         autor = self.buscar_autor(nombre)
         if autor:
             autor.habilitado = False
