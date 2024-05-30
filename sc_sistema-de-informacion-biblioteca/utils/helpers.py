@@ -165,7 +165,7 @@ class SistemaBiblioteca:
             SistemaBiblioteca.limpiar_consola(self)
             SistemaBiblioteca.print_brand_sistema(self)
         
-            SistemaBiblioteca.gestionar_tesis(self, TesisManager, 'bibliotecario')
+            SistemaBiblioteca.gestionar_tesis(self, TesisManager, 'bibliotecario', AutorManager)
         
         elif opcion == '2':
             SistemaBiblioteca.limpiar_consola(self)
@@ -330,8 +330,9 @@ class SistemaBiblioteca:
             opcion = input("\n> Ingrese una opción => ")
             
             if opcion == '1':
+                autor = AutorManager.seleccionar_autores()
                 SistemaBiblioteca.limpiar_consola(self)
-                TesisManager.agregar_tesis()
+                TesisManager.agregar_tesis(autor)
         
             elif opcion == '2':
                 SistemaBiblioteca.limpiar_consola(self)
