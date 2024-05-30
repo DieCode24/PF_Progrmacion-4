@@ -179,7 +179,7 @@ class SistemaBiblioteca:
             SistemaBiblioteca.limpiar_consola(self)
             SistemaBiblioteca.print_brand_sistema(self)
         
-            SistemaBiblioteca.gestionar_libros(self, LibroManager, 'bibliotecario')
+            SistemaBiblioteca.gestionar_libros(self, LibroManager, 'bibliotecario', AutorManager)
         
             SistemaBiblioteca.pausar_sistema(self)        
         
@@ -269,7 +269,7 @@ class SistemaBiblioteca:
         elif opcion == '3':
             SistemaBiblioteca.limpiar_consola(self)
             SistemaBiblioteca.print_brand_sistema(self)
-            SistemaBiblioteca.gestionar_libros(self, LibroManager, 'administrador')
+            SistemaBiblioteca.gestionar_libros(self, LibroManager, 'administrador', AutorManager)
             SistemaBiblioteca.pausar_sistema(self)
         
         elif opcion == '4':
@@ -383,7 +383,7 @@ class SistemaBiblioteca:
         print("> [0] Volver al menú principal")
 
 
-    def gestionar_libros(self, LibroManager: LibroManager, menu_llamador, ArticuloManager=None, AutorManager=None, TesisManager= None, LectorManager:LectorManager = None):
+    def gestionar_libros(self, LibroManager: LibroManager, menu_llamador, AutorManager: AutorManager, ArticuloManager=None, TesisManager= None, LectorManager:LectorManager = None):
         print("# Gestión de Libros")
         print("---------------------------------------------------")
         print("Seleccione una opción:")
@@ -401,7 +401,8 @@ class SistemaBiblioteca:
         opcion = input("\n> Ingrese una opción => ")
         
         if opcion == '1':
-            LibroManager.registrar_libro()
+            autor = AutorManager.seleccionar_autores()
+            LibroManager.registrar_libro(autor)
 
         elif opcion == '2':
             LibroManager.buscar_libro()
