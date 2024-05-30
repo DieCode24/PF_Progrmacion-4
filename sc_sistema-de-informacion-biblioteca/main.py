@@ -12,7 +12,7 @@ def main():
     libro_manager = LibroManager()
     articulo_manager = ArticuloCientificoManager()
     autor_manager = AutorManager()
-    Tesis = TesisManager()
+    tesis_manager = TesisManager()
     lector_manager = LectorManager()
     
     sb.limpiar_consola(biblioteca)
