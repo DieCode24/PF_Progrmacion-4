@@ -8,7 +8,7 @@ def main():
     biblioteca = sb()
     libro_manager = LibroManager()
     articulo_manager = ArticuloCientificoManager()
-    Autor = AutorManager()
+    autor_manager = AutorManager()
     Tesis = TesisManager()
     sb.limpiar_consola(biblioteca)
 
@@ -31,9 +31,10 @@ def main():
         if rol == "lector":
             sb.mostrar_menu_lector(biblioteca)
         elif rol == "bibliotecario":
-            sb.mostrar_menu_bibliotecario(biblioteca, Autor, libro_manager, articulo_manager, Tesis)
+            sb.mostrar_menu_bibliotecario(biblioteca, autor_manager, libro_manager, articulo_manager, Tesis)
         elif rol == "administrador":
-            sb.mostrar_menu_administrador(biblioteca, Autor, libro_manager, articulo_manager, Tesis)
+            sb.mostrar_menu_administrador(biblioteca, autor_manager, libro_manager, articulo_manager, Tesis)
+
 
 if __name__ == "__main__":
     main()

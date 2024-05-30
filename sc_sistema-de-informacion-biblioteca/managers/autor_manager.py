@@ -89,6 +89,36 @@ class AutorManager:
                 break
             else:
                 print("Opción inválida. Por favor, intente de nuevo.")
+    
+    def seleccionar_autores(self):
+        autores_seleccionados = []
+        while True:
+            if not self.autores:
+                print("No hay autores registrados.")
+                self.registrar_autor()
+            
+            print("Autores:")
+            for i, autor in enumerate(self.autores):
+                print(f"{i + 1}. {autor.nombre}")
+                
+            print("Seleccione los autores que desea agregar al libro (separados por coma):")
+            print("0. Crear un autor nuevo")
+            
+            try:
+                seleccion = input("Autores: ")
+                seleccion = [int(x) for x in seleccion.split(",")]
+                for i in seleccion:
+                    if i == 0:
+                        self.registrar_autor()
+                    elif 1 <= i <= len(self.autores):
+                        autores_seleccionados.append(self.autores[i - 1])
+                    else:
+                        print("Opción inválida. Por favor, intente de nuevo.")
+                if autores_seleccionados:
+                    return autores_seleccionados
+            except ValueError:
+                print("Opción inválida. Por favor, intente de nuevo.")
+
                 
     def habilitar_autor(self):
         nombre = input("Ingrese el nombre del autor que desea habilitar: ")
