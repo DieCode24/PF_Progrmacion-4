@@ -157,6 +157,7 @@ class SistemaBiblioteca:
                 print("Opción no válida, intente de nuevo.")
             if opcion != '0':
                 SistemaBiblioteca.pausar_sistema(self)
+                SistemaBiblioteca.limpiar_consola(self)
 
     def gestionar_articulos(self, ArticuloManager: ArticuloCientificoManager):
         print("Gestión de Artículos Científicos")

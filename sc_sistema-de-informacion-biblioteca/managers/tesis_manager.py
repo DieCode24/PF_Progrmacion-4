@@ -12,13 +12,14 @@ class TesisManager:
             ]
     
     def agregar_tesis(self):
-        autores = validar_input("Ingrese los autores de la tesis (separados por coma): ", list, separator=",")
-        institucion = validar_input("Ingrese la institucion de la tesis: ", str)
-        f_investigacion = validar_input("Ingrese la fecha de investigacion de la tesis (YYYY-MM-DD): ", str)
-        f_presentacion = validar_input("Ingrese la fecha de presentacion de la tesis (YYYY-MM-DD): ", str)
+        institucion = validar_input("Ingrese la institución de la tesis: ", str)
+        f_investigacion = validar_input("Ingrese la fecha de investigación de la tesis (YYYY-MM-DD): ", str)
+        f_presentacion = validar_input("Ingrese la fecha de presentación de la tesis (YYYY-MM-DD): ", str)
         campo_estudio = validar_input("Ingrese el campo de estudio de la tesis: ", str)
         estado = Estado.DISPONIBLE
-        paginas = validar_input("Ingrese el numero de paginas de la tesis: ", int)
+        paginas = validar_input("Ingrese el número de páginas de la tesis: ", int)
+        autores = validar_input("Ingrese los autores de la tesis (separados por coma): ", list, separator=",")
+
         tesis = Tesis(autores, institucion, f_investigacion, f_presentacion, campo_estudio, estado, paginas)
         self.tesis.append(tesis)
         
@@ -36,10 +37,10 @@ class TesisManager:
             
     def buscar_tesis(self): 
         print("Como desea buscar la tesis?")
-        print("1. Por autor")
-        print("2. Por campo de estudio")
+        print("1. Autor")
+        print("2. Campo de estudio")
         
-        op = input("Ingrese la opcion: ")
+        op = validar_input("\n> Ingrese una opción => ", int)
         
         if op == '1':
             self.buscar_por_autor()
@@ -52,9 +53,9 @@ class TesisManager:
         for tesis in self.tesis:
             if autor in tesis.get_Autores():
                 print(" Campo: ", tesis.get_CampoEstudio(), "\n" + 
-                      "   Autores: ", tesis.get_Autores(),"\n" + 
-                      "   Páginas: ", tesis.get_Paginas(),"\n" + 
-                      "   Fecha publicacion: ", tesis.get_Fpresentacion(),"\n\n")
+                    "   Autores: ", tesis.get_Autores(),"\n" + 
+                    "   Páginas: ", tesis.get_Paginas(),"\n" + 
+                    "   Fecha publicación: ", tesis.get_Fpresentacion(),"\n\n")
 
                     
     def buscar_por_campo(self):
@@ -62,9 +63,9 @@ class TesisManager:
         for tesis in self.tesis:
             if campo in tesis.get_CampoEstudio().lower():
                 print(" Campo: ", tesis.get_CampoEstudio(), "\n" + 
-                      "   Autores: ", tesis.get_Autores(),"\n" + 
-                      "   Páginas: ", tesis.get_Paginas(),"\n" + 
-                      "   Fecha publicacion: ", tesis.get_Fpresentacion(),"\n\n")
+                    "   Autores: ", tesis.get_Autores(),"\n" + 
+                    "   Páginas: ", tesis.get_Paginas(),"\n" + 
+                    "   Fecha publicación: ", tesis.get_Fpresentacion(),"\n\n")
                 
                 
     def eliminar_tesis(self):
@@ -89,33 +90,33 @@ class TesisManager:
         opcion = validar_input(f"Ingrese el número de la tesis que desea modificar: ", int)
     
 
-        tesis_a_modificar = self.tesis[opcion - 1]
+        T_modificar = self.tesis[opcion - 1]
         
         print("Datos actuales de la tesis\n")
-        print(" Campo: ", tesis_a_modificar.get_CampoEstudio(), "\n" + 
-                      "   Autores: ", tesis_a_modificar.get_Autores(),"\n" + 
-                      "   Páginas: ", tesis_a_modificar.get_Paginas(),"\n" + 
-                      "   Fecha publicacion: ", tesis_a_modificar.get_Fpresentacion(),"\n" +
-                      "   Fecha investigacion: ", tesis_a_modificar.get_Finvestigacion(),"\n" +
-                      "   Institucion: ", tesis_a_modificar.get_Institucion(),"\n\n")
+        print(" Campo: ", T_modificar.get_CampoEstudio(), "\n" + 
+                "   Autores: ", T_modificar.get_Autores(),"\n" + 
+                "   Páginas: ", T_modificar.get_Paginas(),"\n" + 
+                "   Fecha investigacion: ", T_modificar.get_Finvestigacion(),"\n" +
+                "   Fecha publicacion: ", T_modificar.get_Fpresentacion(),"\n" +
+                "   Institucion: ", T_modificar.get_Institucion(),"\n\n")
         
         print("Datos nuevos de la tesis\n")
 
         autores = validar_input("Ingrese los autores de la tesis (separados por coma): ", list, separator=",")
-        institucion = validar_input("Ingrese la institucion de la tesis: ", str)
-        f_investigacion = validar_input("Ingrese la fecha de investigacion de la tesis (YYYY-MM-DD): ", str)
-        f_presentacion = validar_input("Ingrese la fecha de presentacion de la tesis (YYYY-MM-DD): ", str)
+        institucion = validar_input("Ingrese la institución de la tesis: ", str)
+        f_investigacion = validar_input("Ingrese la fecha de investigación de la tesis (YYYY-MM-DD): ", str)
+        f_presentacion = validar_input("Ingrese la fecha de presentación de la tesis (YYYY-MM-DD): ", str)
         campo_estudio = validar_input("Ingrese el campo de estudio de la tesis: ", str)
         estado = Estado.DISPONIBLE
-        paginas = validar_input("Ingrese el numero de paginas de la tesis: ", int)
+        paginas = validar_input("Ingrese el número de páginas de la tesis: ", int)
         
-        tesis_a_modificar.set_Autores(autores)
-        tesis_a_modificar.set_Institucion(institucion)
-        tesis_a_modificar.set_Finvestigacion(f_investigacion)
-        tesis_a_modificar.set_Fpresentacion(f_presentacion)
-        tesis_a_modificar.set_CampoEstudio(campo_estudio)
-        tesis_a_modificar.set_Estado(estado)
-        tesis_a_modificar.set_Paginas(paginas)
+        T_modificar.set_Autores(autores)
+        T_modificar.set_Institucion(institucion)
+        T_modificar.set_Finvestigacion(f_investigacion)
+        T_modificar.set_Fpresentacion(f_presentacion)
+        T_modificar.set_CampoEstudio(campo_estudio)
+        T_modificar.set_Estado(estado)
+        T_modificar.set_Paginas(paginas)
         
         print("Tesis modificada correctamente.")
         
