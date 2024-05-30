@@ -313,7 +313,7 @@ class SistemaBiblioteca:
 
 
 
-    def gestionar_tesis(self, TesisManager:TesisManager, menu_llamador, LibroManager:LibroManager, ArticuloManager:ArticuloCientificoManager, AutorManager:AutorManager, LectorManager:LectorManager):
+    def gestionar_tesis(self, TesisManager:TesisManager, menu_llamador, LibroManager: LibroManager = None, ArticuloManager: ArticuloCientificoManager = None, AutorManager: AutorManager = None, LectorManager: LectorManager = None):
         opcion = None
         
         while opcion != '0':
@@ -330,8 +330,9 @@ class SistemaBiblioteca:
             opcion = input("\n> Ingrese una opción => ")
             
             if opcion == '1':
+                autor = AutorManager.seleccionar_autores()
                 SistemaBiblioteca.limpiar_consola(self)
-                TesisManager.agregar_tesis()
+                TesisManager.agregar_tesis(autor)
         
             elif opcion == '2':
                 SistemaBiblioteca.limpiar_consola(self)
