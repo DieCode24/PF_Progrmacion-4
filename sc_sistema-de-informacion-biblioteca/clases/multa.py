@@ -1,25 +1,44 @@
 from datetime import datetime, timedelta
+from utils.validators import validar_input
+from clases.prestamo import Prestamo
+from utils.idgenerator import id_generator
 
 class Multa:
-    def __init__(self, id_multa, id_prestamo):
-        self.id_multa = id_multa
+    def __init__(self, id_prestamo, valor_multa):
+        self.id_multa = id_generator()
         self.id_prestamo = id_prestamo
         self.dias_retraso = 0
         self.fecha_finalizacion = None
         self.estado = "activa"
-        self.valor_multa = 3000  # Valor en pesos colombianos por día de retraso
+        self.valor_multa = valor_multa # Valor en pesos colombianos por día de retraso
 
-    def generar_multa(self):
-        # Solicitar al usuario la fecha de préstamo y devolución
-        fecha_prestamo_str = input("Ingrese la fecha de préstamo (dd/mm/aaaa): ")
-        fecha_devolucion_str = input("Ingrese la fecha de devolución (dd/mm/aaaa): ")
 
-        # Convertir las cadenas de texto a objetos datetime
-        fecha_prestamo = datetime.strptime(fecha_prestamo_str, "%d/%m/%Y")
-        fecha_devolucion = datetime.strptime(fecha_devolucion_str, "%d/%m/%Y")
-
-        # Calcular la fecha de entrega y los días de retraso
-        fecha_entrega = fecha_prestamo + timedelta(days=3)
+    def __str__(self):
+        return f"ID: {self.id_multa}\nID Préstamo: {self.id_prestamo}\nDías de retraso: {self.dias_retraso}\nFecha de finalización: {self.fecha_finalizacion}\nEstado: {self.estado}\nValor de la multa: {self.calcular_valor_multa()}"
+    
+    def idmulta(self):
+        return self.id_multa
+    
+    def idprestamo(self):
+        return self.id_prestamo
+    
+    def diasretraso(self):
+        return self.dias_retraso
+    
+    def fechafinalizacion(self):
+        return self.fecha_finalizacion
+    
+    def estado(self):
+        return self.estado
+    
+    
+    def generar_multa(self, fecha_prestamo, fecha_entrega):
+        
+        #juan manuel me pasa la fecha de prestamo y yo le pido la fecha de devolucion+
+        
+        fecha_devolucion = validar_input("Ingrese la fecha de devolución (dd/mm/aaaa): ")
+        
+        
         if fecha_devolucion > fecha_entrega:
             self.dias_retraso = (fecha_devolucion - fecha_entrega).days
             self.fecha_finalizacion = fecha_devolucion + timedelta(days=self.dias_retraso)
