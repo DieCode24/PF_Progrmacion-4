@@ -171,7 +171,7 @@ class SistemaBiblioteca:
             SistemaBiblioteca.limpiar_consola(self)
             SistemaBiblioteca.print_brand_sistema(self)
         
-            SistemaBiblioteca.gestionar_articulos(self, ArticuloManager)
+            SistemaBiblioteca.gestionar_articulos(self, ArticuloManager, 'bibliotecario')
         
             SistemaBiblioteca.pausar_sistema(self)
         
@@ -263,8 +263,7 @@ class SistemaBiblioteca:
         elif opcion == '2':
             SistemaBiblioteca.limpiar_consola(self)
             SistemaBiblioteca.print_brand_sistema(self)
-            SistemaBiblioteca.gestionar_articulos(self, ArticuloCientificoManager)
-            SistemaBiblioteca.pausar_sistema(self)
+            SistemaBiblioteca.gestionar_articulos(self, ArticuloCientificoManager, 'administrador')
         
         elif opcion == '3':
             SistemaBiblioteca.limpiar_consola(self)
@@ -369,19 +368,97 @@ class SistemaBiblioteca:
                 SistemaBiblioteca.limpiar_consola(self)
 
 
-    def gestionar_articulos(self, ArticuloManager: ArticuloCientificoManager):
-        print("# Gestión de Artículos Científicos")
-        print("---------------------------------------------------")
-        print("Seleccione una opción:")
-        print("\n> [1] Registrar Artículo")
-        print("> [2] Buscar Artículo")
-        print("> [3] Modificar Artículo")
-        print("> [4] Eliminar Artículo")
-        print("> [5] Realizar Préstamo de Artículo")
-        print("> [6] Devolver Artículo")
-        print("> [7] Generar Multa")
-        print("> [8] Levantar Multa")
-        print("> [0] Volver al menú principal")
+    def gestionar_articulos(self, articulo_manager, menu_llamador, LibroManager=None, TesisManager=None, AutorManager=None, LectorManager=None):
+        while True:
+            self.limpiar_consola()
+            self.print_brand_sistema()
+            print("# Gestión de Artículos Científicos")
+            print("---------------------------------------------------")
+            print("Seleccione una opción:")
+            print("\n> [1] Registrar Artículo")
+            print("> [2] Buscar Artículo")
+            print("> [3] Modificar Artículo")
+            print("> [4] Eliminar Artículo")
+            print("> [5] Realizar Préstamo de Artículo")
+            print("> [6] Devolver Artículo")
+            print("> [7] Generar Multa")
+            print("> [8] Levantar Multa")
+            print("> [0] Volver al menú principal")
+            
+            opcion = input("\n> Ingrese una opción => ")
+            
+            if opcion == '1':
+                articulo_manager.registrar_articulo_desde_consola()
+            
+            elif opcion == '2':
+                articulo_manager.buscar_articulo_desde_consola()
+                self.pausar_sistema()
+            
+            elif opcion == '3':
+                articulo_manager.modificar_articulo_desde_consola()
+                self.pausar_sistema()
+            
+            elif opcion == '4':
+                doi = input("Ingrese el DOI del artículo a eliminar: ")
+                try:
+                    articulo_manager.eliminar_articulo(doi)
+                    print("Artículo eliminado exitosamente.")
+                except ValueError as e:
+                    print(e)
+                self.pausar_sistema()
+            
+            elif opcion == '5':
+                doi = input("Ingrese el DOI del artículo a prestar: ")
+                id_lector = int(input("Ingrese el ID del lector: "))
+                try:
+                    articulo_manager.realizar_prestamo(doi, id_lector)
+                    print("Préstamo realizado exitosamente.")
+                except ValueError as e:
+                    print(e)
+                self.pausar_sistema()
+            
+            elif opcion == '6':
+                doi = input("Ingrese el DOI del artículo a devolver: ")
+                id_lector = int(input("Ingrese el ID del lector: "))
+                try:
+                    articulo_manager.devolver_articulo(doi, id_lector)
+                    print("Artículo devuelto exitosamente.")
+                except ValueError as e:
+                    print(e)
+                self.pausar_sistema()
+            
+            elif opcion == '7':
+                id_prestamo = int(input("Ingrese el ID del préstamo: "))
+                try:
+                    articulo_manager.generar_multa(id_prestamo)
+                    print("Multa generada exitosamente.")
+                except ValueError as e:
+                    print(e)
+                self.pausar_sistema()
+            
+            elif opcion == '8':
+                id_multa = int(input("Ingrese el ID de la multa: "))
+                try:
+                    articulo_manager.levantar_multa(id_multa)
+                    print("Multa levantada exitosamente.")
+                except ValueError as e:
+                    print(e)
+                self.pausar_sistema()
+            
+            elif opcion == '0':
+                input("\n\n> Volviendo al menú principal...")
+                
+                if menu_llamador == 'bibliotecario':
+                    self.mostrar_menu_bibliotecario(LibroManager, articulo_manager, AutorManager, TesisManager, LectorManager)
+                    
+                elif menu_llamador == 'administrador':
+                    self.mostrar_menu_administrador(AutorManager, LibroManager, articulo_manager, TesisManager, LectorManager)
+                    
+                break  # Salir del bucle while y regresar al menú anterior
+            
+            else:
+                print("Opción no válida, intente de nuevo.")
+                self.pausar_sistema()
 
 
     def gestionar_libros(self, LibroManager: LibroManager, menu_llamador, AutorManager: AutorManager, ArticuloManager=None, TesisManager= None, LectorManager:LectorManager = None):
@@ -524,9 +601,6 @@ class SistemaBiblioteca:
 
 
     def gestionar_lectores(self, lector_manager, menu_llamador, LibroManager: LibroManager = None, ArticuloManager: ArticuloCientificoManager = None, TesisManager:TesisManager = None, AutorManager: AutorManager = None):
-        if lector_manager is None:
-            print("Error: el gestor de lectores no está inicializado.")
-            return
         while True:
             self.limpiar_consola()
             self.print_brand_sistema()
