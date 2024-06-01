@@ -6,6 +6,7 @@ from managers.autor_manager import AutorManager
 from managers.lector_manager import LectorManager
 from managers.prestamo_manager import PrestamoManager
 from managers.multa_manager import MultaManager
+from managers.categoria_manager import CategoriaManager
 
 from datetime import date
 
@@ -18,6 +19,7 @@ def main():
     lector_manager = LectorManager()
     prestamo_manager = PrestamoManager()
     multa_manager = MultaManager()
+    categoria_manager = CategoriaManager()
     
     sb.limpiar_consola(biblioteca)
     sb.print_brand_sistema(biblioteca)
@@ -41,11 +43,11 @@ def main():
             return False
         
         elif rol == "bibliotecario":
-            sb.mostrar_menu_bibliotecario(biblioteca, libro_manager, autor_manager , articulo_manager, tesis_manager, lector_manager, prestamo_manager, multa_manager)
+            sb.mostrar_menu_bibliotecario(biblioteca, libro_manager, autor_manager , articulo_manager, tesis_manager, lector_manager, prestamo_manager, multa_manager, categoria_manager)
             return False
         
         elif rol == "administrador":
-            sb.mostrar_menu_administrador(biblioteca, autor_manager, libro_manager, articulo_manager, tesis_manager, lector_manager, prestamo_manager, multa_manager)
+            sb.mostrar_menu_administrador(biblioteca, autor_manager, libro_manager, articulo_manager, tesis_manager, lector_manager, prestamo_manager, multa_manager, categoria_manager)
             return False
 
 if __name__ == "__main__":
