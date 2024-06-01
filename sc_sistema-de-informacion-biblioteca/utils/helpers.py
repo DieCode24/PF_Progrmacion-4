@@ -1,4 +1,5 @@
 import os
+
 from managers.libro_manager import LibroManager
 from managers.autor_manager import AutorManager
 from managers.articulo_cientifico_manager import ArticuloCientificoManager
@@ -6,6 +7,8 @@ from managers.tesis_manager import TesisManager
 from managers.lector_manager import LectorManager
 from managers.prestamo_manager import PrestamoManager
 from managers.multa_manager import MultaManager
+from managers.categoria_manager import CategoriaManager
+
 
 class SistemaBiblioteca:
     def __init__(self):
@@ -46,7 +49,7 @@ class SistemaBiblioteca:
                 return
 
 
-    def cambiar_rol(self, libro_manager:LibroManager, autor_manager:AutorManager, articulo_manager:ArticuloCientificoManager, tesis_manager:TesisManager, lector_manager: LectorManager, prestamo_manager: PrestamoManager, multa_manager: MultaManager):
+    def cambiar_rol(self, libro_manager:LibroManager, autor_manager:AutorManager, articulo_manager:ArticuloCientificoManager, tesis_manager:TesisManager, lector_manager: LectorManager, prestamo_manager: PrestamoManager, multa_manager: MultaManager, categoria_manager: CategoriaManager):
         """Permite cambiar el rol actual del usuario."""
         self.limpiar_consola()
         self.print_brand_sistema()
@@ -64,13 +67,13 @@ class SistemaBiblioteca:
         
         elif opcion == '2':
             self.rol_actual = 'bibliotecario'
-            self.mostrar_menu_bibliotecario(libro_manager, autor_manager, articulo_manager, tesis_manager, lector_manager, prestamo_manager)
+            self.mostrar_menu_bibliotecario(autor_manager, libro_manager, articulo_manager, tesis_manager, lector_manager, prestamo_manager, multa_manager, categoria_manager)
             return
         
         elif opcion == '3':
             self.rol_actual = 'administrador'
             self.verificar_acceso_administrador(self.rol_actual)
-            self.mostrar_menu_administrador(autor_manager, libro_manager, articulo_manager, tesis_manager, lector_manager, prestamo_manager, multa_manager)
+            self.mostrar_menu_administrador(autor_manager, libro_manager, articulo_manager, tesis_manager, lector_manager, prestamo_manager, multa_manager, categoria_manager)
             return
         
         elif opcion == '0':
@@ -80,10 +83,10 @@ class SistemaBiblioteca:
         
         else:
             input("Opción no válida, intente de nuevo.")
-            self.cambiar_rol(libro_manager, autor_manager, articulo_manager, tesis_manager, lector_manager, prestamo_manager, multa_manager)
+            self.cambiar_rol(libro_manager, autor_manager, articulo_manager, tesis_manager, lector_manager, prestamo_manager, multa_manager, categoria_manager)
     
 
-    
+
 
     def mostrar_menu_lector(self):
         SistemaBiblioteca.limpiar_consola(self)
@@ -134,7 +137,7 @@ class SistemaBiblioteca:
             SistemaBiblioteca.pausar_sistema(self)
         
         elif opcion == '5':
-            self.cambiar_rol(LibroManager, AutorManager, ArticuloCientificoManager, TesisManager, LectorManager, PrestamoManager, MultaManager)
+            self.cambiar_rol(LibroManager, AutorManager, ArticuloCientificoManager, TesisManager, LectorManager, PrestamoManager, MultaManager, CategoriaManager)
             
         elif opcion == '0':
             print("\n\n> Saliendo del sistema...")
@@ -147,7 +150,7 @@ class SistemaBiblioteca:
             self.mostrar_menu_lector()
         
         
-    def mostrar_menu_bibliotecario (self, AutorManager: AutorManager, LibroManager: LibroManager, ArticuloCientificoManager: ArticuloCientificoManager, TesisManager: TesisManager, lector_manager: LectorManager, prestamo_manager: PrestamoManager, multa_manager: MultaManager):
+    def mostrar_menu_bibliotecario (self, AutorManager: AutorManager, LibroManager: LibroManager, ArticuloCientificoManager: ArticuloCientificoManager, TesisManager: TesisManager, lector_manager: LectorManager, prestamo_manager: PrestamoManager, multa_manager: MultaManager, categoria_manager: CategoriaManager):
         SistemaBiblioteca.limpiar_consola(self)
         SistemaBiblioteca.print_brand_sistema(self)
         
@@ -185,7 +188,7 @@ class SistemaBiblioteca:
         elif opcion == '4':
             SistemaBiblioteca.limpiar_consola(self)
             SistemaBiblioteca.print_brand_sistema(self)
-            SistemaBiblioteca.gestionar_categorias(self)
+            SistemaBiblioteca.gestionar_categorias(self, categoria_manager, 'bibliotecario')
         
         elif opcion == '5':
             SistemaBiblioteca.limpiar_consola(self)
@@ -208,7 +211,7 @@ class SistemaBiblioteca:
             SistemaBiblioteca.gestionar_multas(self, multa_manager, 'bibliotecario')
         
         elif opcion == '9':
-            self.cambiar_rol(LibroManager, AutorManager, ArticuloCientificoManager, TesisManager, lector_manager, prestamo_manager, multa_manager)
+            self.cambiar_rol(LibroManager, AutorManager, ArticuloCientificoManager, TesisManager, lector_manager, prestamo_manager, multa_manager, categoria_manager)
         
         elif opcion == '0':
             print("\n\n> Saliendo del sistema...")
@@ -219,7 +222,7 @@ class SistemaBiblioteca:
             print("Opción no válida, intente de nuevo.")
         
         
-    def mostrar_menu_administrador(self, AutorManager: AutorManager, LibroManager: LibroManager, ArticuloCientificoManager: ArticuloCientificoManager, TesisManager: TesisManager, lector_manager: LectorManager, prestamo_manager: PrestamoManager, multa_manager: MultaManager):
+    def mostrar_menu_administrador(self, AutorManager: AutorManager, LibroManager: LibroManager, ArticuloCientificoManager: ArticuloCientificoManager, TesisManager: TesisManager, lector_manager: LectorManager, prestamo_manager: PrestamoManager, multa_manager: MultaManager, categoria_manager: CategoriaManager):
         SistemaBiblioteca.limpiar_consola(self)
         SistemaBiblioteca.print_brand_sistema(self)
         
@@ -257,7 +260,7 @@ class SistemaBiblioteca:
         elif opcion == '4':
             SistemaBiblioteca.limpiar_consola(self)
             SistemaBiblioteca.print_brand_sistema(self)
-            SistemaBiblioteca.gestionar_categorias(self)
+            SistemaBiblioteca.gestionar_categorias(self, categoria_manager, 'administrador')
             SistemaBiblioteca.pausar_sistema(self)
         
         elif opcion == '5':
@@ -281,7 +284,7 @@ class SistemaBiblioteca:
             SistemaBiblioteca.gestionar_multas(self, multa_manager, 'administrador')
             
         elif opcion == '9':
-            self.cambiar_rol(LibroManager, AutorManager, ArticuloCientificoManager, TesisManager, lector_manager, prestamo_manager, multa_manager)
+            self.cambiar_rol(LibroManager, AutorManager, ArticuloCientificoManager, TesisManager, lector_manager, prestamo_manager, multa_manager, categoria_manager)
         
         elif opcion == '0':
             print("\n\n> Saliendo del sistema...")
@@ -293,7 +296,7 @@ class SistemaBiblioteca:
 
 
 
-    def gestionar_tesis(self, TesisManager:TesisManager, menu_llamador, AutorManager: AutorManager, LibroManager = None, ArticuloManager = None, LectorManager = None, prestamo_manager: PrestamoManager = None , multa_manager: MultaManager = None):
+    def gestionar_tesis(self, TesisManager:TesisManager, menu_llamador, AutorManager: AutorManager, LibroManager = None, ArticuloManager = None, LectorManager = None, prestamo_manager: PrestamoManager = None , multa_manager: MultaManager = None, categoria_manager: CategoriaManager = None):
         opcion = None
         
         while opcion != '0':
@@ -334,10 +337,10 @@ class SistemaBiblioteca:
                 input("\n\n> Volviendo al menú principal...")
         
                 if menu_llamador == 'bibliotecario':
-                    self.mostrar_menu_bibliotecario(LibroManager, ArticuloManager, AutorManager, TesisManager, LectorManager, prestamo_manager, multa_manager)
+                    self.mostrar_menu_bibliotecario(AutorManager, LibroManager, ArticuloManager, TesisManager, LectorManager, prestamo_manager, multa_manager, categoria_manager)
         
                 elif menu_llamador == 'administrador':
-                    self.mostrar_menu_administrador(AutorManager, LibroManager, ArticuloManager, TesisManager, LectorManager, prestamo_manager, multa_manager)
+                    self.mostrar_menu_administrador(AutorManager, LibroManager, ArticuloManager, TesisManager, LectorManager, prestamo_manager, multa_manager, categoria_manager)
                 
                 return
         
@@ -349,7 +352,7 @@ class SistemaBiblioteca:
                 SistemaBiblioteca.limpiar_consola(self)
 
 
-    def gestionar_articulos(self, articulo_manager, menu_llamador, LibroManager=None, TesisManager=None, AutorManager=None, LectorManager=None, prestamo_manager: PrestamoManager = None , multa_manager: MultaManager = None):
+    def gestionar_articulos(self, articulo_manager, menu_llamador, LibroManager=None, TesisManager=None, AutorManager=None, LectorManager=None, prestamo_manager: PrestamoManager = None , multa_manager: MultaManager = None, categoria_manager: CategoriaManager = None):
         while True:
             self.limpiar_consola()
             self.print_brand_sistema()
@@ -430,10 +433,10 @@ class SistemaBiblioteca:
                 input("\n\n> Volviendo al menú principal...")
                 
                 if menu_llamador == 'bibliotecario':
-                    self.mostrar_menu_bibliotecario(LibroManager, articulo_manager, AutorManager, TesisManager, LectorManager, prestamo_manager, multa_manager)
+                    self.mostrar_menu_bibliotecario(AutorManager, LibroManager, articulo_manager, TesisManager, LectorManager, prestamo_manager, multa_manager, categoria_manager)
                     
                 elif menu_llamador == 'administrador':
-                    self.mostrar_menu_administrador(AutorManager, LibroManager, articulo_manager, TesisManager, LectorManager, prestamo_manager, multa_manager)
+                    self.mostrar_menu_administrador(AutorManager, LibroManager, articulo_manager, TesisManager, LectorManager, prestamo_manager, multa_manager, categoria_manager)
                     
                 break  # Salir del bucle while y regresar al menú anterior
             
@@ -442,7 +445,7 @@ class SistemaBiblioteca:
                 self.pausar_sistema()
 
 
-    def gestionar_libros(self, LibroManager: LibroManager, menu_llamador, AutorManager: AutorManager, ArticuloManager=None, TesisManager= None, LectorManager:LectorManager = None, prestamo_manager: PrestamoManager = None , multa_manager: MultaManager = None):
+    def gestionar_libros(self, LibroManager: LibroManager, menu_llamador, AutorManager: AutorManager, ArticuloManager=None, TesisManager= None, LectorManager:LectorManager = None, prestamo_manager: PrestamoManager = None , multa_manager: MultaManager = None, categoria_manager: CategoriaManager = None):
         opcion = None
 
         while opcion != '0':
@@ -509,10 +512,10 @@ class SistemaBiblioteca:
                 input("\n\n> Volviendo al menú principal...")
             
                 if menu_llamador == 'bibliotecario':
-                    self.mostrar_menu_bibliotecario(LibroManager, ArticuloManager, AutorManager, TesisManager, LectorManager, prestamo_manager, multa_manager)
+                    self.mostrar_menu_bibliotecario(AutorManager, LibroManager, ArticuloManager, TesisManager, LectorManager, prestamo_manager, multa_manager, categoria_manager)
             
                 elif menu_llamador == 'administrador':
-                    self.mostrar_menu_administrador(AutorManager, LibroManager, ArticuloManager, TesisManager, LectorManager, prestamo_manager, multa_manager)
+                    self.mostrar_menu_administrador(AutorManager, LibroManager, ArticuloManager, TesisManager, LectorManager, prestamo_manager, multa_manager, categoria_manager)
             
                 return
             
@@ -520,17 +523,53 @@ class SistemaBiblioteca:
                 print("Opción no válida, intente de nuevo.")
 
 
-    def gestionar_categorias(self):
-        print("# Gestión de Categorías")
-        print("---------------------------------------------------")
-        print("\n> [1] Crear Categoría")
-        print("> [2] Buscar Categoría")
-        print("> [3] Modificar Categoría")
-        print("> [4] Eliminar Categoría")
-        print("> [0] Volver al menú principal")
+    def gestionar_categorias(self, categoria_manager, menu_llamador, LibroManager: LibroManager = None, ArticuloManager: ArticuloCientificoManager = None, TesisManager: TesisManager = None, AutorManager: AutorManager = None, lector_manager: LectorManager = None, prestamo_manager: PrestamoManager = None, multa_manager: MultaManager = None):
+        while True:
+            self.limpiar_consola()
+            self.print_brand_sistema()
+            print("# Gestión de Categorías")
+            print("---------------------------------------------------")
+            print("\n> [1] Crear Categoría")
+            print("> [2] Buscar Categoría")
+            print("> [3] Modificar Categoría")
+            print("> [4] Eliminar Categoría")
+            print("> [0] Volver al menú principal")
+            
+            opcion = input("\n> Ingrese una opción => ")
+            
+            if opcion == '1':
+                # Lógica 'Crear Categoría'
+                pass
+            
+            elif opcion == '2':
+                # Lógica 'Buscar Categoría'
+                pass
+            
+            elif opcion == '3':
+                # Lógica 'Modificar Categoría'
+                pass
+            
+            elif opcion == '4':
+                # Lógica 'Eliminar Categoría'
+                pass
+            
+            elif opcion == '0':
+                input("\n\n> Volviendo al menú principal...")
+
+                if menu_llamador == 'bibliotecario':
+                    self.mostrar_menu_bibliotecario(AutorManager, LibroManager, ArticuloManager, TesisManager, lector_manager, prestamo_manager, multa_manager, categoria_manager)
+
+                elif menu_llamador == 'administrador':
+                    self.mostrar_menu_administrador(AutorManager, LibroManager, ArticuloManager, TesisManager, lector_manager, prestamo_manager, multa_manager, categoria_manager)
+
+                break  # Salir del bucle while y regresar al menú anterior
+            
+            else:
+                print("Opción no válida, intente de nuevo.")
+                self.pausar_sistema()
 
 
-    def gestionar_autores(self, AutorManager: AutorManager, menu_llamador, LibroManager:LibroManager = None, ArticuloManager: ArticuloCientificoManager = None, TesisManager:TesisManager= None, LectorManager:LectorManager = None, prestamo_manager: PrestamoManager = None , multa_manager: MultaManager = None):
+    def gestionar_autores(self, AutorManager: AutorManager, menu_llamador, LibroManager:LibroManager = None, ArticuloManager: ArticuloCientificoManager = None, TesisManager:TesisManager= None, LectorManager:LectorManager = None, prestamo_manager: PrestamoManager = None , multa_manager: MultaManager = None, categoria_manager: CategoriaManager = None):
         opcion = None
 
         while opcion != '0':
@@ -567,10 +606,10 @@ class SistemaBiblioteca:
                 input("\n\n> Volviendo al menú principal...")
 
                 if menu_llamador == 'bibliotecario':
-                    self.mostrar_menu_bibliotecario(LibroManager, ArticuloManager, AutorManager, TesisManager, LectorManager, prestamo_manager, multa_manager)
+                    self.mostrar_menu_bibliotecario(AutorManager, LibroManager, ArticuloManager, TesisManager, LectorManager, prestamo_manager, multa_manager, categoria_manager)
 
                 elif menu_llamador == 'administrador':
-                    self.mostrar_menu_administrador(AutorManager, LibroManager, ArticuloManager, TesisManager, LectorManager, prestamo_manager, multa_manager)
+                    self.mostrar_menu_administrador(AutorManager, LibroManager, ArticuloManager, TesisManager, LectorManager, prestamo_manager, multa_manager, categoria_manager)
 
                 return
 
@@ -581,7 +620,7 @@ class SistemaBiblioteca:
                 SistemaBiblioteca.pausar_sistema(self)
 
 
-    def gestionar_lectores(self, lector_manager, menu_llamador, LibroManager: LibroManager = None, ArticuloManager: ArticuloCientificoManager = None, TesisManager:TesisManager = None, AutorManager: AutorManager = None, prestamo_manager: PrestamoManager = None , multa_manager: MultaManager = None):
+    def gestionar_lectores(self, lector_manager, menu_llamador, LibroManager: LibroManager = None, ArticuloManager: ArticuloCientificoManager = None, TesisManager:TesisManager = None, AutorManager: AutorManager = None, prestamo_manager: PrestamoManager = None , multa_manager: MultaManager = None, categoria_manager: CategoriaManager = None):
         while True:
             self.limpiar_consola()
             self.print_brand_sistema()
@@ -637,10 +676,10 @@ class SistemaBiblioteca:
                 input("\n\n> Volviendo al menú principal...")
 
                 if menu_llamador == 'bibliotecario':
-                    self.mostrar_menu_bibliotecario(LibroManager, ArticuloManager, AutorManager, TesisManager, lector_manager, prestamo_manager, multa_manager)
+                    self.mostrar_menu_bibliotecario(AutorManager, LibroManager, ArticuloManager, TesisManager, lector_manager, prestamo_manager, multa_manager, categoria_manager)
 
                 elif menu_llamador == 'administrador':
-                    self.mostrar_menu_administrador(AutorManager, LibroManager, ArticuloManager, TesisManager, lector_manager, prestamo_manager, multa_manager)
+                    self.mostrar_menu_administrador(AutorManager, LibroManager, ArticuloManager, TesisManager, lector_manager, prestamo_manager, multa_manager, categoria_manager)
 
                 break  # Salir del bucle while y regresar al menú anterior
             
@@ -649,7 +688,7 @@ class SistemaBiblioteca:
                 self.pausar_sistema()
 
 
-    def gestionar_prestamos(self, prestamo_manager, menu_llamador, LibroManager: LibroManager = None, ArticuloManager: ArticuloCientificoManager = None, TesisManager: TesisManager = None, AutorManager: AutorManager = None, lector_manager: LectorManager = None, multa_manager: MultaManager = None):
+    def gestionar_prestamos(self, prestamo_manager, menu_llamador, LibroManager: LibroManager = None, ArticuloManager: ArticuloCientificoManager = None, TesisManager: TesisManager = None, AutorManager: AutorManager = None, lector_manager: LectorManager = None, multa_manager: MultaManager = None, categoria_manager: CategoriaManager = None):
         while True:
             self.limpiar_consola()
             self.print_brand_sistema()
@@ -679,10 +718,10 @@ class SistemaBiblioteca:
                 input("\n\n> Volviendo al menú principal...")
 
                 if menu_llamador == 'bibliotecario':
-                    self.mostrar_menu_bibliotecario(LibroManager, ArticuloManager, AutorManager, TesisManager, lector_manager, prestamo_manager, multa_manager)
+                    self.mostrar_menu_bibliotecario(AutorManager, LibroManager, ArticuloManager, TesisManager, lector_manager, prestamo_manager, multa_manager, categoria_manager)
 
                 elif menu_llamador == 'administrador':
-                    self.mostrar_menu_administrador(AutorManager, LibroManager, ArticuloManager, TesisManager, lector_manager, prestamo_manager, multa_manager)
+                    self.mostrar_menu_administrador(AutorManager, LibroManager, ArticuloManager, TesisManager, lector_manager, prestamo_manager, multa_manager, categoria_manager)
 
                 break  # Salir del bucle while y regresar al menú anterior
             
@@ -691,7 +730,7 @@ class SistemaBiblioteca:
                 self.pausar_sistema()
 
 
-    def gestionar_multas(self, multa_manager, menu_llamador, LibroManager: LibroManager = None, ArticuloManager: ArticuloCientificoManager = None, TesisManager: TesisManager = None, AutorManager: AutorManager = None, lector_manager: LectorManager = None, prestamo_manager: PrestamoManager = None):
+    def gestionar_multas(self, multa_manager, menu_llamador, LibroManager: LibroManager = None, ArticuloManager: ArticuloCientificoManager = None, TesisManager: TesisManager = None, AutorManager: AutorManager = None, lector_manager: LectorManager = None, prestamo_manager: PrestamoManager = None, categoria_manager: CategoriaManager = None):
         while True:
             self.limpiar_consola()
             self.print_brand_sistema()
@@ -721,10 +760,10 @@ class SistemaBiblioteca:
                 input("\n\n> Volviendo al menú principal...")
 
                 if menu_llamador == 'bibliotecario':
-                    self.mostrar_menu_bibliotecario(LibroManager, ArticuloManager, AutorManager, TesisManager, lector_manager, prestamo_manager, multa_manager)
+                    self.mostrar_menu_bibliotecario(AutorManager, LibroManager, ArticuloManager, TesisManager, lector_manager, prestamo_manager, multa_manager, categoria_manager)
 
                 elif menu_llamador == 'administrador':
-                    self.mostrar_menu_administrador(AutorManager, LibroManager, ArticuloManager, TesisManager, lector_manager, prestamo_manager, multa_manager)
+                    self.mostrar_menu_administrador(AutorManager, LibroManager, ArticuloManager, TesisManager, lector_manager, prestamo_manager, multa_manager, categoria_manager)
 
                 break  # Salir del bucle while y regresar al menú anterior
             
