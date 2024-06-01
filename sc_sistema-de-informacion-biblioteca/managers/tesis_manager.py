@@ -1,7 +1,6 @@
 from clases.tesis import Tesis
 from clases.estado import Estado
 from clases.autor import Autor
-from managers.autor_manager import AutorManager
 from typing import List
 from utils.validators import validar_input
 
@@ -9,9 +8,9 @@ class TesisManager:
 
     def __init__(self):
         self.tesis = [ 
-            Tesis(["juan", "pedro"], "utp", "2020-01-04", "2024-01-01", "Ciencia", Estado.DISPONIBLE, 100),
-            Tesis(["maria", "luis"], "utp", "2020-01-04", "2024-01-01", "Matematicas", Estado.DISPONIBLE, 200),
-            Tesis(["juan", "mateo"], "utp", "2020-01-04", "2024-01-01", "Ciencia", Estado.DISPONIBLE, 100),
+            #Tesis(["juan", "pedro"], "utp", "2020-01-04", "2024-01-01", "Ciencia", Estado.DISPONIBLE, 100),
+            #Tesis(["maria", "luis"], "utp", "2020-01-04", "2024-01-01", "Matematicas", Estado.DISPONIBLE, 200),
+            #Tesis(["juan", "mateo"], "utp", "2020-01-04", "2024-01-01", "Ciencia", Estado.DISPONIBLE, 100),
             ]
     
     def agregar_tesis(self, autores):
@@ -27,9 +26,10 @@ class TesisManager:
     def listar_tesis(self):
         print("LISTA DE TESIS\n")
         counter = 1;
-        for tesis in self.tesis:
+        for tesis in self.tesis: 
+            autores = ", ".join(str(autor) for autor in tesis.get_Autores())
             print(counter, " Campo: ", tesis.get_CampoEstudio(), "\n" + 
-                "   Autores: ", tesis.get_Autores(),"\n" + 
+                "   Autores: ", autores,"\n" + 
                 "   Páginas: ", tesis.get_Paginas(),"\n" + 
                 "   Fecha publicacion: ", tesis.get_Fpresentacion(),"\n\n")
             counter += 1
