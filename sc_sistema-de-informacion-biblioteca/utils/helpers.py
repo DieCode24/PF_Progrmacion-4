@@ -4,6 +4,7 @@ from clases.base import Base
 class SistemaBiblioteca:
     def __init__(self):
         self.rol_actual = None
+
     
     def pausar_sistema(self):
         """Pausa el sistema, funciona en Windows y Linux."""
@@ -23,9 +24,11 @@ class SistemaBiblioteca:
 
         except Exception as e:
             print(f"Error al limpiar la consola: {e}")
+
     
     def print_brand_sistema(self):
         print("\tSistema de Información Biblioteca\n\n")
+
         
     def verificar_acceso_administrador(self, rol):
         clave_admin = "clave_admin"  # Clave de administrador predeterminada
@@ -169,11 +172,7 @@ class SistemaBiblioteca:
         
             SistemaBiblioteca.gestionar_articulos(self, Base, 'bibliotecario')
         
-            SistemaBiblioteca.pausar_sistema(self)
         
-        elif opcion == '3':
-            SistemaBiblioteca.limpiar_consola(self)
-            SistemaBiblioteca.print_brand_sistema(self)
         
             SistemaBiblioteca.gestionar_libros(self, Base, 'bibliotecario')
         
@@ -182,10 +181,7 @@ class SistemaBiblioteca:
         elif opcion == '4':
             SistemaBiblioteca.limpiar_consola(self)
             SistemaBiblioteca.print_brand_sistema(self)
-        
-            SistemaBiblioteca.gestionar_categorias(self)
-        
-            SistemaBiblioteca.pausar_sistema(self)
+            SistemaBiblioteca.gestionar_categorias(self, categoria_manager, 'bibliotecario')
         
         elif opcion == '5':
             SistemaBiblioteca.limpiar_consola(self)
@@ -193,31 +189,21 @@ class SistemaBiblioteca:
         
             SistemaBiblioteca.gestionar_autores(self, Base, 'bibliotecario')
         
-            SistemaBiblioteca.pausar_sistema(self)
-        
         elif opcion == '6':
             SistemaBiblioteca.limpiar_consola(self)
             SistemaBiblioteca.print_brand_sistema(self)
         
             SistemaBiblioteca.gestionar_lectores(self, Base, 'bibliotecario')
         
-            SistemaBiblioteca.pausar_sistema(self)
-        
         elif opcion == '7':
             SistemaBiblioteca.limpiar_consola(self)
             SistemaBiblioteca.print_brand_sistema(self)
-        
-            SistemaBiblioteca.gestionar_prestamos(self)
-        
-            SistemaBiblioteca.pausar_sistema(self)
+            SistemaBiblioteca.gestionar_prestamos(self, prestamo_manager, 'bibliotecario')
         
         elif opcion == '8':
             SistemaBiblioteca.limpiar_consola(self)
             SistemaBiblioteca.print_brand_sistema(self)
-        
-            SistemaBiblioteca.gestionar_multas(self)
-        
-            SistemaBiblioteca.pausar_sistema(self)
+            SistemaBiblioteca.gestionar_multas(self, multa_manager, 'bibliotecario')
         
         elif opcion == '9':
             self.cambiar_rol(Base)
@@ -270,7 +256,7 @@ class SistemaBiblioteca:
         elif opcion == '4':
             SistemaBiblioteca.limpiar_consola(self)
             SistemaBiblioteca.print_brand_sistema(self)
-            SistemaBiblioteca.gestionar_categorias(self)
+            SistemaBiblioteca.gestionar_categorias(self, categoria_manager, 'administrador')
             SistemaBiblioteca.pausar_sistema(self)
         
         elif opcion == '5':
@@ -293,8 +279,7 @@ class SistemaBiblioteca:
         elif opcion == '8':
             SistemaBiblioteca.limpiar_consola(self)
             SistemaBiblioteca.print_brand_sistema(self)
-            SistemaBiblioteca.gestionar_multas(self)
-            SistemaBiblioteca.pausar_sistema(self)
+            SistemaBiblioteca.gestionar_multas(self, multa_manager, 'administrador')
             
         elif opcion == '9':
             self.cambiar_rol(Base)
