@@ -4,6 +4,7 @@ from managers.autor_manager import AutorManager
 from managers.articulo_cientifico_manager import ArticuloCientificoManager
 from managers.tesis_manager import TesisManager
 from managers.lector_manager import LectorManager
+from managers.prestamo_manager import PrestamoManager
 
 class SistemaBiblioteca:
     def __init__(self):
@@ -40,7 +41,7 @@ class SistemaBiblioteca:
                 print("Clave incorrecta. Acceso denegado.")
                 return
 
-    def cambiar_rol(self, libro_manager:LibroManager, autor_manager:AutorManager, articulo_manager:ArticuloCientificoManager, tesis_manager:TesisManager, lector_manager: LectorManager):
+    def cambiar_rol(self, libro_manager:LibroManager, autor_manager:AutorManager, articulo_manager:ArticuloCientificoManager, tesis_manager:TesisManager, lector_manager: LectorManager, prestamo_manager: PrestamoManager):
         """Permite cambiar el rol actual del usuario."""
         self.limpiar_consola()
         self.print_brand_sistema()
@@ -58,13 +59,13 @@ class SistemaBiblioteca:
         
         elif opcion == '2':
             self.rol_actual = 'bibliotecario'
-            self.mostrar_menu_bibliotecario(libro_manager, autor_manager, articulo_manager, tesis_manager, lector_manager)
+            self.mostrar_menu_bibliotecario(libro_manager, autor_manager, articulo_manager, tesis_manager, lector_manager, prestamo_manager)
             return
         
         elif opcion == '3':
             self.rol_actual = 'administrador'
             self.verificar_acceso_administrador(self.rol_actual)
-            self.mostrar_menu_administrador(autor_manager, libro_manager, articulo_manager, tesis_manager, lector_manager)
+            self.mostrar_menu_administrador(autor_manager, libro_manager, articulo_manager, tesis_manager, lector_manager, prestamo_manager)
             return
         
         elif opcion == '0':
@@ -74,7 +75,7 @@ class SistemaBiblioteca:
         
         else:
             input("Opción no válida, intente de nuevo.")
-            self.cambiar_rol(libro_manager, autor_manager, articulo_manager, tesis_manager, lector_manager)
+            self.cambiar_rol(libro_manager, autor_manager, articulo_manager, tesis_manager, lector_manager, prestamo_manager)
     
     
 
@@ -141,7 +142,7 @@ class SistemaBiblioteca:
             self.mostrar_menu_lector()
         
         
-    def mostrar_menu_bibliotecario (self,LibroManager: LibroManager,  AutorManager: AutorManager,ArticuloManager: ArticuloCientificoManager, TesisManager: TesisManager, lector_manager: LectorManager):
+    def mostrar_menu_bibliotecario (self,LibroManager: LibroManager,  AutorManager: AutorManager,ArticuloManager: ArticuloCientificoManager, TesisManager: TesisManager, lector_manager: LectorManager, ):
         SistemaBiblioteca.limpiar_consola(self)
         SistemaBiblioteca.print_brand_sistema(self)
         
@@ -235,7 +236,7 @@ class SistemaBiblioteca:
             print("Opción no válida, intente de nuevo.")
         
         
-    def mostrar_menu_administrador(self, AutorManager: AutorManager, LibroManager: LibroManager, ArticuloCientificoManager: ArticuloCientificoManager, TesisManager: TesisManager, lector_manager: LectorManager):
+    def mostrar_menu_administrador(self, AutorManager: AutorManager, LibroManager: LibroManager, ArticuloCientificoManager: ArticuloCientificoManager, TesisManager: TesisManager, lector_manager: LectorManager, prestamo_manager: PrestamoManager):
         SistemaBiblioteca.limpiar_consola(self)
         SistemaBiblioteca.print_brand_sistema(self)
         
@@ -291,7 +292,7 @@ class SistemaBiblioteca:
         elif opcion == '7':
             SistemaBiblioteca.limpiar_consola(self)
             SistemaBiblioteca.print_brand_sistema(self)
-            SistemaBiblioteca.gestionar_prestamos(self)
+            SistemaBiblioteca.gestionar_prestamos(self, prestamo_manager, 'administrador')
             SistemaBiblioteca.pausar_sistema(self)
         
         elif opcion == '8':
@@ -668,16 +669,46 @@ class SistemaBiblioteca:
                 self.pausar_sistema()
 
 
+    def gestionar_prestamos(self, prestamo_manager, menu_llamador, LibroManager: LibroManager = None, ArticuloManager: ArticuloCientificoManager = None, TesisManager: TesisManager = None, AutorManager: AutorManager = None, lector_manager: LectorManager = None):
+        while True:
+            self.limpiar_consola()
+            self.print_brand_sistema()
+            print("# Gestión de Préstamos")
+            print("---------------------------------------------------")
+            print("Seleccione una opción:")
+            print("\n> [1] Registrar Préstamo")
+            print("> [2] Consultar Préstamo")
+            print("> [3] Calcular Fecha de Entrega")
+            print("> [0] Regresar al menú anterior")
+            
+            opcion = input("\n> Ingrese una opción => ")
+            
+            if opcion == '1':
+                # Logica 'Registrar Préstamo'.
+                pass
+            
+            elif opcion == '2':
+                # Logica 'Consultar Préstamo'.
+                pass
+            
+            elif opcion == '3':
+                # Logica 'Calcular Fecha de Entrega'.
+                pass
+            
+            elif opcion == '0':
+                input("\n\n> Volviendo al menú principal...")
 
+                if menu_llamador == 'bibliotecario':
+                    self.mostrar_menu_bibliotecario(LibroManager, ArticuloManager, AutorManager, TesisManager, lector_manager, prestamo_manager)
 
+                elif menu_llamador == 'administrador':
+                    self.mostrar_menu_administrador(AutorManager, LibroManager, ArticuloManager, TesisManager, lector_manager, prestamo_manager)
 
-
-    def gestionar_prestamos(self):
-        print("Gestión de Préstamos")
-        print("1. Registrar Préstamo")
-        print("2. Consultar Préstamo")
-        print("3. Calcular Fecha de Entrega")
-        print("0. Volver al menú principal")
+                break  # Salir del bucle while y regresar al menú anterior
+            
+            else:
+                print("Opción no válida, intente de nuevo.")
+                self.pausar_sistema()
 
 
     def gestionar_multas(self):
