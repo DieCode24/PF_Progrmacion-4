@@ -4,9 +4,11 @@ from clases.libro import Estado
 from clases.autor import Autor
 from utils.validators import validar_input
 from managers.autor_manager import AutorManager
+from managers.data_manager import DataManager
 
 class LibroManager():
-    def __init__(self):
+    def __init__(self, data_manager: DataManager):
+        self.data_manager = data_manager
         self.libros = [
             Libro("Ciencia", "Libro de Ciencia", "Primera", 2020, "Editorial Uno", [Autor("Autor Uno", "Nacionalidad Uno", "Fecha Nacimiento Uno"), Autor("Autor Dos", "Nacionalidad Dos", "Fecha Nacimiento Dos")], Estado.DISPONIBLE, "123-456-789", ["Español"], 5)
         ]
@@ -22,15 +24,31 @@ class LibroManager():
         idiomas = validar_input("Ingrese los idiomas del libro (separados por coma): ", list, separator=",")
         numero_copias = validar_input("Ingrese el número de copias del libro: ", int)
         libro = Libro(genero, titulo, edicion, anio_publicacion, editorial, autores, estado, isbn, idiomas, numero_copias)
-        self.libros.append(libro)
+        self.data_manager.books.append(libro)
 
     def listado_libros(self):
-        for libro in self.libros:
+        for libro in self.data_manager.books:
             print("Título:", libro.titulo + "\n" + "ISBN:", libro.isbn)
             print("Autores:")
             for autor in libro.autores:
                 print(autor.nombre)
-            
+    
+    def show_menu(self):
+        while True:
+            print("\nArticle Manager")
+            print("1. Registrar libro")
+            print("2. ver libros")
+            print("0. Back")
+            choice = input("Choose an option: ")
+            if choice == "1":
+                autores = AutorManager.seleccionar_autores(self)
+                self.registrar_libro(autores)
+            elif choice == "2":
+                self.listado_libros()
+            elif choice == "0":
+                break
+            else:
+                print("Invalid choice. Please try again.")
         
     def buscar_libro(self, query: str) -> List[Libro]:
         # buscar libro por título o ISBN y mostrar información
@@ -92,11 +110,11 @@ class LibroManager():
                 return libro
         return None
 
-class LibroFactory:
-    @staticmethod
-    def create_libro(genero: str, titulo: str, edicion: str, anio_publicacion: int, editorial: str,
-                     autores: List[Autor], estado: Estado, isbn: str, idiomas: List[str], numero_copias: int) -> Libro:
-        return Libro(genero, titulo, edicion, anio_publicacion, editorial, autores, estado, isbn, idiomas, numero_copias)
+# class LibroFactory:
+#     @staticmethod
+#     def create_libro(genero: str, titulo: str, edicion: str, anio_publicacion: int, editorial: str,
+#                      autores: List[Autor], estado: Estado, isbn: str, idiomas: List[str], numero_copias: int) -> Libro:
+#         return Libro(genero, titulo, edicion, anio_publicacion, editorial, autores, estado, isbn, idiomas, numero_copias)
 
 # # Uso del Singleton y Factory Method para la gestión de libros
 # if __name__ == "__main__":

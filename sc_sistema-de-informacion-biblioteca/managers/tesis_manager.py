@@ -7,7 +7,8 @@ from utils.validators import validar_input
 
 class TesisManager:
 
-    def __init__(self):
+    def __init__(self, data_manager):
+        self.data_manager = data_manager
         self.tesis = [ 
             Tesis(["juan", "pedro"], "utp", "2020-01-04", "2024-01-01", "Ciencia", Estado.DISPONIBLE, 100),
             Tesis(["maria", "luis"], "utp", "2020-01-04", "2024-01-01", "Matematicas", Estado.DISPONIBLE, 200),
