@@ -32,7 +32,7 @@ class TesisManager:
                 "   Páginas: ", tesis.Paginas(),"\n" + 
                 "   Fecha publicacion: ", tesis.Fpresentacion()
                 )
-            print("   Autores: ")
+            print("   Autores ")
             for autor in tesis.Autores():
                     print (f"\t{autor.nombre}")
             print("\n\n")
@@ -84,7 +84,7 @@ class TesisManager:
                     "   Fecha investigacion: ", tesis.Finvestigacion(),"\n" +
                     "   Fecha publicacion: ", tesis.Fpresentacion()
                     )
-                print("   Autores: ")
+                print("   Autores ")
                 for autor in tesis.Autores():
                     print (f"\t{autor.nombre}")
                 print("\n\n")
@@ -102,7 +102,7 @@ class TesisManager:
                 "   Fecha investigacion: ", tesis.Finvestigacion(),"\n" +
                 "   Fecha publicacion: ", tesis.Fpresentacion()
                 )
-            print("   Autores: ")
+            print("   Autores ")
             for autor in tesis.Autores():
                     print (f"\t{autor.nombre}")
             
@@ -123,7 +123,7 @@ class TesisManager:
                 "   Fecha investigacion: ", T_modificar.Finvestigacion(),"\n" +
                 "   Fecha publicacion: ", T_modificar.Fpresentacion(),"\n" +
                 "   Institucion: ", T_modificar.Institucion(),"\n" +
-                "   Autores: ")
+                "   Autores ")
         for autor in T_modificar.Autores():
             print (f"\t{autor.nombre}")
             
