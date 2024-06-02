@@ -3,7 +3,7 @@ from clases.autor import Autor
 from datetime import datetime, timedelta
 from utils.validators import validar_input
 from managers.data_manager import DataManager
-
+from utils.helpers import limpiar_consola, pausar_sistema
 class AutorManager:
     def __init__(self, data_manager: DataManager):
         self.data_manager = data_manager
@@ -28,7 +28,9 @@ class AutorManager:
                 return autor
         return None
 
-
+    def asociar_libro(self, autores, isbn):
+        for autor in autores:
+            autor.libros.append(isbn)
 
     def modificar_autor(self):
         nombre = validar_input("Ingrese el nombre del autor que desea modificar: ", str).title()
@@ -113,16 +115,17 @@ class AutorManager:
         autores_seleccionados = []
         while True:
             if not self.data_manager.autores:
+                limpiar_consola()
                 print("No hay autores registrados.")
                 self.registrar_autor()
+                pausar_sistema()
             
+            limpiar_consola()
+            print(">. Seleccione los autores que desea agregar al libro (separados por coma):")
+            print("0. Crear un autor nuevo")
             print("Autores:")
             for i, autor in enumerate(self.data_manager.autores):
                 print(f"{i + 1}. {autor.nombre}")
-                
-            print("Seleccione los autores que desea agregar al libro (separados por coma):")
-            print("0. Crear un autor nuevo")
-            
             try:
                 seleccion = input("Autores: ")
                 seleccion = [int(x) for x in seleccion.split(",")]
@@ -134,6 +137,8 @@ class AutorManager:
                     else:
                         print("Opción inválida. Por favor, intente de nuevo.")
                 if autores_seleccionados:
+                    pausar_sistema()
+                    limpiar_consola()
                     return autores_seleccionados
             except ValueError:
                 print("Opción inválida. Por favor, intente de nuevo.")

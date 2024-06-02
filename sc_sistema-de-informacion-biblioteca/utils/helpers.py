@@ -1,6 +1,4 @@
 import os
-from clases.base import Base
-from utils.validators import validar_input
 
 
 def pausar_sistema():

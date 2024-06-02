@@ -4,3 +4,4 @@ class DataManager:
         self.books = []
         self.articles = []
         self.autores = []
+        self.copies = []

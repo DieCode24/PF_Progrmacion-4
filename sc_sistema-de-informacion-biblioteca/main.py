@@ -4,6 +4,7 @@ from managers.libro_manager import LibroManager
 from managers.articulo_cientifico_manager import ArticuloCientificoManager
 from managers.tesis_manager import TesisManager
 from managers.autor_manager import AutorManager
+from managers.copia_manager import CopiaManager
 from managers.lector_manager import LectorManager
 from managers.data_manager import DataManager
 from menu import AdminMenu, LibrarianMenu
@@ -19,6 +20,7 @@ class DependencyContainer:
         self.autor_manager = AutorManager(data_manager)
         self.tesis_manager = TesisManager(data_manager)
         self.lector_manager = LectorManager(data_manager)
+        self.copy_manager = CopiaManager(data_manager)
 
 def validar_contraseña(rol):
     if rol == "1":
