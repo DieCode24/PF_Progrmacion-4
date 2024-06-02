@@ -24,7 +24,7 @@ def main():
     
     while True:
         if rol == "lector":
-            sb.mostrar_menu_lector(biblioteca)
+            sb.mostrar_menu_lector(biblioteca, base)
             return False
         
         elif rol == "bibliotecario":

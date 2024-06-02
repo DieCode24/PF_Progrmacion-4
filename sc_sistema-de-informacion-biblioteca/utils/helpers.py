@@ -329,7 +329,8 @@ class SistemaBiblioteca:
         
             elif opcion == '5':
                 SistemaBiblioteca.limpiar_consola(self)
-                Base.TesisManager.modificar_tesis()
+                autor = Base.AutorManager
+                Base.TesisManager.modificar_tesis(autor)
                 
             elif opcion == '6':
                 Base.TesisManager.mock()

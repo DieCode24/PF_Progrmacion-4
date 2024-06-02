@@ -107,9 +107,8 @@ class TesisManager:
                     print (f"\t{autor.nombre}")
             
                 
-    def modificar_tesis(self):
-        
-
+    def modificar_tesis(self, autores : AutorManager):
+    
         self.listar_tesis()
         if not self.tesis:
             print("No hay tesis registradas")
@@ -131,8 +130,7 @@ class TesisManager:
         self.tesis.remove(T_modificar)
         
         print("\n\tDatos nuevos de la tesis\n")
-        autor = AutorManager()
-        autoresModi = autor.seleccionar_autores()
+        autoresModi = autores.seleccionar_autores()
         self.agregar_tesis(autoresModi)
                 
         print("Tesis modificada correctamente.")
