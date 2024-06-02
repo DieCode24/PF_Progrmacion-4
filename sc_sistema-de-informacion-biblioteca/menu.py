@@ -1,4 +1,5 @@
 from menus.libro_menu import show_libro_menu
+from menus.copy_menu import show_copy_menu
 
 class Menu:
     def __init__(self, container):
@@ -20,8 +21,9 @@ class AdminMenu(Menu):
             print("6. Prestamo Manager")
             print("7. Multa Manager")
             print("8. Categoria Manager")
+            print ("9. Copia Manager")
             print("0. Logout")
-            choice = input("Choose an option: ")
+            choice = input("Seleccione la opcion: ")
             if choice == "1":
                 show_libro_menu(self)
             elif choice == "2":
@@ -38,21 +40,28 @@ class AdminMenu(Menu):
                 self.show_multa_menu()
             elif choice == "8":
                 self.show_categoria_menu()
+            elif choice == "9":
+                show_copy_menu(self)
             elif choice == "0":
                 break
             else:
-                print("Invalid choice. Please try again.")
+                print("Opción inválida. Por favor, intente de nuevo.")
 
 class LibrarianMenu(Menu):
     def show(self):
         while True:
-            print("\nLibrarian Menu")
+            print("\nAdmin Menu")
             print("1. Libro Manager")
-            print("2. Articulo Manager")
-            print("3. Autor Manager")
-            print("4. Prestamo Manager")
+            print("2. Tesis Manager")
+            print("3. Articulo Manager")
+            print("4. Autor Manager")
+            print("5. Lector Manager")
+            print("6. Prestamo Manager")
+            print("7. Multa Manager")
+            print("8. Categoria Manager")
+            print ("9. Copia Manager")
             print("0. Logout")
-            choice = input("Choose an option: ")
+            choice = input("Seleccione la opcion:")
             if choice == "1":
                 show_libro_menu(self)
             elif choice == "2":
@@ -61,10 +70,12 @@ class LibrarianMenu(Menu):
                 self.show_autor_menu()
             elif choice == "4":
                 self.show_prestamo_menu()
+            elif choice == "9":
+                show_copy_menu(self)
             elif choice == "0":
                 break
             else:
-                print("Invalid choice. Please try again.")
+                print("Opción inválida. Por favor, intente de nuevo.")
 
     # Similar methods for other managers...
 
