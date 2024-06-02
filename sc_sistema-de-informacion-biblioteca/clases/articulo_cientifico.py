@@ -4,7 +4,6 @@ from datetime import date
 from typing import List
 from clases.estado import Estado
 
-
 class ArticuloCientifico:
     """
     Clase que representa un artículo científico en el sistema de información de la biblioteca.

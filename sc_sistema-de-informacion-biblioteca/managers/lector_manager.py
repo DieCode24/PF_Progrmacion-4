@@ -57,7 +57,7 @@ class LectorManager:
         :param id: ID del lector a habilitar.
         :raise ValueError: Si el lector no se encuentra.
         """
-        lector = LectorManager.buscar_lector(id)
+        lector = LectorManager.buscar_lector(self, id)
         if lector:
             lector.rehabilitar()
         else:
@@ -70,7 +70,7 @@ class LectorManager:
         :param id: ID del lector a inhabilitar.
         :raise ValueError: Si el lector no se encuentra.
         """
-        lector = LectorManager.buscar_lector(id)
+        lector = self.buscar_lector(id)
         if lector:
             lector.suspender()
         else:
