@@ -311,8 +311,8 @@ class SistemaBiblioteca:
             opcion = input("\n> Ingrese una opción => ")
             
             if opcion == '1':
-                autor = Base.AutorManager.seleccionar_autores()
                 SistemaBiblioteca.limpiar_consola(self)
+                autor = Base.AutorManager.seleccionar_autores()
                 Base.TesisManager.agregar_tesis(autor)
         
             elif opcion == '2':
@@ -733,5 +733,3 @@ class SistemaBiblioteca:
             else:
                 print("Opción no válida, intente de nuevo.")
                 self.pausar_sistema()
-        
-        
