@@ -10,31 +10,31 @@ class Prestamo:
         self._fecha_prestamo = fecha_prestamo
         self._fecha_devolucion = fecha_devolucion
         
-    def get_IdPrestamo(self):
+    def IdPrestamo(self):
         return self._id_prestamo
     
     def set_IdPrestamo(self, id_prestamo):
         self._id_prestamo = id_prestamo
         
-    def get_IdLector(self):
+    def IdLector(self):
         return self._id_lector
     
     def set_IdLector(self, id_lector):
         self._id_lector = id_lector
         
-    def get_IdLibro(self):
+    def IdLibro(self):
         return self._id_libro
     
     def set_IdLibro(self, id_libro):
         self._id_libro = id_libro
         
-    def get_FechaPrestamo(self):
+    def FechaPrestamo(self):
         return self._fecha_prestamo
     
     def set_FechaPrestamo(self, fecha_prestamo):
         self._fecha_prestamo = fecha_prestamo
         
-    def get_FechaDevolucion(self):
+    def FechaDevolucion(self):
         return self._fecha_devolucion
     
     def set_FechaDevolucion(self, fecha_devolucion):
