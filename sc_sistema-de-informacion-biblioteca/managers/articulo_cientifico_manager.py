@@ -8,10 +8,11 @@ class ArticuloCientificoManager:
     Clase que gestiona las operaciones CRUD para los artículos científicos en el sistema de información de la biblioteca.
     """
 
-    def __init__(self):
+    def __init__(self, data_manager):
         """
         Inicializa una nueva instancia de ArticuloCientificoManager con una lista vacía de artículos científicos.
         """
+        self.data_manager = data_manager
         self.articulos = []
 
     def registrar_articulo(self, titulo: str, doi: str, editor: str, fecha_publicacion: date, periodicidad: str, volumen: int, campo_interes: str, estado: str = Estado.DISPONIBLE) -> ArticuloCientifico:

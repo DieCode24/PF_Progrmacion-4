@@ -3,7 +3,8 @@ from clases.lector import Lector
 from clases.estado import Estado
 
 class LectorManager:
-    def __init__(self):
+    def __init__(self, data_manager):
+        self.data_manager = data_manager
         self.lectores = []
 
     def registrar_lector(self, nombre: str, id: int, telefono: str, direccion: str, estado: str = Estado.NORMAL):

@@ -2,9 +2,11 @@
 from clases.autor import Autor
 from datetime import datetime, timedelta
 from utils.validators import validar_input
+from managers.data_manager import DataManager
 
 class AutorManager:
-    def __init__(self):
+    def __init__(self, data_manager: DataManager):
+        self.data_manager = data_manager
         self.autores = []
 
     def registrar_autor(self):
@@ -17,11 +19,11 @@ class AutorManager:
     def agregar_autor(self, nombre: str, nacionalidad: str, fecha_nacimiento: str):
         fecha_nacimiento = datetime.strptime(fecha_nacimiento, "%Y-%m-%d")
         autor = Autor(nombre, nacionalidad, fecha_nacimiento)
-        self.autores.append(autor)
+        self.data_manager.autores.append(autor)
         return autor
 
     def buscar_autor(self, nombre: str):
-        for autor in self.autores:
+        for autor in self.data_manager.autores:
             if autor.nombre == nombre:
                 return autor
         return None
@@ -110,12 +112,12 @@ class AutorManager:
     def seleccionar_autores(self):
         autores_seleccionados = []
         while True:
-            if not self.autores:
+            if not self.data_manager.autores:
                 print("No hay autores registrados.")
                 self.registrar_autor()
             
             print("Autores:")
-            for i, autor in enumerate(self.autores):
+            for i, autor in enumerate(self.data_manager.autores):
                 print(f"{i + 1}. {autor.nombre}")
                 
             print("Seleccione los autores que desea agregar al libro (separados por coma):")
@@ -127,8 +129,8 @@ class AutorManager:
                 for i in seleccion:
                     if i == 0:
                         self.registrar_autor()
-                    elif 1 <= i <= len(self.autores):
-                        autores_seleccionados.append(self.autores[i - 1])
+                    elif 1 <= i <= len(self.data_manager.autores):
+                        autores_seleccionados.append(self.data_manager.autores[i - 1])
                     else:
                         print("Opción inválida. Por favor, intente de nuevo.")
                 if autores_seleccionados:
