@@ -9,15 +9,22 @@ class PrestamoManager:
     def __init__(self):
         self.prestamos = []
 
-    def registrar_prestamo(self, lector, libro):
+    def registrar_prestamo(self, lectores, libros):
+        lectores.listar_lectores()
+        id_lector= validar_input("Ingrese el ID del lector: ", int)
+        lector = lectores.buscar_lector(id_lector)
+        
+        libros.listado_libros()
+        id_libro = validar_input("Ingrese el ID del libro: ", str)
+        libro = libros.buscar_libro(id_libro)
+        
         id_prestamo = id_generator()
-        id_lector = lector.get_IdLector()
-        id_libro = libro.get_IdLibro()
+        id_lector = lectores.get_IdLector()
+        id_libro = libros.get_IdLibro()
         fecha_prestamo = date.today()
         fecha_devolucion = self.calcular_fecha_entrega(fecha_prestamo)
         nuevo_prestamo = Prestamo(id_prestamo, id_lector, id_libro, fecha_prestamo, fecha_devolucion)
         self.prestamos.append(nuevo_prestamo)
-        return nuevo_prestamo
 
     def consultar_prestamo(self, id_prestamo: int):
         for prestamo in self.prestamos:
