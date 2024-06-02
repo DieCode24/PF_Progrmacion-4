@@ -36,19 +36,7 @@ def validar_contraseña(rol):
 def main():
     data_manager = DataManager()
     container = DependencyContainer(data_manager)
-
-    roles_validos = ["lector", "bibliotecario", "administrador"]
-    rol = None
     
-    # while rol not in roles_validos:
-    #     rol = input("¿Es usted un lector, bibliotecario o administrador? ").lower()
-
-    #     if rol not in roles_validos:
-    #         print("Rol no reconocido. Intente de nuevo.")
-            
-    # # sb.verificar_acceso_administrador(biblioteca, rol)
-    
-    limpiar_consola()
     limpiar_consola()
     while True:
         limpiar_consola()

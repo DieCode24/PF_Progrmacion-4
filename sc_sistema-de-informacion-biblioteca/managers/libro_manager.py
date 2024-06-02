@@ -9,9 +9,6 @@ from managers.data_manager import DataManager
 class LibroManager():
     def __init__(self, data_manager: DataManager):
         self.data_manager = data_manager
-        self.libros = [
-            Libro("Ciencia", "Libro de Ciencia", "Primera", 2020, "Editorial Uno", [Autor("Autor Uno", "Nacionalidad Uno", "Fecha Nacimiento Uno"), Autor("Autor Dos", "Nacionalidad Dos", "Fecha Nacimiento Dos")], Estado.DISPONIBLE, "123-456-789", ["Español"], 5)
-        ]
 
     def registrar_libro(self, autores):
         genero = validar_input("Ingrese el género del libro: ", str)

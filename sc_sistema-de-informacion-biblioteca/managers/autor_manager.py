@@ -23,7 +23,7 @@ class AutorManager:
         return autor
 
     def buscar_autor(self, nombre: str):
-        for autor in self.autores:
+        for autor in self.data_manager.autores:
             if autor.nombre == nombre:
                 return autor
         return None
