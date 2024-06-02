@@ -173,7 +173,7 @@ class SistemaBiblioteca:
             SistemaBiblioteca.gestionar_articulos(self, Base, 'bibliotecario')
         
         
-        
+        elif opcion == '3':
             SistemaBiblioteca.gestionar_libros(self, Base, 'bibliotecario')
         
             SistemaBiblioteca.pausar_sistema(self)        
@@ -262,7 +262,7 @@ class SistemaBiblioteca:
         elif opcion == '5':
             SistemaBiblioteca.limpiar_consola(self)
             SistemaBiblioteca.print_brand_sistema(self)
-            SistemaBiblioteca.gestionar_autores(self, Base.Autor_manager, 'administrador')
+            SistemaBiblioteca.gestionar_autores(self, Base, 'administrador')
             SistemaBiblioteca.pausar_sistema(self)
         
         elif opcion == '6':
@@ -295,7 +295,7 @@ class SistemaBiblioteca:
 
     def gestionar_tesis(self, Base: Base, menu_llamador):
         opcion = None
-        
+      
         while opcion != '0':
             print("# Gestión de Tesis")
             print("---------------------------------------------------")
@@ -305,6 +305,7 @@ class SistemaBiblioteca:
             print("> [3] Buscar Tesis")
             print("> [4] Eliminar Tesis")
             print("> [5] Modificar Tesis")
+            print("> [6] Mock")
             print("> [0] Volver al menú principal")
           
             opcion = input("\n> Ingrese una opción => ")
@@ -329,6 +330,9 @@ class SistemaBiblioteca:
             elif opcion == '5':
                 SistemaBiblioteca.limpiar_consola(self)
                 Base.TesisManager.modificar_tesis()
+                
+            elif opcion == '6':
+                Base.TesisManager.mock()
         
             elif opcion == '0':
                 input("\n\n> Volviendo al menú principal...")
