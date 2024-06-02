@@ -1,5 +1,6 @@
 import os
 from clases.base import Base
+from utils.validators import validar_input
 
 class SistemaBiblioteca:
     def __init__(self):
@@ -84,8 +85,8 @@ class SistemaBiblioteca:
 
         print("# Menú de opciones | Lector")
         print("---------------------------------------------------")
-        print("Seleccione una opción:")
-        print("\n> [1] Buscar libros")
+        print("Seleccione una opción:\n")
+        print("> [1] Buscar libros")
         print("> [2] Realizar préstamo de libro")
         print("> [3] Devolver libro")
         print("> [4] Consultar préstamos")
@@ -146,8 +147,8 @@ class SistemaBiblioteca:
         
         print("# Menú de opciones | Bibliotecario")
         print("---------------------------------------------------")
-        print("Seleccione una opción:")
-        print("\n> [1] Gestión de Tesis")
+        print("Seleccione una opción:\n")
+        print("> [1] Gestión de Tesis")
         print("> [2] Gestión de Artículos Científicos")
         print("> [3] Gestión de Libros")
         print("> [4] Gestión de Categorías")
@@ -223,7 +224,7 @@ class SistemaBiblioteca:
         
         print("# Menu de opciones | Administrador")
         print("---------------------------------------------------")
-        print("Seleccione una opción:")
+        print("Seleccione una opción:\n")
         print("> [1] Gestión de Tesis")
         print("> [2] Gestión de Artículos Científicos")
         print("> [3] Gestión de Libros")
@@ -299,7 +300,7 @@ class SistemaBiblioteca:
         while opcion != '0':
             print("# Gestión de Tesis")
             print("---------------------------------------------------")
-            print("Seleccione una opción:")
+            print("Seleccione una opción:\n")
             print("> [1] Registrar Tesis")
             print("> [2] Lista Tesis")
             print("> [3] Buscar Tesis")
@@ -308,34 +309,34 @@ class SistemaBiblioteca:
             print("> [6] Mock")
             print("> [0] Volver al menú principal")
           
-            opcion = input("\n> Ingrese una opción => ")
+            opcion = validar_input("\n> Ingrese una opción => ", int)
             
-            if opcion == '1':
+            if opcion == 1:
                 SistemaBiblioteca.limpiar_consola(self)
                 autor = Base.AutorManager.seleccionar_autores()
                 Base.TesisManager.agregar_tesis(autor)
         
-            elif opcion == '2':
+            elif opcion == 2:
                 SistemaBiblioteca.limpiar_consola(self)
                 Base.TesisManager.listar_tesis()
         
-            elif opcion == '3':
+            elif opcion == 3:
                 SistemaBiblioteca.limpiar_consola(self)
                 Base.TesisManager.buscar_tesis()
         
-            elif opcion == '4':
+            elif opcion == 4:
                 SistemaBiblioteca.limpiar_consola(self)
                 Base.TesisManager.eliminar_tesis()
         
-            elif opcion == '5':
+            elif opcion == 5:
                 SistemaBiblioteca.limpiar_consola(self)
                 autor = Base.AutorManager
                 Base.TesisManager.modificar_tesis(autor)
                 
-            elif opcion == '6':
+            elif opcion == 6:
                 Base.TesisManager.mock()
         
-            elif opcion == '0':
+            elif opcion == 0:
                 input("\n\n> Volviendo al menú principal...")
         
                 if menu_llamador == 'bibliotecario':
@@ -349,7 +350,7 @@ class SistemaBiblioteca:
             else:
                 print("Opción no válida, intente de nuevo.")
             
-            if opcion != '0':
+            if opcion != 0:
                 SistemaBiblioteca.pausar_sistema(self)
                 SistemaBiblioteca.limpiar_consola(self)
 
@@ -360,8 +361,8 @@ class SistemaBiblioteca:
             self.print_brand_sistema()
             print("# Gestión de Artículos Científicos")
             print("---------------------------------------------------")
-            print("Seleccione una opción:")
-            print("\n> [1] Registrar Artículo")
+            print("Seleccione una opción:\n")
+            print("> [1] Registrar Artículo")
             print("> [2] Buscar Artículo")
             print("> [3] Modificar Artículo")
             print("> [4] Eliminar Artículo")
@@ -453,8 +454,8 @@ class SistemaBiblioteca:
         while opcion != '0':
             print("# Gestión de Libros")
             print("---------------------------------------------------")
-            print("Seleccione una opción:")
-            print("\n> [1] Registrar Libro")
+            print("Seleccione una opción:\n")
+            print("> [1] Registrar Libro")
             print("> [2] Listar Libros")
             print("> [3] Buscar Libro")
             print("> [4] Modificar Libro")
@@ -528,7 +529,8 @@ class SistemaBiblioteca:
     def gestionar_categorias(self, Base: Base, menu_llamador):
         print("# Gestión de Categorías")
         print("---------------------------------------------------")
-        print("\n> [1] Crear Categoría")
+        print("Seleccione una opción:\n")
+        print("> [1] Crear Categoría")
         print("> [2] Buscar Categoría")
         print("> [3] Modificar Categoría")
         print("> [4] Eliminar Categoría")
@@ -592,8 +594,8 @@ class SistemaBiblioteca:
             self.print_brand_sistema()
             print("# Gestión de Lectores")
             print("---------------------------------------------------")
-            print("Seleccione una opción:")
-            print("\n> [1] Registrar Lector")
+            print("Seleccione una opción:\n")
+            print("> [1] Registrar Lector")
             print("> [2] Buscar Lector")
             print("> [3] Modificar Lector")
             print("> [4] Habilitar Lector")
@@ -660,8 +662,8 @@ class SistemaBiblioteca:
             self.print_brand_sistema()
             print("# Gestión de Préstamos")
             print("---------------------------------------------------")
-            print("Seleccione una opción:")
-            print("\n> [1] Registrar Préstamo")
+            print("Seleccione una opción:\n")
+            print("> [1] Registrar Préstamo")
             print("> [2] Consultar Préstamo")
             print("> [3] Calcular Fecha de Entrega")
             print("> [0] Regresar al menú anterior")
@@ -703,6 +705,7 @@ class SistemaBiblioteca:
             self.print_brand_sistema()
             print("# Gestión de Multas")
             print("---------------------------------------------------")
+            print("Seleccione una opción:\n")
             print("Gestión de Multas")
             print("1. Generar Multa")
             print("2. Levantar Multa")

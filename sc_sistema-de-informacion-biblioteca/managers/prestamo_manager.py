@@ -11,13 +11,15 @@ class PrestamoManager:
 
     def registrar_prestamo(self, lector, libro):
         id_prestamo = id_generator()
+        id_lector = lector.get_IdLector()
+        id_libro = libro.get_IdLibro()
         fecha_prestamo = date.today()
         fecha_devolucion = self.calcular_fecha_entrega(fecha_prestamo)
         nuevo_prestamo = Prestamo(id_prestamo, id_lector, id_libro, fecha_prestamo, fecha_devolucion)
         self.prestamos.append(nuevo_prestamo)
         return nuevo_prestamo
 
-    def consultar_prestamo(self, id_prestamo: int) -> Optional[Prestamo]:
+    def consultar_prestamo(self, id_prestamo: int):
         for prestamo in self.prestamos:
             if prestamo.get_IdPrestamo() == id_prestamo:
                 return prestamo
