@@ -1,4 +1,4 @@
-from utils.helpers import pausar_sistema, limpiar_consola
+from utils.helpers import pausar_sistema, limpiar_consola, print_brand_sistema, separador_en_consola
 
 def show_prestamo_menu(self):
     limpiar_consola()
@@ -8,30 +8,46 @@ def show_prestamo_menu(self):
     tesis_manager = self.container.tesis_manager
     articulo_manager = self.container.articulo_manager
     copia_manager = self.container.copy_manager
-    
+
     while True:
-        print("# Gestión de Préstamos")
-        print("---------------------------------------------------")
-        print("Seleccione una opción:\n")
-        print("> [1] Realizar Préstamo")
-        print("> [2] Devolver Libro")
-        print("> [3] Listar Préstamos")
-        print("> [4] Buscar Préstamo")
-        opcion = input("Seleccione una opción: ")
+        limpiar_consola()
+        print_brand_sistema()
+        separador_en_consola()
+
+        print("[-- Menu | Gestión de Préstamos --]")
+
+        print("\n[1] Realizar Préstamo")
+        print("[2] Devolver Libro")
+        print("[3] Listar Préstamos")
+        print("[4] Buscar Préstamo")
+        print("[0] Volver al menú principal")
+        opcion = input("\n\n> Seleccione una opción => ")
+
         if opcion == "1":
-            
-            lector = lector_manager() 
+            limpiar_consola()
+            lector = lector_manager()
             libro = libro_manager()
             prestamo_manager.realizar_prestamo(lector, libro)
+            pausar_sistema()
+
         elif opcion == "2":
+            limpiar_consola()
             prestamo_manager.devolver_libro()
+            pausar_sistema()
+
         elif opcion == "3":
+            limpiar_consola()
             prestamo_manager.listar_prestamos()
+            pausar_sistema()
+
         elif opcion == "4":
+            limpiar_consola()
             prestamo_manager.buscar_prestamo()
+            pausar_sistema()
+
+        elif opcion == "0":
+            return False
+
         else:
-            print("Opción inválida. Por favor, intente de nuevo.")
-            
-            
-            
-        
+            print("\n> Opción inválida. Por favor, intente de nuevo.")
+            pausar_sistema()
