@@ -1,7 +1,10 @@
 from datetime import date
 from typing import List, Optional
+
 from clases.articulo_cientifico import ArticuloCientifico
 from clases.estado import Estado
+from utils.validators import validar_input
+
 
 class ArticuloCientificoManager:
     """
@@ -13,7 +16,11 @@ class ArticuloCientificoManager:
         Inicializa una nueva instancia de ArticuloCientificoManager con una lista vacía de artículos científicos.
         """
         self.data_manager = data_manager
-        self.articulos = []
+        self.articulos = [
+            ArticuloCientifico("Artículo 1", "10.1000/xyz123", "Editor 1", date(2021, 1, 1), "Mensual", 1, "Ciencia", Estado.DISPONIBLE),
+            ArticuloCientifico("Artículo 2", "10.1000/xyz124", "Editor 2", date(2022, 2, 2), "Semanal", 2, "Tecnología", Estado.PRESTADO),
+            ArticuloCientifico("Artículo 3", "10.1000/xyz125", "Editor 3", date(2023, 3, 3), "Mensual", 3, "Matemáticas", Estado.RESERVADO),
+        ]
 
     def registrar_articulo(self, titulo: str, doi: str, editor: str, fecha_publicacion: date, periodicidad: str, volumen: int, campo_interes: str, estado: str = Estado.DISPONIBLE) -> ArticuloCientifico:
         """
@@ -23,7 +30,7 @@ class ArticuloCientificoManager:
         :param doi: Identificador único del artículo (DOI).
         :param editor: Nombre del editor del artículo.
         :param fecha_publicacion: Fecha de publicación del artículo.
-        :param periodicidad: Periodicidad de la publicación (mensual, semanal, etc.).
+        :param periodicidad: Periodicidad de la publicación (mensual, semanal).
         :param volumen: Número de volumen del artículo.
         :param campo_interes: Campo de interés del artículo.
         :param estado: Estado del artículo (predeterminado a "Disponible").
@@ -76,26 +83,28 @@ class ArticuloCientificoManager:
         else:
             return False
 
-    def listar_articulos(self) -> List[ArticuloCientifico]:
-        """
-        Lista todos los artículos científicos registrados en el sistema.
-        
-        :return: Lista de artículos científicos.
-        """
-        return self.articulos
+    def listar_articulos(self):
+        print("LISTA DE ARTÍCULOS CIENTÍFICOS\n")
+        if not self.articulos:
+            print("No hay artículos científicos registrados")
+            return
+        for idx, articulo in enumerate(self.articulos, start=1):
+            print(f"{idx}. Título: {articulo.titulo}, DOI: {articulo.doi}, Editor: {articulo.editor}")
+            print(f"   Fecha de Publicación: {articulo.fecha_publicacion}, Periodicidad: {articulo.periodicidad}, Volumen: {articulo.volumen}")
+            print(f"   Campo de Interés: {articulo.campo_interes}, Estado: {articulo.estado}\n")
 
     def registrar_articulo_desde_consola(self):
         """
         Registra un nuevo artículo científico desde la consola.
         """
-        titulo = input("Ingrese el título del artículo: ")
-        doi = input("Ingrese el DOI del artículo: ")
-        editor = input("Ingrese el editor del artículo: ")
-        fecha_str = input("Ingrese la fecha de publicación (YYYY-MM-DD): ")
+        titulo = validar_input("Ingrese el título del artículo: ", str)
+        doi = validar_input("Ingrese el DOI del artículo: ", str)
+        editor = validar_input("Ingrese el editor del artículo: ", str)
+        fecha_str = validar_input("Ingrese la fecha de publicación (YYYY-MM-DD): ", str)
         fecha_publicacion = date.fromisoformat(fecha_str)
-        periodicidad = input("Ingrese la periodicidad del artículo (Mensual, Semanal): ")
-        volumen = int(input("Ingrese el volumen del artículo: "))
-        campo_interes = input("Ingrese el campo de interés del artículo: ")
+        periodicidad = validar_input("Ingrese la periodicidad del artículo (Mensual, Semanal): ", str)
+        volumen = validar_input("Ingrese el volumen del artículo: ", int)
+        campo_interes = validar_input("Ingrese el campo de interés del artículo: ", str)
 
         self.registrar_articulo(titulo, doi, editor, fecha_publicacion, periodicidad, volumen, campo_interes, Estado.DISPONIBLE)
         print("Artículo científico registrado exitosamente.")
@@ -104,18 +113,50 @@ class ArticuloCientificoManager:
         """
         Busca un artículo científico desde la consola.
         """
-        doi = input("Ingrese el DOI del artículo a buscar: ")
-        articulo = self.buscar_articulo(doi)
-        if articulo:
-            print(articulo)
+        print("¿Cómo desea buscar el artículo científico?")
+        print("1. Título")
+        print("2. Campo de interés")
+        print("0. Salir")
+
+        opcion = validar_input("\n> Ingrese una opción => ", int)
+
+        if opcion == 1:
+            self.buscar_por_titulo()
+        elif opcion == 2:
+            self.buscar_por_campo()
+        elif opcion == 0:
+            return
         else:
-            print("Artículo científico no encontrado.")
+            print("Opción no válida")
+            return
+        
+    def buscar_por_titulo(self):
+        print("\tBuscando por título\n")
+        titulo = validar_input("Ingrese el título: ", str).title()
+        articulos_encontrados = [art for art in self.articulos if titulo in art.titulo]
+
+        if not articulos_encontrados:
+            print(f"No se encontraron artículos con el título {titulo}.")
+        else:
+            for articulo in articulos_encontrados:
+                self.mostrar_detalles_articulo(articulo)
+
+    def buscar_por_campo(self):
+        print("\tBuscando por campo de interés\n")
+        campo = validar_input("Ingrese el campo de interés: ", str).title()
+        articulos_encontrados = [art for art in self.articulos if campo in art.campo_interes]
+
+        if not articulos_encontrados:
+            print(f"No se encontraron artículos en el campo de interés {campo}.")
+        else:
+            for articulo in articulos_encontrados:
+                self.mostrar_detalles_articulo(articulo)
 
     def modificar_articulo_desde_consola(self):
         """
         Modifica un artículo científico desde la consola.
         """
-        doi = input("Ingrese el DOI del artículo a modificar: ")
+        doi = validar_input("Ingrese el DOI del artículo a modificar: ", str)
         kwargs = {}
         titulo = input("Ingrese el nuevo título del artículo (o presione Enter para omitir): ")
         if titulo:
@@ -146,7 +187,7 @@ class ArticuloCientificoManager:
         """
         Elimina un artículo científico desde la consola.
         """
-        doi = input("Ingrese el DOI del artículo a eliminar: ")
+        doi = validar_input("Ingrese el DOI del artículo a eliminar: ", str)
         try:
             if self.eliminar_articulo(doi):
                 print("Artículo científico eliminado exitosamente.")

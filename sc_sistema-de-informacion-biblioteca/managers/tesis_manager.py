@@ -1,3 +1,6 @@
+import os
+from typing import List
+
 from clases.tesis import Tesis
 from clases.estado import Estado
 from clases.autor import Autor
@@ -11,6 +14,7 @@ class TesisManager():
 
     def __init__(self, data_manager: DataManager):
         self.data_manager = data_manager
+    
     
     def agregar_tesis(self, autores):
         institucion = validar_input("Ingrese la institución de la tesis: ", str).title()
@@ -59,6 +63,7 @@ class TesisManager():
         else:
             print("Opción no válida")
             return
+    
         
     def buscar_por_autor(self):
         print("\t BUscanco por autor\n")
@@ -115,6 +120,7 @@ class TesisManager():
         self.agregar_tesis(autoresModi)
                 
         print("Tesis modificada correctamente.")
+        
         
     def eliminar_tesis(self):
         self.listado_tesis()
