@@ -1,4 +1,4 @@
-from utils.helpers import pausar_sistema, limpiar_consola
+from utils.helpers import pausar_sistema, limpiar_consola, print_brand_sistema, separador_en_consola
 
 def show_tesis_menu(self):
     limpiar_consola()
@@ -6,17 +6,20 @@ def show_tesis_menu(self):
     tesis_manager = self.container.tesis_manager
     
     while True:
-        print("# Gestión de Tesis")
-        print("---------------------------------------------------")
-        print("Seleccione una opción:\n")
-        print("> [1] Registrar Tesis")
-        print("> [2] Listar Tesis")
-        print("> [3] Buscar Tesis")
-        print("> [4] Modificar Tesis")
-        print("> [5] Eliminar Tesis")
-        print("> [6] Datos de prueba (Mock data)")
-        print("> [0] Voler al menú principal")
-        opcion = input("Seleccione una opción: ")
+        limpiar_consola()
+        print_brand_sistema()
+        separador_en_consola()
+        
+        print("[-- Menu | Gestión de Tesis --]")
+        
+        print("\n[1] Registrar Tesis")
+        print("[2] Listar Tesis")
+        print("[3] Buscar Tesis")
+        print("[4] Modificar Tesis")
+        print("[5] Eliminar Tesis")
+        print("[6] Datos de prueba (Mock data)")
+        print("[0] Voler al menú principal")
+        opcion = input("\n\n> Seleccione una opción => ")
         if opcion == "1":
             limpiar_consola()
             autores = autor_manager.seleccionar_autores()
@@ -53,10 +56,6 @@ def show_tesis_menu(self):
             limpiar_consola()
             
         elif opcion == "0":
-            break
+            return False
         else:
-            print("Opción inválida. Por favor, intente de nuevo.")
-            
-        
-    
-    
+            print("\n> Opción inválida. Por favor, intente de nuevo.")
