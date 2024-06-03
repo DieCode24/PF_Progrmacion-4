@@ -51,7 +51,7 @@ class AdminMenu(Menu):
 class LibrarianMenu(Menu):
     def show(self):
         while True:
-            print("\nAdmin Menu")
+            print("\nLibrarian Menu")
             print("1. Libro Manager")
             print("2. Tesis Manager")
             print("3. Articulo Manager")
