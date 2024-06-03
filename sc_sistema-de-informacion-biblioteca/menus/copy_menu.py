@@ -1,19 +1,22 @@
-from utils.helpers import pausar_sistema, limpiar_consola
+from utils.helpers import pausar_sistema, limpiar_consola, print_brand_sistema, separador_en_consola
 
 def show_copy_menu(self):
     libro_manager = self.container.libro_manager
     autor_manager = self.container.autor_manager
     copy_manager = self.container.copy_manager
     while True:
-        print("# Gestión de copias")
-        print("---------------------------------------------------")
-        print ("Seleccione una opción:")
-        print("> [1] Listar copias")
-        print("> [2] Buscar copia")
-        print("> [3] Habilitar copia")
-        print("> [4] Inhabilitar copia")
-        print("> [0] Volver al menú principal")
-        choice = input("Choose an option: ")
+        limpiar_consola()
+        print_brand_sistema()
+        separador_en_consola()
+
+        print("[-- Menu | Gestión de Copias --]")
+
+        print("\n[1] Listar copias")
+        print("[2] Buscar copia")
+        print("[3] Habilitar copia")
+        print("[4] Inhabilitar copia")
+        print("[0] Volver al menú principal")
+        choice = input("\n\n> Seleccione una opción => ")
         
         if choice == "1":
             copy_manager.listar_copias()
@@ -39,6 +42,8 @@ def show_copy_menu(self):
             limpiar_consola()
 
         elif choice == "0":
-            break
+            return False
+
         else:
-            print("Invalid choice. Please try again.")
+            print("\n> Opción inválida. Por favor, intente de nuevo.")
+            pausar_sistema()
