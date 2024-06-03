@@ -1,20 +1,16 @@
-import os
 from typing import List
-
 from clases.tesis import Tesis
 from clases.estado import Estado
 from clases.autor import Autor
 from managers.autor_manager import AutorManager
 from managers.data_manager import DataManager
 from utils.validators import validar_input
-from typing import List
 from utils.helpers import limpiar_consola
 
 class TesisManager():
 
     def __init__(self, data_manager: DataManager):
         self.data_manager = data_manager
-    
     
     def agregar_tesis(self, autores):
         institucion = validar_input("Ingrese la institución de la tesis: ", str).title()

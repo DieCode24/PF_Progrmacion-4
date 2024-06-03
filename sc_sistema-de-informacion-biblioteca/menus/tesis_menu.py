@@ -10,9 +10,9 @@ def show_tesis_menu(self):
         print_brand_sistema()
         separador_en_consola()
         
-        print("[-- Menu | Gestión de Tesis --]")
+        print("[-- Menu | Gestión de Tesis --]\n")
         
-        print("\n[1] Registrar Tesis")
+        print("[1] Registrar Tesis")
         print("[2] Listar Tesis")
         print("[3] Buscar Tesis")
         print("[4] Modificar Tesis")
@@ -57,6 +57,6 @@ def show_tesis_menu(self):
             limpiar_consola()
             
         elif opcion == "0":
-            return False
+            return
         else:
             print("Opción inválida. Por favor, intente de nuevo.")

@@ -5,3 +5,4 @@ class DataManager:
         self.articles = []
         self.autores = []
         self.copies = []
+        self.lectores = []
