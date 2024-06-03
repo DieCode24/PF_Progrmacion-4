@@ -29,5 +29,12 @@ class Autor:
     def cantidad_libros(self):
         return self.cantidad_libros
     
-    def habilitado(self):
+    def gethabilitado(self):
         return self.habilitado
+    
+    def inhabilitar(self):
+        self.habilitado = False
+        
+    def habilitar(self):
+        self.habilitado = True
+        
