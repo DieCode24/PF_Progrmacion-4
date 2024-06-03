@@ -16,11 +16,7 @@ class ArticuloCientificoManager:
         Inicializa una nueva instancia de ArticuloCientificoManager con una lista vacía de artículos científicos.
         """
         self.data_manager = data_manager
-        self.articulos = [
-            ArticuloCientifico("Artículo 1", "10.1000/xyz123", "Editor 1", date(2021, 1, 1), "Mensual", 1, "Ciencia", Estado.DISPONIBLE),
-            ArticuloCientifico("Artículo 2", "10.1000/xyz124", "Editor 2", date(2022, 2, 2), "Semanal", 2, "Tecnología", Estado.PRESTADO),
-            ArticuloCientifico("Artículo 3", "10.1000/xyz125", "Editor 3", date(2023, 3, 3), "Mensual", 3, "Matemáticas", Estado.RESERVADO),
-        ]
+        self.articulos = []
 
     def registrar_articulo(self, titulo: str, doi: str, editor: str, fecha_publicacion: date, periodicidad: str, volumen: int, campo_interes: str, estado: str = Estado.DISPONIBLE) -> ArticuloCientifico:
         """

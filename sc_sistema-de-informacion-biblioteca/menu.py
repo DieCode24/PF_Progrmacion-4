@@ -1,30 +1,40 @@
 from menus.libro_menu import show_libro_menu
 from menus.copy_menu import show_copy_menu
 from menus.tesis_menu import show_tesis_menu
+from menus.prestamo_menu import show_prestamo_menu
+from utils.helpers import pausar_sistema, print_brand_sistema, separador_en_consola, limpiar_consola
+
+
 
 class Menu:
     def __init__(self, container):
         self.container = container
 
+
     def show(self):
-        raise NotImplementedError("This method should be implemented by subclasses")
+        raise NotImplementedError("Este método debe ser implementado por las subclases")
     
 
 class AdminMenu(Menu):
     def show(self):
         while True:
-            print("\nAdmin Menu")
-            print("1. Libro Manager")
-            print("2. Tesis Manager")
-            print("3. Articulo Manager")
-            print("4. Autor Manager")
-            print("5. Lector Manager")
-            print("6. Prestamo Manager")
-            print("7. Multa Manager")
-            print("8. Categoria Manager")
-            print ("9. Copia Manager")
-            print("0. Logout")
-            choice = input("Seleccione la opcion: ")
+            limpiar_consola()
+            print_brand_sistema()
+            separador_en_consola()
+            
+            print("[-- Menu de Administrador --]\n")
+            print("[1] Gestor de Libros")
+            print("[2] Gestor de Tesis")
+            print("[3] Gestor de Artículos")
+            print("[4] Gestor de Autores")
+            print("[5] Gestor de Lectores")
+            print("[6] Gestor de Préstamos")
+            print("[7] Gestor de Multas")
+            print("[8] Gestor de Categorías")
+            print("[9] Gestor de Copias")
+            print("[0] Cerrar sesión")
+            choice = input("\n\n> Seleccione una opción => ")
+            
             if choice == "1":
                 show_libro_menu(self)
             elif choice == "2":
@@ -36,7 +46,7 @@ class AdminMenu(Menu):
             elif choice == "5":
                 self.show_lector_menu()
             elif choice == "6":
-                self.show_prestamo_menu()
+                show_prestamo_menu(self)
             elif choice == "7":
                 self.show_multa_menu()
             elif choice == "8":
@@ -44,39 +54,55 @@ class AdminMenu(Menu):
             elif choice == "9":
                 show_copy_menu(self)
             elif choice == "0":
-                break
+                return False
             else:
-                print("Opción inválida. Por favor, intente de nuevo.")
+                print("\nOpción inválida. Por favor, intente de nuevo.")
+                pausar_sistema()
+
 
 class LibrarianMenu(Menu):
     def show(self):
         while True:
-            print("\nAdmin Menu")
-            print("1. Libro Manager")
-            print("2. Tesis Manager")
-            print("3. Articulo Manager")
-            print("4. Autor Manager")
-            print("5. Lector Manager")
-            print("6. Prestamo Manager")
-            print("7. Multa Manager")
-            print("8. Categoria Manager")
-            print ("9. Copia Manager")
-            print("0. Logout")
-            choice = input("Seleccione la opcion:")
+            limpiar_consola()
+            print_brand_sistema()
+            separador_en_consola()
+
+            print("[-- Menú de Bibliotecario --]\n")
+            print("[1] Gestor de Libros")
+            print("[2] Gestor de Tesis")
+            print("[3] Gestor de Artículos")
+            print("[4] Gestor de Autores")
+            print("[5] Gestor de Lectores")
+            print("[6] Gestor de Préstamos")
+            print("[7] Gestor de Multas")
+            print("[8] Gestor de Categorías")
+            print("[9] Gestor de Copias")
+            print("[0] Cerrar sesión")
+            choice = input("\n\n> Seleccione una opción => ")
+
             if choice == "1":
                 show_libro_menu(self)
             elif choice == "2":
-                self.show_articulo_menu()
+                show_tesis_menu(self)
             elif choice == "3":
-                self.show_autor_menu()
+                self.show_articulo_menu()
             elif choice == "4":
-                self.show_prestamo_menu()
+                self.show_autor_menu()
+            elif choice == "5":
+                self.show_lector_menu()
+            elif choice == "6":
+                show_prestamo_menu(self)
+            elif choice == "7":
+                self.show_multa_menu()
+            elif choice == "8":
+                self.show_categoria_menu()
             elif choice == "9":
                 show_copy_menu(self)
             elif choice == "0":
-                break
+                return False
             else:
-                print("Opción inválida. Por favor, intente de nuevo.")
+                print("\nOpción inválida. Por favor, intente de nuevo.")
+                pausar_sistema()
 
     # Similar methods for other managers...
 

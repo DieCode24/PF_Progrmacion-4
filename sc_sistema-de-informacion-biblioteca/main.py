@@ -1,5 +1,5 @@
-import os
 from dotenv import load_dotenv
+
 from managers.libro_manager import LibroManager
 from managers.articulo_cientifico_manager import ArticuloCientificoManager
 from managers.tesis_manager import TesisManager
@@ -7,9 +7,9 @@ from managers.autor_manager import AutorManager
 from managers.copia_manager import CopiaManager
 from managers.lector_manager import LectorManager
 from managers.data_manager import DataManager
+from managers.prestamo_manager import PrestamoManager
 from menu import AdminMenu, LibrarianMenu
-from datetime import date
-from utils.helpers import pausar_sistema, limpiar_consola, print_brand_sistema
+from utils.helpers import pausar_sistema, limpiar_consola, print_brand_sistema, separador_en_consola, validar_contraseña
 
 load_dotenv()
 class DependencyContainer:
@@ -21,19 +21,7 @@ class DependencyContainer:
         self.tesis_manager = TesisManager(data_manager)
         self.lector_manager = LectorManager(data_manager)
         self.copy_manager = CopiaManager(data_manager)
-
-def validar_contraseña(rol):
-    if rol == "1":
-        contraseña_correcta = os.getenv("ADMIN_PASSWORD")
-    elif rol == "2":
-        contraseña_correcta = os.getenv("LIBRARIAN_PASSWORD")
-    elif rol == "3":
-        contraseña_correcta = os.getenv("READER_PASSWORD")
-    else:
-        return False
-
-    contraseña = input("Ingrese la contraseña: ")
-    return contraseña == contraseña_correcta
+        self.prestamo_manager = PrestamoManager(data_manager)
 
 def main():
     data_manager = DataManager()
@@ -43,23 +31,29 @@ def main():
     while True:
         limpiar_consola()
         print_brand_sistema()
-        print("\nLogin")
-        print("1. Admin")
-        print("2. Librarian")
-        print("3. Reader")
-        print("0. Exit")
-        role = input("Choose your role: ")
+        separador_en_consola()
+        
+        print("[--Login--]")
+        print("\n[1] Administrador")
+        print("[2] Bibliotecario")
+        print("[3] Lector")
+        print("[0] Salir")
+        role = input("\n\n> Elige una opción => ")
 
         if role == "0":
-            break
+            print("\n> Saliendo del sistema.")
+            pausar_sistema()
+            return False
 
         if role not in ["1", "2", "3"]:
-            print("Invalid choice. Please try again.")
+            print("\n> Opción invalida. Por favor intentalo de nuevo.")
+            pausar_sistema()
             continue
 
-        if not validar_contraseña(role):
-            print("Contraseña incorrecta. Intente de nuevo.")
-            pausar_sistema()
+        if validar_contraseña(role):
+            print("\n> Contraseña correcta. Acceso concedido.")
+        else:
+            input("\n> Contraseña incorrecta. Acceso denegado.")
             continue
 
         limpiar_consola()
@@ -68,10 +62,10 @@ def main():
         elif role == "2":
             LibrarianMenu(container).show()
         elif role == "3":
-            pass
             # ReaderMenu(container).show()
+            pass
         else:
-            print("Invalid choice. Please try again.")
+            print("\nOpción invalida. Por favor intentalo de nuevo.")
 
 if __name__ == "__main__":
     main()
