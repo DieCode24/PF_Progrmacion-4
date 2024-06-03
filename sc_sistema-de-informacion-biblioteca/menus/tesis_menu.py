@@ -10,9 +10,9 @@ def show_tesis_menu(self):
         print_brand_sistema()
         separador_en_consola()
         
-        print("[-- Menu | Gestión de Tesis --]")
+        print("[-- Menu | Gestión de Tesis --]\n")
         
-        print("\n[1] Registrar Tesis")
+        print("[1] Registrar Tesis")
         print("[2] Listar Tesis")
         print("[3] Buscar Tesis")
         print("[4] Modificar Tesis")
@@ -25,6 +25,7 @@ def show_tesis_menu(self):
             autores = autor_manager.seleccionar_autores()
             tesis_manager.agregar_tesis(autores)
             pausar_sistema()
+            limpiar_consola()
             
         elif opcion == "2":
             limpiar_consola()
@@ -40,7 +41,7 @@ def show_tesis_menu(self):
             
         elif opcion == "4":
             limpiar_consola()
-            autores = autor_manager.seleccionar_autores()
+            autores = autor_manager
             tesis_manager.modificar_tesis(autores)
             pausar_sistema()
             limpiar_consola()
@@ -56,6 +57,6 @@ def show_tesis_menu(self):
             limpiar_consola()
             
         elif opcion == "0":
-            return False
+            return
         else:
-            print("\n> Opción inválida. Por favor, intente de nuevo.")
+            print("Opción inválida. Por favor, intente de nuevo.")

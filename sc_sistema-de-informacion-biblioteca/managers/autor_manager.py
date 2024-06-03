@@ -7,7 +7,6 @@ from utils.helpers import limpiar_consola, pausar_sistema
 class AutorManager:
     def __init__(self, data_manager: DataManager):
         self.data_manager = data_manager
-        self.autores = []
 
     def registrar_autor(self):
         nombre = validar_input("Ingrese el nombre del autor: ", str).title()
@@ -15,11 +14,13 @@ class AutorManager:
         fecha_nacimiento = validar_input("Ingrese la fecha de nacimiento del autor (YYYY-MM-DD): ", str)
         self.agregar_autor(nombre, nacionalidad, fecha_nacimiento)
         print(f"Autor {nombre} registrado exitosamente.")
+        limpiar_consola()
 
     def agregar_autor(self, nombre: str, nacionalidad: str, fecha_nacimiento: str):
         fecha_nacimiento = datetime.strptime(fecha_nacimiento, "%Y-%m-%d")
         autor = Autor(nombre, nacionalidad, fecha_nacimiento)
         self.data_manager.autores.append(autor)
+        limpiar_consola()
         return autor
 
     def buscar_autor(self, nombre: str):
@@ -27,6 +28,7 @@ class AutorManager:
             if autor.nombre == nombre:
                 return autor
         return None
+    
 
     def asociar_libro(self, autores, isbn):
         for autor in autores:
@@ -36,7 +38,7 @@ class AutorManager:
         nombre = validar_input("Ingrese el nombre del autor que desea modificar: ", str).title()
         autor = self.buscar_autor(nombre)
         
-        if autor.habilitado() == False:
+        if autor.gethabilitado() == False:
             print("No se puede modificar un autor inhabilitado")
             return
          
@@ -57,7 +59,7 @@ class AutorManager:
         if autor:
             print(f"Información Actual de {autor.nombre}:")
             print(f"Nacionalidad: {autor.nacionalidad}")
-            print(f"Fecha de nacimiento: {autor.fecha_nacimiento.strftime('%Y-%m-%d')}")
+            print(f"Fecha de nacimiento: {autor.fecha_nacimiento}")
             print("Libros:")
             for libro in autor.libros:
                 print(libro)
@@ -66,33 +68,43 @@ class AutorManager:
 
     def see_authors(self, bool=None, mas_info=None):
         count = 1
+        autores_lista = []
         if bool is None:
             print("Autores:")
-            for autor in self.autores:
+            for autor in self.data_manager.autores:
                 print(f"{count}. {autor.nombre}")
+                autores_lista.append(autor)
                 count += 1
                 
         elif bool:
             print("Autores Habilitados:")
-            for autor in self.autores:
+            for autor in self.data_manager.autores:
                 if autor.habilitado:
                     print(f"{count}. {autor.nombre}")
+                    autores_lista.append(autor)
                     count += 1
                     
         else:
             print("Autores Inhabilitados:")
-            for autor in self.autores:
+            for autor in self.data_manager.autores:
                 if not autor.habilitado:
                     print(f"{count}. {autor.nombre}")
+                    autores_lista.append(autor)
                     count += 1
                     
         if mas_info:
-            nombre = input("Ingrese el nombre del autor del que desea ver más información: ").title()
-            self.mostrar_informacion_autor(nombre)   
+            numero = int(input("Ingrese el número del autor del que desea ver más información: "))
+            if 1 <= numero <= len(autores_lista):
+                autor = autores_lista[numero - 1]
+                self.mostrar_informacion_autor(autor.nombre)
+                pausar_sistema()
+            else:
+                print("Número inválido. Por favor, ingrese un número válido.")  
                      
                             
     def listas_d_autores(self):
         while True:
+            limpiar_consola()
             print("\nSeleccione una opción:")
             print("1. Todos los autores")
             print("2. Autores habilitados")
@@ -101,10 +113,13 @@ class AutorManager:
             opcion = input("Ingrese el número de la opción deseada: ")
 
             if opcion == "1":
+                limpiar_consola()
                 self.see_authors(None, True)
             elif opcion == "2":
+                limpiar_consola()
                 self.see_authors(True, True)
             elif opcion == "3":
+                limpiar_consola()
                 self.see_authors(False, True)
             elif opcion == "0":
                 break
@@ -148,7 +163,7 @@ class AutorManager:
         nombre = input("Ingrese el nombre del autor que desea habilitar: ").title()
         autor = self.buscar_autor(nombre)
         if autor:
-            autor.habilitado = True
+            autor.habilitar()
             print(f"Autor {nombre} habilitado exitosamente.")
         else:
             print("El autor no existe.")
@@ -157,18 +172,26 @@ class AutorManager:
         nombre = input("Ingrese el nombre del autor que desea inhabilitar: ").title()
         autor = self.buscar_autor(nombre)
         if autor:
-            autor.habilitado = False
+            autor.inhabilitar()
             print(f"Autor {nombre} inhabilitado exitosamente.")
         else:
             print("El autor no existe.")
             
     def mock(self):
-        self.agregar_autor("Gabriel Garcia Marquez", "Colombiano", "1927-03-06")
-        self.agregar_autor("Julio Cortazar", "Argentino", "1914-08-26")
-        self.agregar_autor("Jorge Luis Borges", "Argentino", "1899-08-24")
-        self.agregar_autor("Mario Vargas Llosa", "Peruano", "1936-03-28")
-        self.agregar_autor("Isabel Allende", "Chilena", "1942-08-02")
-        self.agregar_autor("Pablo Neruda", "Chileno", "1904-07-12")
+        
+        autor1 = Autor ("Gabriel Garcia Marquez", "Colombiano", "1927-03-06")
+        autor1.inhabilitar()
+        self.data_manager.autores.append(autor1)
+        autor2 = Autor ("Julio Cortazar", "Argentino", "1914-08-26")
+        self.data_manager.autores.append(autor2)
+        autor3 = Autor ("Jorge Luis Borges", "Argentino", "1899-08-24")
+        self.data_manager.autores.append(autor3)
+        autor4 = Autor ("Mario Vargas Llosa", "Peruano", "1936-03-28")
+        self.data_manager.autores.append(autor4)
+        autor5 = Autor ("Isabel Allende", "Chilena", "1942-08-02")
+        self.data_manager.autores.append(autor5)
+        
+         
         
         
             

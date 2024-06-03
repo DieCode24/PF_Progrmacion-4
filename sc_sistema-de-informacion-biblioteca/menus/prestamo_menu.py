@@ -25,8 +25,8 @@ def show_prestamo_menu(self):
 
         if opcion == "1":
             limpiar_consola()
-            lector = lector_manager()
-            libro = libro_manager()
+            lector = lector_manager
+            libro = libro_manager
             prestamo_manager.realizar_prestamo(lector, libro)
             pausar_sistema()
 
