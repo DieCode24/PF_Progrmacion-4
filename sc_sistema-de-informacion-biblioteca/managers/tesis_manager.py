@@ -1,9 +1,11 @@
+import os
+from typing import List
+
 from clases.tesis import Tesis
 from clases.estado import Estado
 from managers.autor_manager import AutorManager
-from typing import List
-import os 
 from utils.validators import validar_input
+
 
 class TesisManager:
 
@@ -15,6 +17,7 @@ class TesisManager:
             Tesis(["juan", "mateo"], "utp", "2020-01-04", "2024-01-01", "Ciencia", Estado.DISPONIBLE, 100),
             ]
     
+    
     def agregar_tesis(self, autores):
         institucion = validar_input("Ingrese la institución de la tesis: ", str).title()
         f_investigacion = validar_input("Ingrese la fecha de investigación de la tesis (YYYY-MM-DD): ", str)
@@ -24,6 +27,7 @@ class TesisManager:
         paginas = validar_input("Ingrese el número de páginas de la tesis: ", int)
         tesis  = Tesis(autores, institucion, f_investigacion, f_presentacion, campo_estudio, estado, paginas)
         self.tesis.append(tesis)             
+    
         
     def listar_tesis(self):
         print("LISTA DE TESIS\n")
@@ -63,6 +67,7 @@ class TesisManager:
         else:
             print("Opción no válida")
             return
+    
         
     def buscar_por_autor(self):
         print("\t BUscanco por autor\n")
@@ -93,6 +98,7 @@ class TesisManager:
                 for autor in tesis.Autores():
                     print (f"\t{autor.nombre}")
                 print("\n\n")
+    
                         
     def buscar_por_campo(self):
         print("\t Buscando por campo de estudio\n")
@@ -110,7 +116,7 @@ class TesisManager:
             print("   Autores ")
             for autor in tesis.Autores():
                     print (f"\t{autor.nombre}")
-            
+    
                 
     def modificar_tesis(self, autores : AutorManager):
     
@@ -140,6 +146,7 @@ class TesisManager:
                 
         print("Tesis modificada correctamente.")
         
+        
     def eliminar_tesis(self):
         self.listar_tesis()
         if not self.tesis:
@@ -151,4 +158,3 @@ class TesisManager:
         tesis_a_eliminar = self.tesis[opcion - 1]
         self.tesis.remove(tesis_a_eliminar) 
         print("Tesis eliminada correctamente.")
-            

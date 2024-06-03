@@ -1,6 +1,8 @@
-from datetime import date
-from clases.autor import Autor
 from typing import List
+from datetime import date
+
+from clases.autor import Autor
+
 
 class Tesis:
     def __init__(self, autores: List[Autor], institucion: str, f_investigacion: date, f_presentacion: date, campo_estudio: str, estado: str, paginas: int):
@@ -61,9 +63,3 @@ class Tesis:
     
     def set_Paginas(self, paginas):
         self._paginas = paginas
-    
-        
-        
-    
-
-
