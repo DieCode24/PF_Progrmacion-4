@@ -105,6 +105,19 @@ class ArticuloCientificoManager:
         self.registrar_articulo(titulo, doi, editor, fecha_publicacion, periodicidad, volumen, campo_interes, Estado.DISPONIBLE)
         print("Artículo científico registrado exitosamente.")
 
+
+    def mostrar_detalles_articulo(articulo, idx):
+        """
+        Muestra los detalles de un artículo.
+        
+        Args:
+            articulo (Articulo): El objeto Artículo cuyos detalles se mostrarán.
+            idx (int): El índice del artículo en la lista.
+        """
+        print(f"{idx}. Título: {articulo.titulo}, DOI: {articulo.doi}, Editor: {articulo.editor}")
+        print(f"   Fecha de Publicación: {articulo.fecha_publicacion}, Periodicidad: {articulo.periodicidad}, Volumen: {articulo.volumen}")
+        print(f"   Campo de Interés: {articulo.campo_interes}, Estado: {articulo.estado}\n")
+
     def buscar_articulo_desde_consola(self):
         """
         Busca un artículo científico desde la consola.
@@ -134,19 +147,20 @@ class ArticuloCientificoManager:
         if not articulos_encontrados:
             print(f"No se encontraron artículos con el título {titulo}.")
         else:
-            for articulo in articulos_encontrados:
-                self.mostrar_detalles_articulo(articulo)
+            for idx, articulo in enumerate(articulos_encontrados, start=1):
+                ArticuloCientificoManager.mostrar_detalles_articulo(articulo, idx)
+
 
     def buscar_por_campo(self):
         print("\tBuscando por campo de interés\n")
-        campo = validar_input("Ingrese el campo de interés: ", str).title()
+        campo = validar_input("Ingrese el campo de interés: ", str).lower().title()
         articulos_encontrados = [art for art in self.articulos if campo in art.campo_interes]
 
         if not articulos_encontrados:
             print(f"No se encontraron artículos en el campo de interés {campo}.")
         else:
-            for articulo in articulos_encontrados:
-                self.mostrar_detalles_articulo(articulo)
+            for idx, articulo in enumerate(articulos_encontrados, start=1):
+                ArticuloCientificoManager.mostrar_detalles_articulo(articulo, idx)
 
     def modificar_articulo_desde_consola(self):
         """
