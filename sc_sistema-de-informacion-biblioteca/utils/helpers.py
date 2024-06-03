@@ -4,6 +4,7 @@ import os
 
 def pausar_sistema():
     try:
+        print("\n")
         command_pause = 'pause' if os.name == 'nt' else 'read -n 1 -s -r -p "Presione cualquier tecla para continuar..."'
         os.system(command_pause)
 
