@@ -1,5 +1,6 @@
 from menus.libro_menu import show_libro_menu
 from menus.copy_menu import show_copy_menu
+from menus.tesis_menu import show_tesis_menu
 
 class Menu:
     def __init__(self, container):
@@ -27,7 +28,7 @@ class AdminMenu(Menu):
             if choice == "1":
                 show_libro_menu(self)
             elif choice == "2":
-                self.show_tesis_menu()
+                show_tesis_menu(self)
             elif choice == "3":
                 self.show_articulo_menu()
             elif choice == "4":
