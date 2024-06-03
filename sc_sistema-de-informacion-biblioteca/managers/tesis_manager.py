@@ -25,6 +25,7 @@ class TesisManager():
         paginas = validar_input("Ingrese el número de páginas de la tesis: ", int)
         tesis  = Tesis(autores, institucion, f_investigacion, f_presentacion, campo_estudio, estado, paginas)
         self.data_manager.thesis.append(tesis)             
+      
         
     def listado_tesis(self):
         print("\tLISTA DE TESIS\n")
@@ -66,7 +67,7 @@ class TesisManager():
     
         
     def buscar_por_autor(self):
-        print("\t BUscanco por autor\n")
+        print("\t Buscanco por autor\n")
         autor_B = validar_input("Ingrese el autor: ", str).title()
         Tesis = []
 
@@ -83,6 +84,7 @@ class TesisManager():
         else:
             for tesis in Tesis:
                 self.mostrar_tesis(tesis)
+        
                         
     def buscar_por_campo(self):
         print("\t Buscando por campo de estudio\n")
@@ -90,35 +92,62 @@ class TesisManager():
         for tesis in self.data_manager.thesis:
             if campo in tesis.campoEstudio():
                 self.mostrar_tesis(tesis)
+          
                 
-    def modificar_tesis(self, autores : AutorManager):
+    def modificar_tesis(self, autores: AutorManager):
     
         self.listado_tesis()
-        if not self.data_manager.thesis:
-            print("No hay tesis registradas")
-            return
         opcion = validar_input(f"Ingrese el número de la tesis que desea modificar: ", int)
     
         T_modificar = self.data_manager.thesis[opcion - 1]
         if T_modificar.estado() != Estado.DISPONIBLE:
             print("La tesis no se puede modificar porque no está disponible.")
             return
+        limpiar_consola()
         print("\tDatos actuales de la tesis\n")
-        print(" Campo: ", T_modificar.CampoEstudio(), "\n" + 
-                "   Páginas: ", T_modificar.Paginas(),"\n" + 
-                "   Fecha investigacion: ", T_modificar.Finvestigacion(),"\n" +
-                "   Fecha publicacion: ", T_modificar.Fpresentacion(),"\n" +
-                "   Institucion: ", T_modificar.Institucion(),"\n" +
+        print(" Campo: ", T_modificar.campoEstudio(), "\n" + 
+                "   Páginas: ", T_modificar.paginas(),"\n" + 
+                "   Fecha investigacion: ", T_modificar.finvestigacion(),"\n" +
+                "   Fecha publicacion: ", T_modificar.fpresentacion(),"\n" +
+                "   Institucion: ", T_modificar.institucion(),"\n" +
                 "   Autores ")
-        for autor in T_modificar.Autores():
+        for autor in T_modificar.autores():
             print (f"\t{autor.nombre}")
             
-        self.data_manager.thesis.remove(T_modificar)
-        
-        print("\n\tDatos nuevos de la tesis\n")
-        autoresModi = autores.seleccionar_autores()
-        self.agregar_tesis(autoresModi)
-                
+           
+        while True:
+            print ("\nModificar Tesis\n")
+            print("1. Modifcar campo de estudio")
+            print("2. Modificar páginas")
+            print("3. Modificar fecha de investigación")
+            print("4. Modificar fecha de presentación")
+            print("5. Modificar institución")
+            print("6. Modificar autores")
+            print("0. Salir")
+            opcion = input("\n> Ingrese una opción => ")
+            if opcion == "1":
+                campo = validar_input("Ingrese el campo de estudio: ", str).title()
+                T_modificar.set_CampoEstudio(campo)
+            elif opcion == "2":
+                paginas = validar_input("Ingrese el número de páginas: ", int)
+                T_modificar.set_Paginas(paginas)
+            elif opcion == "3":
+                finvestigacion = validar_input("Ingrese la fecha de investigación (YYYY-MM-DD): ", str)
+                T_modificar.set_Finvestigacion(finvestigacion)
+            elif opcion == "4":
+                fpresentacion = validar_input("Ingrese la fecha de presentación (YYYY-MM-DD): ", str)
+                T_modificar.set_Fpresentacion(fpresentacion)
+            elif opcion == "5":
+                institucion = validar_input("Ingrese la institución: ", str).title()
+                T_modificar.set_Institucion(institucion)
+            elif opcion == "6":
+                autores = autores.seleccionar_autores()
+                T_modificar.set_Autores(autores)
+            elif opcion == "0":
+                break
+            else:
+                print("Opción no válida.")                    
+                    
         print("Tesis modificada correctamente.")
         
         
@@ -139,6 +168,9 @@ class TesisManager():
         autor1 = Autor("Juan Perez", "Colombiano", "2000-09-23")
         autor2 = Autor("Maria Rodriguez", "Mexicano", "1990-09-23")
         autor3 = Autor("Pedro Gomez", "Argentino", "1995-09-23")
+        self.data_manager.autores.append(autor1)
+        self.data_manager.autores.append(autor2)
+        self.data_manager.autores.append(autor3)
         
         Tesis1 = Tesis([autor1], "Universidad Nacional", "2020-09-23", "2024-09-23", "Ingenieria", Estado.DISPONIBLE, 100)
         Tesis2 = Tesis([autor1, autor2], "Universidad de Andes", "2010-09-23", "2024-09-23", "Fisica", Estado.DISPONIBLE, 100)  

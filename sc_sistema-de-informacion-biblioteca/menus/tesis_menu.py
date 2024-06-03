@@ -22,6 +22,7 @@ def show_tesis_menu(self):
             autores = autor_manager.seleccionar_autores()
             tesis_manager.agregar_tesis(autores)
             pausar_sistema()
+            limpiar_consola()
             
         elif opcion == "2":
             limpiar_consola()
@@ -37,7 +38,7 @@ def show_tesis_menu(self):
             
         elif opcion == "4":
             limpiar_consola()
-            autores = autor_manager.seleccionar_autores()
+            autores = autor_manager
             tesis_manager.modificar_tesis(autores)
             pausar_sistema()
             limpiar_consola()
@@ -56,7 +57,3 @@ def show_tesis_menu(self):
             break
         else:
             print("Opción inválida. Por favor, intente de nuevo.")
-            
-        
-    
-    
