@@ -68,10 +68,12 @@ class AutorManager:
 
     def see_authors(self, bool=None, mas_info=None):
         count = 1
+        autores_lista = []
         if bool is None:
             print("Autores:")
             for autor in self.data_manager.autores:
                 print(f"{count}. {autor.nombre}")
+                autores_lista.append(autor)
                 count += 1
                 
         elif bool:
@@ -79,6 +81,7 @@ class AutorManager:
             for autor in self.data_manager.autores:
                 if autor.habilitado:
                     print(f"{count}. {autor.nombre}")
+                    autores_lista.append(autor)
                     count += 1
                     
         else:
@@ -86,11 +89,17 @@ class AutorManager:
             for autor in self.data_manager.autores:
                 if not autor.habilitado:
                     print(f"{count}. {autor.nombre}")
+                    autores_lista.append(autor)
                     count += 1
                     
         if mas_info:
-            nombre = input("Ingrese el nombre del autor del que desea ver más información: ").title()
-            self.mostrar_informacion_autor(nombre)   
+            numero = int(input("Ingrese el número del autor del que desea ver más información: "))
+            if 1 <= numero <= len(autores_lista):
+                autor = autores_lista[numero - 1]
+                self.mostrar_informacion_autor(autor.nombre)
+                pausar_sistema()
+            else:
+                print("Número inválido. Por favor, ingrese un número válido.")  
                      
                             
     def listas_d_autores(self):
