@@ -8,7 +8,6 @@ from managers.copia_manager import CopiaManager
 from managers.lector_manager import LectorManager
 from managers.data_manager import DataManager
 from menu import AdminMenu, LibrarianMenu
-from datetime import date
 from utils.helpers import pausar_sistema, limpiar_consola, print_brand_sistema, separador_en_consola, validar_contraseña
 
 load_dotenv()
@@ -31,6 +30,7 @@ def main():
         limpiar_consola()
         print_brand_sistema()
         separador_en_consola()
+        
         print("[--Login--]")
         print("\n[1] Administrador")
         print("[2] Bibliotecario")
@@ -42,7 +42,8 @@ def main():
             break
 
         if role not in ["1", "2", "3"]:
-            print("Opción invalida. Por favor intentalo de nuevo.")
+            print("\nOpción invalida. Por favor intentalo de nuevo.")
+            pausar_sistema()
             continue
 
         if validar_contraseña(role):
