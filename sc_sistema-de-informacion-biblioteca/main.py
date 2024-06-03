@@ -9,7 +9,7 @@ from managers.lector_manager import LectorManager
 from managers.data_manager import DataManager
 from menu import AdminMenu, LibrarianMenu
 from datetime import date
-from utils.helpers import pausar_sistema, limpiar_consola, print_brand_sistema
+from utils.helpers import pausar_sistema, limpiar_consola, print_brand_sistema, separador_en_consola, validar_contraseña
 
 load_dotenv()
 class DependencyContainer:
@@ -22,19 +22,6 @@ class DependencyContainer:
         self.lector_manager = LectorManager(data_manager)
         self.copy_manager = CopiaManager(data_manager)
 
-def validar_contraseña(rol):
-    if rol == "1":
-        contraseña_correcta = os.getenv("ADMIN_PASSWORD")
-    elif rol == "2":
-        contraseña_correcta = os.getenv("LIBRARIAN_PASSWORD")
-    elif rol == "3":
-        contraseña_correcta = os.getenv("READER_PASSWORD")
-    else:
-        return False
-
-    contraseña = input("Ingrese la contraseña: ")
-    return contraseña == contraseña_correcta
-
 def main():
     data_manager = DataManager()
     container = DependencyContainer(data_manager)
@@ -43,24 +30,25 @@ def main():
     while True:
         limpiar_consola()
         print_brand_sistema()
-        print("\nLogin")
-        print("1. Admin")
-        print("2. Librarian")
-        print("3. Reader")
-        print("0. Exit")
-        role = input("Choose your role: ")
+        separador_en_consola()
+        print("[--Login--]")
+        print("\n[1] Administrador")
+        print("[2] Bibliotecario")
+        print("[3] Lector")
+        print("[0] Salir")
+        role = input("\n\n> Elige una opción => ")
 
         if role == "0":
             break
 
         if role not in ["1", "2", "3"]:
-            print("Invalid choice. Please try again.")
+            print("Opción invalida. Por favor intentalo de nuevo.")
             continue
 
-        if not validar_contraseña(role):
-            print("Contraseña incorrecta. Intente de nuevo.")
-            pausar_sistema()
-            continue
+        if validar_contraseña(role):
+            print("Contraseña correcta. Acceso concedido.")
+        else:
+            print("Contraseña incorrecta. Acceso denegado.")
 
         limpiar_consola()
         if role == "1":
