@@ -1,6 +1,7 @@
 from menus.libro_menu import show_libro_menu
 from menus.copy_menu import show_copy_menu
 from menus.tesis_menu import show_tesis_menu
+from menus.prestamo_menu import show_prestamo_menu
 from utils.helpers import pausar_sistema, print_brand_sistema, separador_en_consola, limpiar_consola
 
 
@@ -45,7 +46,7 @@ class AdminMenu(Menu):
             elif choice == "5":
                 self.show_lector_menu()
             elif choice == "6":
-                self.show_prestamo_menu()
+                show_prestamo_menu(self)
             elif choice == "7":
                 self.show_multa_menu()
             elif choice == "8":
@@ -53,7 +54,7 @@ class AdminMenu(Menu):
             elif choice == "9":
                 show_copy_menu(self)
             elif choice == "0":
-                break
+                return False
             else:
                 print("\nOpción inválida. Por favor, intente de nuevo.")
                 pausar_sistema()
@@ -90,7 +91,7 @@ class LibrarianMenu(Menu):
             elif choice == "5":
                 self.show_lector_menu()
             elif choice == "6":
-                self.show_prestamo_menu()
+                show_prestamo_menu(self)
             elif choice == "7":
                 self.show_multa_menu()
             elif choice == "8":
@@ -98,7 +99,7 @@ class LibrarianMenu(Menu):
             elif choice == "9":
                 show_copy_menu(self)
             elif choice == "0":
-                break
+                return False
             else:
                 print("\nOpción inválida. Por favor, intente de nuevo.")
                 pausar_sistema()
