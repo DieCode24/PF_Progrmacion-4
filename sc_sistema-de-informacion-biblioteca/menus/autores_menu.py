@@ -38,7 +38,7 @@ def show_autor_menu(self):
             
         elif opcion == "4":
             limpiar_consola()
-            autor_manager.inhalitar_autor()
+            autor_manager.inhabilitar_autor()
             pausar_sistema()
             limpiar_consola()
             
