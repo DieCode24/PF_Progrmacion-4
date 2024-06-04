@@ -98,3 +98,11 @@ class ArticuloCientifico:
             self.volumen = volumen
         if campo_interes:
             self.campo_interes = campo_interes
+            
+    def get_titulo(self) -> str:
+        """
+        Retorna el título del artículo científico.
+        
+        :return: Título del artículo.
+        """
+        return self.titulo
