@@ -6,3 +6,4 @@ class DataManager:
         self.autores = []
         self.copies = []
         self.lectores = []
+        self.prestamos = []
