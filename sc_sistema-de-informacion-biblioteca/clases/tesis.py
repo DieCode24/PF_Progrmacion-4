@@ -19,6 +19,7 @@ class Tesis:
         
     def id(self):
         return self._id
+          
         
     def autores(self):
         return self._autores
