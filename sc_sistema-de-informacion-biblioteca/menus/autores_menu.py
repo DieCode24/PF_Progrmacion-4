@@ -22,7 +22,7 @@ def show_autor_menu(self):
         print("[6] Datos de prueba (Mock data)")
         print("[0] Volver al menú principal")
         opcion = input("\n\n> Ingrese una opción => ")
-hola
+
         if opcion == "1":
             limpiar_consola()
             autor_manager.registrar_autor()
