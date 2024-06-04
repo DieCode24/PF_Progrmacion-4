@@ -1,7 +1,7 @@
 from datetime import date
 from typing import Any, List
 from clases.estado import Estado
-from utils.idgenerator import generate_id
+from utils.idgenerator import id_generator
 class Lector:
     def __init__(self, nombre: str, telefono: str, direccion: str, estado: str = Estado.NORMAL):
         self.nombre = nombre
