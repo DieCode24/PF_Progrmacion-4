@@ -98,7 +98,7 @@ class LibrarianMenu(Menu):
             elif choice == "6":
                 show_prestamo_menu(self)
             elif choice == "7":
-                show_multa_menu(self)
+                self.show_multa_menu(self)
             elif choice == "8":
                 show_categoria_menu(self)
             elif choice == "9":
