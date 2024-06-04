@@ -6,7 +6,6 @@ from managers.autor_manager import AutorManager
 from managers.data_manager import DataManager
 from utils.validators import validar_input
 from utils.helpers import limpiar_consola
-from utils.idgenerator import id_generator
 
 class TesisManager():
 
