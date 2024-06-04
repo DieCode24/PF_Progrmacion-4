@@ -162,6 +162,7 @@ class ReaderMenu(Menu):
             
             if choice == 1:
                 self.container.autor_manager.see_authors(True, True)
+                pausar_sistema()
             elif choice == 2:
                 self.container.libro_manager.listado_libros_activos()
                 pausar_sistema()

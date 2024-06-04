@@ -116,7 +116,7 @@ class LectorManager:
             input("\n> No hay lectores registrados.")
             return
         for lector in self.data_manager.lectores:
-            print(lector.nombre)
+            print(f"Nombre: {lector.nombre} - ID: {lector.id}")
         pausar_sistema()
 
     def seleccionar_lector(self):
