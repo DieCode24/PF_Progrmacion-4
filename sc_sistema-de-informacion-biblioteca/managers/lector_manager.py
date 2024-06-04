@@ -1,3 +1,5 @@
+import threading
+
 from typing import List, Optional
 from clases.lector import Lector
 from clases.estado import Estado
@@ -5,8 +7,17 @@ from utils.helpers import limpiar_consola, pausar_sistema
 from utils.validators import validar_input
 
 class LectorManager:
+    _instance = None
+    _lock = threading.Lock()
+
     def __init__(self, data_manager):
         self.data_manager = data_manager
+
+    def __new__(cls, *args, **kwargs):
+        with cls._lock:
+            if cls._instance is None:
+                cls._instance = super().__new__(cls)
+        return cls._instance
 
     def registrar_lector(self):
         """
