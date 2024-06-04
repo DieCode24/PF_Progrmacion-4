@@ -110,7 +110,7 @@ class LibrarianMenu(Menu):
                 pausar_sistema()
 
 
-class LectorMenu(Menu):
+class ReaderMenu(Menu):
     def show(self):
         while True:
             limpiar_consola()
@@ -150,4 +150,3 @@ class LectorMenu(Menu):
             else:
                 print("\nOpción inválida. Por favor, intente de nuevo.")
                 pausar_sistema()
-

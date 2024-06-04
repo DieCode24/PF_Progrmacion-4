@@ -9,7 +9,7 @@ from managers.lector_manager import LectorManager
 from managers.data_manager import DataManager
 from managers.prestamo_manager import PrestamoManager
 from managers.categoria_manager import CategoriaManager
-from menu import AdminMenu, LibrarianMenu
+from menu import AdminMenu, LibrarianMenu, ReaderMenu
 from utils.helpers import pausar_sistema, limpiar_consola, print_brand_sistema, separador_en_consola, validar_contraseña
 
 load_dotenv()
@@ -65,8 +65,7 @@ def main():
         elif role == "2":
             LibrarianMenu(container).show()
         elif role == "3":
-            # ReaderMenu(container).show()
-            pass
+            ReaderMenu(container).show()
         else:
             print("\n> Opción invalida. Por favor intentalo de nuevo.")
 
