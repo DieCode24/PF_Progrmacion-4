@@ -84,7 +84,7 @@ class ArticuloCientificoManager():
             print("No hay artículos científicos registrados")
             return
         for idx, articulo in enumerate(self.data_manager.articulos, start=1):
-            print(f"{idx}. Título: {articulo.titulo}, DOI: {articulo.doi}, Editor: {articulo.editor}")
+            print(f"{idx}. Título: {articulo.titulo}, DOI: {articulo.doi} Editor: {articulo.editor}")
             print(f"   Fecha de Publicación: {articulo.fecha_publicacion}, Periodicidad: {articulo.periodicidad}, Volumen: {articulo.volumen}")
             print(f"   Campo de Interés: {articulo.campo_interes}, Estado: {articulo.estado}\n")
 
@@ -92,14 +92,14 @@ class ArticuloCientificoManager():
         """
         Registra un nuevo artículo científico desde la consola.
         """
-        titulo = validar_input("Ingrese el título del artículo: ", str)
+        titulo = validar_input("Ingrese el título del artículo: ", str).title()
         doi = validar_input("Ingrese el DOI del artículo: ", str)
-        editor = validar_input("Ingrese el editor del artículo: ", str)
+        editor = validar_input("Ingrese el editor del artículo: ", str).title()
         fecha_str = validar_input("Ingrese la fecha de publicación (YYYY-MM-DD): ", str)
         fecha_publicacion = date.fromisoformat(fecha_str)
-        periodicidad = validar_input("Ingrese la periodicidad del artículo (Mensual, Semanal): ", str)
+        periodicidad = validar_input("Ingrese la periodicidad del artículo (Mensual, Semanal): ", str).title()
         volumen = validar_input("Ingrese el volumen del artículo: ", int)
-        campo_interes = validar_input("Ingrese el campo de interés del artículo: ", str)
+        campo_interes = validar_input("Ingrese el campo de interés del artículo: ", str).title()
 
         self.registrar_articulo(titulo, doi, editor, fecha_publicacion, periodicidad, volumen, campo_interes, Estado.DISPONIBLE)
         print("Artículo científico registrado exitosamente.")
@@ -193,6 +193,7 @@ class ArticuloCientificoManager():
             print(e)
 
     def eliminar_articulo_desde_consola(self):
+        self.listar_articulos()
         """
         Elimina un artículo científico desde la consola.
         """

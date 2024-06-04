@@ -13,8 +13,7 @@ def show_articulo_menu(self):
         print("[2] Buscar Artículo")
         print("[3] Modificar Artículo")
         print("[4] Eliminar Artículo")
-        print("[5] Realizar Préstamo de Artículo")
-        print("[6] Devolver Artículo")
+        print("[5] Listar Artículos")
         print("[0] Volver al menú principal")
 
         opcion = input("\n\n> Ingrese una opción => ")
@@ -43,28 +42,12 @@ def show_articulo_menu(self):
             except ValueError as e:
                 print(e)
             pausar_sistema()
-
+         
         elif opcion == '5':
             limpiar_consola()
-            doi = input("Ingrese el DOI del artículo a prestar: ")
-            id_lector = int(input("Ingrese el ID del lector: "))
-            try:
-                articulo_manager.realizar_prestamo(doi, id_lector)
-                print("Préstamo realizado exitosamente.")
-            except ValueError as e:
-                print(e)
+            articulo_manager.listar_articulos()
             pausar_sistema()
-
-        elif opcion == '6':
             limpiar_consola()
-            doi = input("Ingrese el DOI del artículo a devolver: ")
-            id_lector = int(input("Ingrese el ID del lector: "))
-            try:
-                articulo_manager.devolver_articulo(doi, id_lector)
-                print("Artículo devuelto exitosamente.")
-            except ValueError as e:
-                print(e)
-            pausar_sistema()
 
         elif opcion == '0':
             input("\n\n> Volviendo al menú principal...")
