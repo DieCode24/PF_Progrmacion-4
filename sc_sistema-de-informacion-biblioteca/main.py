@@ -1,3 +1,4 @@
+import threading
 from dotenv import load_dotenv
 
 from managers.libro_manager import LibroManager
@@ -14,6 +15,9 @@ from utils.helpers import pausar_sistema, limpiar_consola, print_brand_sistema, 
 
 load_dotenv()
 class DependencyContainer:
+    _instance = None
+    _lock = threading.Lock()
+    
     def __init__(self, data_manager):
         self.data_manager = data_manager
         self.libro_manager = LibroManager(data_manager)
@@ -26,6 +30,12 @@ class DependencyContainer:
         self.lector_manager = LectorManager(data_manager)
         self.categoria_manager = CategoriaManager(data_manager)
 
+    def __new__(cls, *args, **kwargs):
+        with cls._lock:
+            if cls._instance is None:
+                cls._instance = super().__new__(cls)
+        return cls._instance
+    
 def main():
     data_manager = DataManager()
     container = DependencyContainer(data_manager)
