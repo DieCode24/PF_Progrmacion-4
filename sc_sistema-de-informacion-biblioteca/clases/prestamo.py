@@ -5,7 +5,7 @@ from datetime import timedelta,  date
 
 
 class Prestamo:
-    def __init__(self,  id_lector: int, id_libro: int, fecha_prestamo: date, fecha_devolucion: date):
+    def __init__(self,  id_lector: int, id_libro: str, fecha_prestamo: date, fecha_devolucion: date):
         self._id_prestamo = id_generator()
         self._id_lector = id_lector
         self._id_libro = id_libro
