@@ -8,6 +8,7 @@ from managers.copia_manager import CopiaManager
 from managers.lector_manager import LectorManager
 from managers.data_manager import DataManager
 from managers.prestamo_manager import PrestamoManager
+from managers.categoria_manager import CategoriaManager
 from menu import AdminMenu, LibrarianMenu
 from utils.helpers import pausar_sistema, limpiar_consola, print_brand_sistema, separador_en_consola, validar_contraseña
 
@@ -23,6 +24,7 @@ class DependencyContainer:
         self.copy_manager = CopiaManager(data_manager)
         self.prestamo_manager = PrestamoManager(data_manager)
         self.lector_manager = LectorManager(data_manager)
+        self.categoria_manager = CategoriaManager(data_manager)
 
 def main():
     data_manager = DataManager()
