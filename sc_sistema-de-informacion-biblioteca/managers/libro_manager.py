@@ -1,5 +1,3 @@
-import threading
-
 from typing import List
 from clases.libro import Libro
 from clases.libro import Estado
@@ -10,17 +8,8 @@ from managers.data_manager import DataManager
 from utils.helpers import pausar_sistema, limpiar_consola
 
 class LibroManager():
-    _instance = None
-    _lock = threading.Lock()
-    
     def __init__(self, data_manager: DataManager):
         self.data_manager = data_manager
-
-    def __new__(cls, *args, **kwargs):
-        with cls._lock:
-            if cls._instance is None:
-                cls._instance = super().__new__(cls)
-        return cls._instance
 
     def registrar_libro(self, autores):
         genero = validar_input("Ingrese el género del libro: ", str)
