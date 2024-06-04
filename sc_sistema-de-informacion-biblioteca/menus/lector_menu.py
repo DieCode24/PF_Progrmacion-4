@@ -21,17 +21,18 @@ def show_lector_menu(self):
 
         if opcion == "1":
             limpiar_consola()
-            lector_manager.registrar_lector_desde_consola()
+            lector_manager.registrar_lector()
             pausar_sistema()
 
         elif opcion == "2":
             limpiar_consola()
-            lector_manager.buscar_lector_desde_consola()
+            id_lector = int(input("Ingrese el ID del lector a buscar: "))
+            lector_manager.buscar_lector(id_lector)
             pausar_sistema()
 
         elif opcion == "3":
             limpiar_consola()
-            lector_manager.modificar_lector_desde_consola()
+            lector_manager.modificar_lector()
             pausar_sistema()
 
         elif opcion == "4":
@@ -49,7 +50,6 @@ def show_lector_menu(self):
             id_lector = int(input("Ingrese el ID del lector a inhabilitar: "))
             try:
                 lector_manager.inhabilitar_lector(id_lector)
-                print("Lector inhabilitado exitosamente.")
             except ValueError as e:
                 print(e)
             pausar_sistema()
@@ -57,12 +57,6 @@ def show_lector_menu(self):
         elif opcion == "6":
             limpiar_consola()
             lectores = lector_manager.listar_lectores()
-            if lectores:
-                for lector in lectores:
-                    print(lector)
-            else:
-                print("No hay lectores registrados.")
-            pausar_sistema()
 
         elif opcion == "0":
             return False

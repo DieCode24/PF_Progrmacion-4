@@ -14,7 +14,7 @@ class LectorManager:
         """
         nombre = validar_input("Ingrese el nombre del lector: ", str).title()
         id = validar_input("Ingrese el ID del lector: ", int)
-        telefono = validar_input("Ingrese el número de teléfono del lector: ", str)
+        telefono = validar_input("Ingrese el número de teléfono del lector: ", int)
         direccion = validar_input("Ingrese la dirección del lector: ", str).title()
         estado = Estado.NORMAL
 
@@ -35,22 +35,24 @@ class LectorManager:
                 return lector
         return None
 
-    def modificar_lector(self, id: int, **kwargs):
+    def modificar_lector(self):
         """
         Modifica la información de un lector existente.
-
-        :param id: ID del lector a modificar.
-        :param kwargs: Diccionario de atributos a actualizar.
-        :return: El objeto Lector modificado.
-        :raise ValueError: Si el lector no se encuentra.
         """
-        lector = self.buscar_lector(id)
+        id_actual = validar_input("Ingrese el ID actual del lector: ", int)
+        lector = self.buscar_lector(id_actual)
         if lector:
-            lector.actualizar_informacion(**kwargs)
+            print(f"Información actual del lector {lector.nombre}:")
+            print(f"ID: {lector.id}, Nombre: {lector.nombre}, Teléfono: {lector.telefono}, Dirección: {lector.direccion}, Estado: {lector.estado}")
+
+            nuevo_nombre = validar_input(f"Ingrese el nuevo nombre (actual: {lector.nombre}): ", str) or lector.nombre
+            nuevo_telefono = validar_input(f"Ingrese el nuevo número de teléfono (actual: {lector.telefono}): ", int) or lector.telefono
+            nueva_direccion = validar_input(f"Ingrese la nueva dirección (actual: {lector.direccion}): ", str) or lector.direccion
+
+            lector.actualizar_informacion(nuevo_nombre, nuevo_telefono, nueva_direccion)
             print("Lector modificado exitosamente.")
-            return lector
         else:
-            raise ValueError("Lector no encontrado")
+            print("Lector no encontrado.")
 
     def habilitar_lector(self, id: int):
         """
@@ -62,7 +64,7 @@ class LectorManager:
         lector = self.buscar_lector(id)
         if lector:
             lector.rehabilitar()
-            print(f"Lector {lector.nombre} habilitado exitosamente.")
+            print(f"\nLector {lector.nombre} habilitado exitosamente.")
         else:
             raise ValueError("Lector no encontrado")
 
@@ -76,7 +78,7 @@ class LectorManager:
         lector = self.buscar_lector(id)
         if lector:
             lector.suspender()
-            print(f"Lector {lector.nombre} inhabilitado exitosamente.")
+            print(f"\nLector {lector.nombre} inhabilitado exitosamente.")
         else:
             raise ValueError("Lector no encontrado")
 
@@ -85,21 +87,22 @@ class LectorManager:
         Lista todos los lectores registrados en el sistema.
         """
         if not self.data_manager.lectores:
-            print("No hay lectores registrados.")
+            input("\n> No hay lectores registrados.")
             return
         for lector in self.data_manager.lectores:
-            print(f"ID: {lector.id}, Nombre: {lector.nombre}, Teléfono: {lector.telefono}, Dirección: {lector.direccion}, Estado: {lector.estado}")
+            print(f"\nID: {lector.id}, Nombre: {lector.nombre}, Teléfono: {lector.telefono}, Dirección: {lector.direccion}, Estado: {lector.estado}")
+        pausar_sistema()
 
     def seleccionar_lector(self):
         while True:
             if not self.data_manager.lectores:
                 limpiar_consola()
-                print("No hay lectores registrados.")
+                print("\n> No hay lectores registrados.")
                 self.registrar_lector()
                 pausar_sistema()
 
             limpiar_consola()
-            print(">. Seleccione un lector:")
+            print("> Seleccione un lector:")
             print("Lectores:")
             for i, lector in enumerate(self.data_manager.lectores):
                 print(f"{i + 1}. {lector.nombre} ({lector.id})")
