@@ -1,6 +1,6 @@
 from datetime import date
 from typing import List, Optional
-from clases.prestamo import Prestamo
+from clases.prestamo import Prestamo, PrestamoBiblioteca
 from datetime import timedelta
 from utils.validators import validar_input
 from utils.idgenerator import id_generator
@@ -19,11 +19,10 @@ class PrestamoManager:
         libro = libros.buscar_libro(id_libro)
         id_lector = lectores.get_IdLector()
         id_libro = libros.get_IdLibro()
-        fecha_prestamo = date.today()
-        fecha_devolucion = self.calcular_fecha_entrega(fecha_prestamo)
-        nuevo_prestamo = Prestamo(id_lector, id_libro, fecha_prestamo, fecha_devolucion)
+        nuevo_prestamo = Prestamo(id_lector, id_libro)
         self.prestamos.append(nuevo_prestamo)
 
+    
     def consultar_prestamo(self, id_prestamo: int):
         for prestamo in self.prestamos:
             if prestamo.get_IdPrestamo() == id_prestamo:

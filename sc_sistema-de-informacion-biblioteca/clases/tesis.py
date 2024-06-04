@@ -16,6 +16,10 @@ class Tesis:
         self._paginas = paginas
         self._id = id_generator()
         
+        
+    def __str__(self):
+        return f"ID: {self._id}"
+    
     def id(self):
         return self._id       
         
