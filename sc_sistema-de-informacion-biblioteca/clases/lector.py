@@ -46,3 +46,6 @@ class Lector:
             self.telefono = telefono
         if direccion:
             self.direccion = direccion
+            
+    def get_id(self):
+        return self.id

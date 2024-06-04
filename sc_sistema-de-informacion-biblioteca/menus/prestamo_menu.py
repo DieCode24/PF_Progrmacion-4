@@ -27,7 +27,9 @@ def show_prestamo_menu(self):
             limpiar_consola()
             lector = lector_manager
             copia = copia_manager
-            prestamo_manager.registrar_prestamo(lector, copia)
+            articulo = articulo_manager
+            tesis = tesis_manager
+            prestamo_manager.registrar_prestamo(lector, copia, tesis, articulo)
             pausar_sistema()
 
         elif opcion == "2":

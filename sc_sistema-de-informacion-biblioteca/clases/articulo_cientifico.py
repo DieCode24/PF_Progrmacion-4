@@ -104,11 +104,11 @@ class ArticuloCientifico:
         """
         Retorna el título del artículo científico.
         
-        :return: Título del artículo.
+        :return: Título del artículo:
         """
         return self.titulo
     
-    def seleccionar_articulos_cientificos(self) -> List[ArticuloCientifico]:
+    def seleccionar_articulos_cientificos(self):
         """
         Permite al usuario seleccionar uno o más artículos científicos desde la consola.
 

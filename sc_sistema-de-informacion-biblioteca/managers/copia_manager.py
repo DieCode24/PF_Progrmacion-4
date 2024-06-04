@@ -69,35 +69,30 @@ class CopiaManager():
             return copia
         return None
     
-    def seleccionar_copias(self):
-        copias_seleccionadas = []
+    def seleccionar_copia(self):
         while True:
             if not self.data_manager.copies:
                 limpiar_consola()
                 print("No hay copias registradas.")
                 pausar_sistema()
-                return []
+                return None
 
             limpiar_consola()
-            print(">. Seleccione las copias que desea (separadas por coma):")
+            print(">. Seleccione una copia:")
             print("Copias:")
             for i, copia in enumerate(self.data_manager.copies):
                 print(f"{i + 1}. ID: {copia.id}, ISBN: {copia.isbn}, Estado: {copia.estado}")
 
             try:
-                seleccion = input("Copias: ")
-                seleccion = [int(x) for x in seleccion.split(",")]
-                for i in seleccion:
-                    if 1 <= i <= len(self.data_manager.copies):
-                        copias_seleccionadas.append(self.data_manager.copies[i - 1])
-                    else:
-                        print("Opción inválida. Por favor, intente de nuevo.")
-
-                if copias_seleccionadas:
+                seleccion = input("Copia: ")
+                seleccion = int(seleccion)
+                if 1 <= seleccion <= len(self.data_manager.copies):
+                    copia_seleccionada = self.data_manager.copies[seleccion - 1]
                     pausar_sistema()
                     limpiar_consola()
-                    return copias_seleccionadas
+                    return copia_seleccionada
+                else:
+                    print("Opción inválida. Por favor, intente de nuevo.")
 
             except ValueError:
                 print("Opción inválida. Por favor, intente de nuevo.")
-        

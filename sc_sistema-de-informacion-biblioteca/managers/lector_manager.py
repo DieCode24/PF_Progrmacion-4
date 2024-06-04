@@ -139,8 +139,7 @@ class LectorManager:
             print("No se encontró ningún lector con ese ID.")
             
             
-    def seleccionar_lectores(self):
-        lectores_seleccionados = []
+    def seleccionar_lector(self):
         while True:
             if not self.lectores:
                 limpiar_consola()
@@ -149,27 +148,24 @@ class LectorManager:
                 pausar_sistema()
 
             limpiar_consola()
-            print(">. Seleccione los lectores que desea (separados por coma):")
+            print(">. Seleccione un lector:")
             print("0. Registrar un nuevo lector")
             print("Lectores:")
             for i, lector in enumerate(self.lectores):
                 print(f"{i + 1}. {lector.nombre} ({lector.id})")
 
             try:
-                seleccion = input("Lectores: ")
-                seleccion = [int(x) for x in seleccion.split(",")]
-                for i in seleccion:
-                    if i == 0:
-                        self.registrar_lector_desde_consola()
-                    elif 1 <= i <= len(self.lectores):
-                        lectores_seleccionados.append(self.lectores[i - 1])
-                    else:
-                        print("Opción inválida. Por favor, intente de nuevo.")
-
-                if lectores_seleccionados:
+                seleccion = input("Lector: ")
+                seleccion = int(seleccion)
+                if seleccion == 0:
+                    self.registrar_lector_desde_consola()
+                elif 1 <= seleccion <= len(self.lectores):
+                    lector_seleccionado = self.lectores[seleccion - 1]
                     pausar_sistema()
                     limpiar_consola()
-                    return lectores_seleccionados
+                    return lector_seleccionado
+                else:
+                    print("Opción inválida. Por favor, intente de nuevo.")
 
             except ValueError:
                 print("Opción inválida. Por favor, intente de nuevo.")

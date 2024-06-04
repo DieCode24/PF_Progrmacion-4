@@ -10,18 +10,42 @@ class PrestamoManager:
     def __init__(self, data_manager: DataManager):
         self.data_manager = data_manager
 
-    def registrar_prestamo(self, lectores, libros):
-        lectores.listar_lectores()
-        id_lector= validar_input("Ingrese el ID del lector: ", int)
-        lector = lectores.buscar_lector(id_lector)
-        libros.listado_libros()
-        id_libro = validar_input("Ingrese el ISBN del libro: ", str)
-        libro = libros.buscar_libro(id_libro)
-        id_lector = lectores.get_IdLector()
-        id_libro = libros.get_IdLibro()
-        nuevo_prestamo = Prestamo(id_lector, id_libro)
-        self.prestamos.append(nuevo_prestamo)
+    def registrar_prestamo(self, lectores, copia, tesis, articulo):
+        
+        print("Seleccione el tipo de material a prestar")
+        print("1. Libro")
+        print("2. Tesis")
+        print("3. Artículo")
+        print("0. Salir")
+        op = validar_input("\n> Ingrese una opción => ", int)
+        
+        if op == 1:
+            self.registrar_prestamo_libro(lectores, copia)
+        elif op == 2:
+            self.registrar_prestamo_tesis(lectores, tesis)
+        elif op == 3:
+            self.registrar_prestamo_articulo(lectores, articulo)
+        elif op == 0:
+            return
+        else:
+            print("Opción no válida")
+            return
 
+    def registrar_prestamo_libro(self, lectores, copia):
+        lector = lectores.seleccionar_lector()
+        
+        
+        copy = copia.seleccionar_copia()
+        if copy is None:
+            print("La copia no existe")
+            return
+        if copy.estado() == "inhabilitado":
+            print("La copia no está habilitada")
+            return
+        prestamo = Prestamo(lector.get_id(), copy.id())
+        self.data_manager.prestamos.append(prestamo)
+        print("Préstamo registrado exitosamente")
+        
     def consultar_prestamo(self, id_prestamo: int):
         for prestamo in self.prestamos:
             if prestamo.get_IdPrestamo() == id_prestamo:
