@@ -14,12 +14,18 @@ class AutorManager:
         nacionalidad = validar_input("Ingrese la nacionalidad del autor: ", str).title()
         fecha_nacimiento = validar_input("Ingrese la fecha de nacimiento del autor (YYYY-MM-DD): ", str)
         self.agregar_autor(nombre, nacionalidad, fecha_nacimiento)
+        
         print(f"Autor {nombre} registrado exitosamente.")
         limpiar_consola()
 
     def agregar_autor(self, nombre: str, nacionalidad: str, fecha_nacimiento: str):
         fecha_nacimiento = datetime.strptime(fecha_nacimiento, "%Y-%m-%d")
         autor = Autor(nombre, nacionalidad, fecha_nacimiento)
+        for recorrer in self.data_manager.books:
+            if recorrer.nombre() == nombre:
+                print("El autor YA EXISTE la base de datos.")
+                return
+        
         self.data_manager.autores.append(autor)
         limpiar_consola()
         return autor
