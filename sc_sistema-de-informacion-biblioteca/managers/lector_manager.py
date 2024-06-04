@@ -2,11 +2,11 @@ from typing import List, Optional
 from clases.lector import Lector
 from clases.estado import Estado
 from utils.helpers import limpiar_consola, pausar_sistema
+from managers.data_manager import DataManager
 
 class LectorManager:
-    def __init__(self, data_manager):
+    def __init__(self, data_manager: DataManager):
         self.data_manager = data_manager
-        self.lectores = []
 
     def registrar_lector(self, nombre: str, id: int, telefono: str, direccion: str, estado: str = Estado.NORMAL):
         """
@@ -20,7 +20,7 @@ class LectorManager:
         :return: El objeto Lector recién creado.
         """
         lector = Lector(nombre, id, telefono, direccion, estado)
-        self.lectores.append(lector)
+        self.data_manager.lectores.append(lector)
         return lector
 
     def buscar_lector(self, id: int) -> Optional[Lector]:
@@ -30,7 +30,7 @@ class LectorManager:
         :param id: ID del lector a buscar.
         :return: El objeto Lector si se encuentra, de lo contrario None.
         """
-        for lector in self.lectores:
+        for lector in self.data_manager.lectores:
             if lector.id == id:
                 return lector
         return None
@@ -44,7 +44,7 @@ class LectorManager:
         :return: El objeto Lector modificado.
         :raise ValueError: Si el lector no se encuentra.
         """
-        lector = LectorManager.buscar_lector(self, id)
+        lector = self.buscar_lector(id)
         if lector:
             lector.actualizar_informacion(**kwargs)
             return lector
@@ -58,7 +58,7 @@ class LectorManager:
         :param id: ID del lector a habilitar.
         :raise ValueError: Si el lector no se encuentra.
         """
-        lector = LectorManager.buscar_lector(self, id)
+        lector = self.buscar_lector(self, id)
         if lector:
             lector.rehabilitar()
         else:
@@ -104,7 +104,7 @@ class LectorManager:
         Busca un lector desde la consola, solicitando el ID al usuario.
         """
         id_lector = int(input("Ingrese el ID del lector a buscar: "))
-        lectores_encontrados = LectorManager.buscar_lector(self, id_lector)
+        lectores_encontrados = self.buscar_lector(id_lector)
 
         if lectores_encontrados:
             print(lectores_encontrados)
@@ -118,7 +118,7 @@ class LectorManager:
         Modifica un lector desde la consola, solicitando el ID y los nuevos datos al usuario.
         """
         id_lector = int(input("Ingrese el ID del lector a modificar: "))
-        lector_a_modificar = LectorManager.buscar_lector(self, id_lector)
+        lector_a_modificar = self.buscar_lector( id_lector)
 
         if lector_a_modificar:
             nuevo_nombre = input("Ingrese el nuevo nombre del lector (dejar en blanco para no cambiar): ")
@@ -133,7 +133,7 @@ class LectorManager:
             if nueva_direccion:
                 kwargs['direccion'] = nueva_direccion
 
-            lector_modificado = LectorManager.modificar_lector(self, id_lector, **kwargs)
+            lector_modificado = self.modificar_lector( id_lector, **kwargs)
             print("Lector modificado exitosamente.")
         else:
             print("No se encontró ningún lector con ese ID.")
@@ -141,7 +141,7 @@ class LectorManager:
             
     def seleccionar_lector(self):
         while True:
-            if not self.lectores:
+            if not self.data_manager.lectores:
                 limpiar_consola()
                 print("No hay lectores registrados.")
                 self.registrar_lector_desde_consola()
@@ -151,7 +151,7 @@ class LectorManager:
             print(">. Seleccione un lector:")
             print("0. Registrar un nuevo lector")
             print("Lectores:")
-            for i, lector in enumerate(self.lectores):
+            for i, lector in enumerate(self.data_manager.lectores):
                 print(f"{i + 1}. {lector.nombre} ({lector.id})")
 
             try:
@@ -159,8 +159,8 @@ class LectorManager:
                 seleccion = int(seleccion)
                 if seleccion == 0:
                     self.registrar_lector_desde_consola()
-                elif 1 <= seleccion <= len(self.lectores):
-                    lector_seleccionado = self.lectores[seleccion - 1]
+                elif 1 <= seleccion <= len(self.data_manager.lectores):
+                    lector_seleccionado = self.data_manager.lectores[seleccion - 1]
                     pausar_sistema()
                     limpiar_consola()
                     return lector_seleccionado
