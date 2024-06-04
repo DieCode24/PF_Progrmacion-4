@@ -6,6 +6,7 @@ from utils.validators import validar_input
 from managers.autor_manager import AutorManager
 from managers.data_manager import DataManager
 from utils.helpers import pausar_sistema, limpiar_consola
+from managers.copia_manager import CopiaManager
 
 class LibroManager():
     def __init__(self, data_manager: DataManager):
@@ -157,12 +158,20 @@ class LibroManager():
             libro.estado = Estado.NO_DISPONIBLE
             
     def load_mock_data(self):
-        autor1 = Autor("Autor Uno", "Nacionalidad Uno", "Fecha Nacimiento Uno")
-        autor2 = Autor("Autor Dos", "Nacionalidad Dos", "Fecha Nacimiento Dos")
-
+        autor1 = Autor("Juan Marulanda", "Colombia", "2004-06-08")
+        autor2 = Autor("Daniel", "Venezuela", "2002-02-08")
+        
         libro1 = Libro("Ciencia", "Libro de Ciencia", "Primera", 2020, "Editorial Uno", [autor1, autor2], Estado.DISPONIBLE, "123-456-789", ["Español", "Aleman", "Ingles"], 5)
         libro2 = Libro("Ficción", "Libro de Ficción", "Segunda", 2021, "Editorial Dos", [autor1], Estado.NO_DISPONIBLE, "987-654-321", ["Inglés"], 3)
+        hola = AutorManager(self.data_manager)
+        hola.asociar_libro([autor1,autor2], libro1)
+        
+        self.data_manager.autores = [autor1, autor2]
+
         self.data_manager.books = [libro1, libro2]
+        
+        asociador_copias = CopiaManager(self.data_manager)
+        asociador_copias.registrar_copias("123-456-789", libro1.estado,5)
         print("Datos de prueba cargados exitosamente.")
 
     def realizar_prestamo_libro(self, isbn: str):

@@ -88,6 +88,7 @@ class AutorManager:
             if autor.libros:
                 print("Libros:")
                 for libro in autor.libros:
+                    
                     print(f"Titulo: {libro.titulo} - ISBN: {libro.isbn}")
             if autor.tesis: 
                 print("Tesis:")
