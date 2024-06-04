@@ -5,7 +5,7 @@ from utils.idgenerator import id_generator
 class Lector:
     def __init__(self, nombre: str, telefono: str, direccion: str, estado: str = Estado.NORMAL):
         self.nombre = nombre
-        self.id = int(generate_id())
+        self.id = int(id_generator())
         self.telefono = telefono
         self.direccion = direccion
         self.estado = estado

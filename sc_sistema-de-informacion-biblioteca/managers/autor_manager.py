@@ -63,6 +63,17 @@ class AutorManager:
             print(f"Autor {nombre} modificado exitosamente.")
         else:
             print("El autor no existe.")
+            
+    def busqueda_autor(self):
+        nombre = validar_input("Ingrese el nombre del autor que desea buscar: ", str).title()
+        autor = self.buscar_autor(nombre)
+        if autor:
+            print(f"Información de {nombre}:")
+            print(f"Fecha de nacimiento: {autor.fecha_nacimiento}")
+            print(f"Nacionalidad: {autor.nacionalidad}")
+            
+        else:
+            print("El autor no existe.")
 
     def actualizar_autor(self, autor: Autor, nacionalidad: str, fecha_nacimiento: str):
         autor.nacionalidad = nacionalidad
