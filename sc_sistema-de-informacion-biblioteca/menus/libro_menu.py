@@ -28,7 +28,7 @@ def show_libro_menu(self):
             limpiar_consola()
             autores = autor_manager.seleccionar_autores()
             libro = libro_manager.registrar_libro(autores)
-            autor_manager.asociar_libro(autores, libro.isbn)
+            autor_manager.asociar_libro(autores, libro)
             # crear numero de copias
             copy_manager.registrar_copias(libro.isbn, "Disponible", libro.numero_copias)
             pausar_sistema()

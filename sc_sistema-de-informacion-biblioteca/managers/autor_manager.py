@@ -4,6 +4,7 @@ from datetime import datetime, timedelta
 from utils.validators import validar_input
 from managers.data_manager import DataManager
 from utils.helpers import limpiar_consola, pausar_sistema
+from clases.tesis import Tesis
 class AutorManager:
     def __init__(self, data_manager: DataManager):
         self.data_manager = data_manager
@@ -30,17 +31,17 @@ class AutorManager:
         return None
     
 
-    def asociar_libro(self, autores, isbn):
+    def asociar_libro(self, autores, libro):
         for autor in autores:
-            autor.libros.append(isbn)
+            autor.libros.append(libro)
             
-    def asociar_tesis(self, autores, id):
-        if id is not None:
-            for autor in autores:
-                autor.libros.append(id)
-        else:
-            print("Error al asociar tesis")
-
+    def asociar_tesis(self, autores, tesis):
+        for autor in autores:
+            autor.tesis.append(tesis)
+            
+    def asociar_articulo(self, autores, articulo):
+        for autor in autores:
+            autor.articulos.append(articulo)
     def modificar_autor(self):
         nombre = validar_input("Ingrese el nombre del autor que desea modificar: ", str).title()
         autor = self.buscar_autor(nombre)
@@ -48,7 +49,6 @@ class AutorManager:
         if autor.gethabilitado() == False:
             print("No se puede modificar un autor inhabilitado")
             return
-         
         if autor:
             nacionalidad = validar_input("Ingrese la nueva nacionalidad del autor: ", str).title()
             fecha_nacimiento = validar_input("Ingrese la nueva fecha de nacimiento del autor (YYYY-MM-DD): ", str)
@@ -67,9 +67,19 @@ class AutorManager:
             print(f"Información Actual de {autor.nombre}:")
             print(f"Nacionalidad: {autor.nacionalidad}")
             print(f"Fecha de nacimiento: {autor.fecha_nacimiento}")
-            print("Libros:")
-            for libro in autor.libros:
-                print(libro)
+            if autor.libros:
+                print("Libros:")
+                for libro in autor.libros:
+                    print(f"Titulo: {libro.titulo} - ISBN: {libro.isbn}")
+            if autor.tesis: 
+                print("Tesis:")
+                for tesis in autor.tesis:
+                    hola = tesis.id()
+                    print(f"ID: {hola}")
+            if autor.articulos:
+                print("Articulos:")
+                for articulo in autor.articulos:
+                    print(f"DOI: {articulo}")
         else:
             print("El autor no existe")
 
@@ -100,14 +110,13 @@ class AutorManager:
                     count += 1
                     
         if mas_info:
-            numero = int(input("Ingrese el número del autor del que desea ver más información: "))
+            numero = validar_input("Ingrese el número del autor del que desea ver más información: ", int)
             if 1 <= numero <= len(autores_lista):
                 autor = autores_lista[numero - 1]
                 self.mostrar_informacion_autor(autor.nombre)
                 pausar_sistema()
             else:
                 print("Número inválido. Por favor, ingrese un número válido.")  
-                     
                             
     def listas_d_autores(self):
         while True:
