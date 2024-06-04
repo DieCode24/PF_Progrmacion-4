@@ -109,5 +109,45 @@ class LibrarianMenu(Menu):
                 print("\nOpción inválida. Por favor, intente de nuevo.")
                 pausar_sistema()
 
-    # Similar methods for other managers...
+
+class LectorMenu(Menu):
+    def show(self):
+        while True:
+            limpiar_consola()
+            print_brand_sistema()
+            separador_en_consola()
+
+            print("[-- Menú de Lector --]\n")
+            print("[1] Consultar información personal")
+            print("[2] Buscar libros")
+            print("[3] Solicitar préstamo de libro")
+            print("[4] Renovar préstamo")
+            print("[5] Devolver libro")
+            print("[6] Consultar historial de préstamos")
+            print("[7] Pagar multas")
+            print("[8] Actualizar información personal")
+            print("[0] Cerrar sesión")
+            choice = input("\n\n> Seleccione una opción => ")
+
+            if choice == "1":
+                self.consultar_informacion_personal()
+            elif choice == "2":
+                self.buscar_libros()
+            elif choice == "3":
+                self.solicitar_prestamo_libro()
+            elif choice == "4":
+                self.renovar_prestamo()
+            elif choice == "5":
+                self.devolver_libro()
+            elif choice == "6":
+                self.consultar_historial_prestamos()
+            elif choice == "7":
+                self.pagar_multas()
+            elif choice == "8":
+                self.actualizar_informacion_personal()
+            elif choice == "0":
+                return False
+            else:
+                print("\nOpción inválida. Por favor, intente de nuevo.")
+                pausar_sistema()
 
