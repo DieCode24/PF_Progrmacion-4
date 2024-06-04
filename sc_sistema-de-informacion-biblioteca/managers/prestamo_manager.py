@@ -5,36 +5,36 @@ from datetime import timedelta
 from utils.validators import validar_input
 from utils.idgenerator import id_generator
 from managers.data_manager import DataManager
+from utils.helpers import pausar_sistema, limpiar_consola
+import clases.estado as estados
 
 class PrestamoManager:
     def __init__(self, data_manager: DataManager):
         self.data_manager = data_manager
 
     def registrar_prestamo(self, lectores, copia, tesis, articulo):
-        
-        print("Seleccione el tipo de material a prestar")
-        print("1. Libro")
-        print("2. Tesis")
-        print("3. Artículo")
-        print("0. Salir")
-        op = validar_input("\n> Ingrese una opción => ", int)
-        
-        if op == 1:
-            self.registrar_prestamo_libro(lectores, copia)
-        elif op == 2:
-            self.registrar_prestamo_tesis(lectores, tesis)
-        elif op == 3:
-            self.registrar_prestamo_articulo(lectores, articulo)
-        elif op == 0:
-            return
-        else:
-            print("Opción no válida")
-            return
+        while True:
+            print("Seleccione el tipo de material a prestar")
+            print("1. Libro")
+            print("2. Tesis")
+            print("3. Artículo")
+            print("0. Salir")
+            op = validar_input("\n> Ingrese una opción => ", int)
+            
+            if op == 1:
+                self.registrar_prestamo_libro(lectores, copia)
+            elif op == 2:
+                self.registrar_prestamo_tesis(lectores, tesis)
+            elif op == 3:
+                self.registrar_prestamo_articulo(lectores, articulo)
+            elif op == 0:
+                return
+            else:
+                print("Opción no válida")
+                return
 
     def registrar_prestamo_libro(self, lectores, copia):
         lector = lectores.seleccionar_lector()
-        
-        
         copy = copia.seleccionar_copia()
         if copy is None:
             print("La copia no existe")
@@ -45,6 +45,7 @@ class PrestamoManager:
         prestamo = Prestamo(lector.get_id(), copy.id())
         self.data_manager.prestamos.append(prestamo)
         print("Préstamo registrado exitosamente")
+        pausar_sistema()
         
     def registrar_prestamo_tesis(self, lectores, tesis):
         lector = lectores.seleccionar_lector()
@@ -54,7 +55,8 @@ class PrestamoManager:
             return
         prestamo = Prestamo(lector.get_id(), tesis.id())
         self.data_manager.prestamos.append(prestamo)
-        self.data_manager.thesis.append(tesis.set_Estado("prestado"))
+        estado = estados.Estado.PRESTADO
+        self.data_manager.thesis.append(tesis.set_Estado(estado))
         print("Préstamo registrado exitosamente")
         
         

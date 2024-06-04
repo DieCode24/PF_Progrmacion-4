@@ -41,6 +41,7 @@ class TesisManager():
                 " Campo: ", tesis.campoEstudio(), "\n" + 
                 "   Páginas: ", tesis.paginas(),"\n" + 
                 "   Fecha publicacion: ", tesis.fpresentacion(), "\n" +
+                "   Estado: ", tesis.estado(), "\n" +
                 "   Autores ")
             for autor in tesis.autores():
                     print (f"\t{autor.nombre}")
