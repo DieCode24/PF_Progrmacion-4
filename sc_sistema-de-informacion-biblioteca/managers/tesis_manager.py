@@ -19,9 +19,15 @@ class TesisManager():
         campo_estudio = validar_input("Ingrese el campo de estudio de la tesis: ", str).title()
         estado = Estado.DISPONIBLE
         paginas = validar_input("Ingrese el número de páginas de la tesis: ", int)
+        for tesis in self.data_manager.thesis:
+            if tesis.institucion() == institucion:
+                if tesis.finvestigacion() == f_investigacion:
+                    if tesis.fpresentacion() == f_presentacion:
+                        if tesis.campoEstudio() == campo_estudio:
+                            print("La tesis ya existe en la base de datos.")
+                            return
         tesis  = Tesis(autores, institucion, f_investigacion, f_presentacion, campo_estudio, estado, paginas)
         self.data_manager.thesis.append(tesis)   
-        return tesis     
         
     def listado_tesis(self):
         print("\tLISTA DE TESIS\n")

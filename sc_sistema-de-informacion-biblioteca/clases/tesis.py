@@ -17,11 +17,11 @@ class Tesis:
         self._id = id_generator()
         
         
-    def __str__(self):
-        return f"ID: {self._id}"
+
     
     def id(self):
-        return self._id       
+        return self._id 
+          
         
     def autores(self):
         return self._autores
