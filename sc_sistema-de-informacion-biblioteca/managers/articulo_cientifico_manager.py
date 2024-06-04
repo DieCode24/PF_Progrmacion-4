@@ -1,17 +1,17 @@
 from datetime import date
 from typing import List, Optional
-
+from managers.data_manager import DataManager
 from clases.articulo_cientifico import ArticuloCientifico
 from clases.estado import Estado
 from utils.validators import validar_input
 
 
-class ArticuloCientificoManager:
+class ArticuloCientificoManager():
     """
     Clase que gestiona las operaciones CRUD para los artículos científicos en el sistema de información de la biblioteca.
     """
 
-    def __init__(self, data_manager):
+    def __init__(self, data_manager: DataManager):
         """
         Inicializa una nueva instancia de ArticuloCientificoManager con una lista vacía de artículos científicos.
         """
@@ -204,3 +204,22 @@ class ArticuloCientificoManager:
                 print("Artículo científico no encontrado.")
         except ValueError as e:
             print(e)
+            
+    def seleccionar_articulo(self):
+        """
+        Muestra una lista de artículos y permite al usuario seleccionar uno.
+        
+        :return: El artículo seleccionado, o None si no se seleccionó ninguno.
+        """
+        if not self.data_manager.articulos:
+            print("No hay artículos científicos registrados.")
+            return None
+        print("Seleccione un artículo:")
+        for idx, articulo in enumerate(self.data_manager.articulos, start=1):
+            print(f"{idx}. {articulo.titulo}")
+        idx = validar_input("\n> Ingrese el número del artículo => ", int)
+        if 1 <= idx <= len(self.data_manager.articulos):
+            return self.data_manager.articulos[idx - 1]
+        else:
+            print("Número de artículo inválido.")
+            return None

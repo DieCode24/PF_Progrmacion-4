@@ -53,18 +53,37 @@ class PrestamoManager:
         if tesis is None:
             print("La tesis no existe")
             return
+        
+        if tesis.estado() == "PRESTADO" or tesis.estado() == "EN REPARACION" or tesis.estado() == "EN REVISION":
+            print("La tesis no está disponible para préstamo")
+            return
         prestamo = Prestamo(lector.get_id(), tesis.id())
         self.data_manager.prestamos.append(prestamo)
         estado = estados.Estado.PRESTADO
-        self.data_manager.thesis.append(tesis.set_Estado(estado))
+        tesis.set_Estado(estado)
         print("Préstamo registrado exitosamente")
         
+    def registrar_prestamo_articulo(self, lectores, articulo):
+        lector = lectores.seleccionar_lector()
+        articulo = articulo.seleccionar_articulo()
+        if articulo is None:
+            print("El artículo no existe")
+            return
+        if articulo.estado() == "PRESTADO" or articulo.estado() == "EN REPARACION" or articulo.estado() == "EN REVISION":
+            print("El artículo no está disponible para préstamo")
+            return
+        prestamo = Prestamo(lector.get_id(), articulo.id())
+        self.data_manager.prestamos.append(prestamo)
+        estado = estados.Estado.PRESTADO
+        articulo.set_Estado(estado)
+        print("Préstamo registrado exitosamente")
         
     def consultar_prestamo(self, id_prestamo: int):
         for prestamo in self.data_manager.prestamos:
             if prestamo.get_IdPrestamo() == id_prestamo:
                 return prestamo
         return None
+    
 
     def calcular_fecha_entrega(self, fecha_prestamo: date, dias_prestamo: int = 3) -> date:
         return fecha_prestamo + timedelta(days=dias_prestamo)

@@ -18,7 +18,7 @@ def show_tesis_menu(self):
         print("[4] Modificar Tesis")
         print("[5] Eliminar Tesis")
         print("[6] Datos de prueba (Mock data)")
-        print("[0] Voler al menú principal")
+        print("[0] Volver al menú principal")
         opcion = input("\n\n> Seleccione una opción => ")
         if opcion == "1":
             limpiar_consola()
