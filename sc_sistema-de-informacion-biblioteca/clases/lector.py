@@ -1,11 +1,11 @@
 from datetime import date
-from typing import List
+from typing import Any, List
 from clases.estado import Estado
-
+from utils.idgenerator import generate_id
 class Lector:
-    def __init__(self, nombre: str, id: int, telefono: str, direccion: str, estado: str = Estado.NORMAL):
+    def __init__(self, nombre: str, telefono: str, direccion: str, estado: str = Estado.NORMAL):
         self.nombre = nombre
-        self.id = id
+        self.id = int(generate_id())
         self.telefono = telefono
         self.direccion = direccion
         self.estado = estado
@@ -49,3 +49,6 @@ class Lector:
             
     def get_id(self):
         return self.id
+    
+    def __setattr__(self, name: str, value: Any) -> None:
+        pass

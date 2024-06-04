@@ -163,9 +163,9 @@ class ReaderMenu(Menu):
             if choice == 1:
                 self.container.autor_manager.see_authors(True, True)
             elif choice == 2:
-                self.container.libro_manager.listar_libros()
+                self.container.libro_manager.listado_libros_activos()
             elif choice == 3:   
-                self.container.tesis_manager.listar_tesis()
+                self.container.tesis_manager.listado_tesis()
             elif choice == 4:
                 self.container.articulo_manager.listar_articulos()
             elif choice == 0:

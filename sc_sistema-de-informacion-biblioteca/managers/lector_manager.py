@@ -13,12 +13,11 @@ class LectorManager:
         Registra un nuevo lector en el sistema.
         """
         nombre = validar_input("Ingrese el nombre del lector: ", str).title()
-        id = validar_input("Ingrese el ID del lector: ", int)
         telefono = validar_input("Ingrese el número de teléfono del lector: ", int)
         direccion = validar_input("Ingrese la dirección del lector: ", str).title()
         estado = Estado.NORMAL
 
-        lector = Lector(nombre, id, telefono, direccion, estado)
+        lector = Lector(nombre, telefono, direccion, estado)
         self.data_manager.lectores.append(lector)
         print(f"Lector {nombre} registrado exitosamente.")
         limpiar_consola()
@@ -39,20 +38,47 @@ class LectorManager:
         """
         Modifica la información de un lector existente.
         """
-        id_actual = validar_input("Ingrese el ID actual del lector: ", int)
-        lector = self.buscar_lector(id_actual)
+        lectores = self.data_manager.lectores
+        if not lectores:
+            print("No hay lectores registrados.")
+            return
+
+        print("Seleccione el lector que desea modificar:")
+        for i, lector in enumerate(lectores, start=1):
+            print(f"{i}. {lector.nombre}")
+
+        opcion = validar_input("Ingrese el número del lector: ", int)
+        if opcion < 1 or opcion > len(lectores):
+            print("Opción inválida.")
+            return
+
+        lector = lectores[opcion - 1]
+        print(f"Información actual del lector {lector.nombre}:")
+        print(f"ID: {lector.id}, Nombre: {lector.nombre}, Teléfono: {lector.telefono}, Dirección: {lector.direccion}, Estado: {lector.estado}")
+
+        nuevo_nombre = validar_input(f"Ingrese el nuevo nombre (actual: {lector.nombre}): ", str) or lector.nombre
+        nuevo_telefono = validar_input(f"Ingrese el nuevo número de teléfono (actual: {lector.telefono}): ", int) or lector.telefono
+        nueva_direccion = validar_input(f"Ingrese la nueva dirección (actual: {lector.direccion}): ", str) or lector.direccion
+
+        lector.actualizar_informacion(nuevo_nombre, nuevo_telefono, nueva_direccion)
+        print("Lector modificado exitosamente.")
+        
+    def actualizar_informacion(self, id: int, nuevo_nombre: str, nuevo_telefono: int, nueva_direccion: str):
+        """
+        Actualiza la información de un lector existente.
+
+        :param id: ID del lector a actualizar.
+        :param nuevo_nombre: Nuevo nombre del lector.
+        :param nuevo_telefono: Nuevo número de teléfono del lector.
+        :param nueva_direccion: Nueva dirección del lector.
+        :raise ValueError: Si el lector no se encuentra.
+        """
+        lector = self.buscar_lector(id)
         if lector:
-            print(f"Información actual del lector {lector.nombre}:")
-            print(f"ID: {lector.id}, Nombre: {lector.nombre}, Teléfono: {lector.telefono}, Dirección: {lector.direccion}, Estado: {lector.estado}")
-
-            nuevo_nombre = validar_input(f"Ingrese el nuevo nombre (actual: {lector.nombre}): ", str) or lector.nombre
-            nuevo_telefono = validar_input(f"Ingrese el nuevo número de teléfono (actual: {lector.telefono}): ", int) or lector.telefono
-            nueva_direccion = validar_input(f"Ingrese la nueva dirección (actual: {lector.direccion}): ", str) or lector.direccion
-
             lector.actualizar_informacion(nuevo_nombre, nuevo_telefono, nueva_direccion)
-            print("Lector modificado exitosamente.")
+            print(f"Información del lector {lector.nombre} actualizada exitosamente.")
         else:
-            print("Lector no encontrado.")
+            raise ValueError("Lector no encontrado")
 
     def habilitar_lector(self, id: int):
         """
