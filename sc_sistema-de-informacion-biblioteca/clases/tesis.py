@@ -1,5 +1,6 @@
 from typing import List
 from datetime import date
+from utils.idgenerator import id_generator
 
 from clases.autor import Autor
 
@@ -13,8 +14,11 @@ class Tesis:
         self._campo_estudio = campo_estudio
         self._estado= estado
         self._paginas = paginas
+        self._id = id_generator()
         
         
+    def id(self):
+        return self._id
         
     def autores(self):
         return self._autores

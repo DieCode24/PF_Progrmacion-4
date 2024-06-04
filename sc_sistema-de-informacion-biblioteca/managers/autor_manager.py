@@ -33,6 +33,13 @@ class AutorManager:
     def asociar_libro(self, autores, isbn):
         for autor in autores:
             autor.libros.append(isbn)
+            
+    def asociar_tesis(self, autores, id):
+        if id is not None:
+            for autor in autores:
+                autor.libros.append(id)
+        else:
+            print("Error al asociar tesis")
 
     def modificar_autor(self):
         nombre = validar_input("Ingrese el nombre del autor que desea modificar: ", str).title()
