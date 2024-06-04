@@ -16,7 +16,6 @@ class ArticuloCientificoManager:
         Inicializa una nueva instancia de ArticuloCientificoManager con una lista vacía de artículos científicos.
         """
         self.data_manager = data_manager
-        self.articulos = []
 
     def registrar_articulo(self, titulo: str, doi: str, editor: str, fecha_publicacion: date, periodicidad: str, volumen: int, campo_interes: str, estado: str = Estado.DISPONIBLE) -> ArticuloCientifico:
         """
@@ -33,7 +32,7 @@ class ArticuloCientificoManager:
         :return: El artículo científico recién creado.
         """
         nuevo_articulo = ArticuloCientifico(titulo, doi, editor, fecha_publicacion, periodicidad, volumen, campo_interes, estado)
-        self.articulos.append(nuevo_articulo)
+        self.data_manager.articulos.append(nuevo_articulo)
         return nuevo_articulo
 
     def buscar_articulo(self, doi: str) -> Optional[ArticuloCientifico]:
@@ -43,7 +42,7 @@ class ArticuloCientificoManager:
         :param doi: Identificador único del artículo (DOI).
         :return: El artículo científico si se encuentra, de lo contrario None.
         """
-        for articulo in self.articulos:
+        for articulo in self.data_manager.articulos:
             if articulo.doi == doi:
                 return articulo
         return None
@@ -74,17 +73,17 @@ class ArticuloCientificoManager:
         """
         articulo = self.buscar_articulo(doi)
         if articulo:
-            self.articulos.remove(articulo)
+            self.data_manager.articulos.remove(articulo)
             return True
         else:
             return False
 
     def listar_articulos(self):
         print("LISTA DE ARTÍCULOS CIENTÍFICOS\n")
-        if not self.articulos:
+        if not self.data_manager.articulos:
             print("No hay artículos científicos registrados")
             return
-        for idx, articulo in enumerate(self.articulos, start=1):
+        for idx, articulo in enumerate(self.data_manager.articulos, start=1):
             print(f"{idx}. Título: {articulo.titulo}, DOI: {articulo.doi}, Editor: {articulo.editor}")
             print(f"   Fecha de Publicación: {articulo.fecha_publicacion}, Periodicidad: {articulo.periodicidad}, Volumen: {articulo.volumen}")
             print(f"   Campo de Interés: {articulo.campo_interes}, Estado: {articulo.estado}\n")
@@ -142,7 +141,7 @@ class ArticuloCientificoManager:
     def buscar_por_titulo(self):
         print("\tBuscando por título\n")
         titulo = validar_input("Ingrese el título: ", str).title()
-        articulos_encontrados = [art for art in self.articulos if titulo in art.titulo]
+        articulos_encontrados = [art for art in self.data_manager.articulos if titulo in art.titulo]
 
         if not articulos_encontrados:
             print(f"No se encontraron artículos con el título {titulo}.")
@@ -154,7 +153,7 @@ class ArticuloCientificoManager:
     def buscar_por_campo(self):
         print("\tBuscando por campo de interés\n")
         campo = validar_input("Ingrese el campo de interés: ", str).lower().title()
-        articulos_encontrados = [art for art in self.articulos if campo in art.campo_interes]
+        articulos_encontrados = [art for art in self.data_manager.articulos if campo in art.campo_interes]
 
         if not articulos_encontrados:
             print(f"No se encontraron artículos en el campo de interés {campo}.")
