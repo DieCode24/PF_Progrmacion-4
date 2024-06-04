@@ -17,7 +17,7 @@ class Tesis:
         self._id = id_generator()
         
     def id(self):
-        return self._id
+        return self._id       
         
     def autores(self):
         return self._autores
