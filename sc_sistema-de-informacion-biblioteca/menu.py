@@ -4,6 +4,9 @@ from menus.tesis_menu import show_tesis_menu
 from menus.autores_menu import show_autor_menu
 from menus.prestamo_menu import show_prestamo_menu
 from menus.articulo_menu import show_articulo_menu
+from menus.lector_menu import show_lector_menu
+from menus.categoria_menu import show_categoria_menu
+
 from utils.helpers import pausar_sistema, print_brand_sistema, separador_en_consola, limpiar_consola
 
 
@@ -46,13 +49,13 @@ class AdminMenu(Menu):
             elif choice == "4":
                 show_autor_menu(self)
             elif choice == "5":
-                self.show_lector_menu()
+                show_lector_menu(self)
             elif choice == "6":
                 show_prestamo_menu(self)
             elif choice == "7":
                 self.show_multa_menu()
             elif choice == "8":
-                self.show_categoria_menu()
+                show_categoria_menu(self)
             elif choice == "9":
                 show_copy_menu(self)
             elif choice == "0":
@@ -91,13 +94,13 @@ class LibrarianMenu(Menu):
             elif choice == "4":
                 show_autor_menu(self)
             elif choice == "5":
-                self.show_lector_menu()
+                show_lector_menu(self)
             elif choice == "6":
                 show_prestamo_menu(self)
             elif choice == "7":
                 self.show_multa_menu()
             elif choice == "8":
-                self.show_categoria_menu()
+                show_categoria_menu(self)
             elif choice == "9":
                 show_copy_menu(self)
             elif choice == "0":

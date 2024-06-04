@@ -1,14 +1,15 @@
-from clases import Categoria
+from clases.categoria import Categoria
 
 class CategoriaManager:
     """
     Clase que gestiona las operaciones CRUD para las categorías en el sistema de gestión de la biblioteca.
     """
 
-    def __init__(self):
+    def __init__(self, data_manager):
         """
         Inicializa una nueva instancia de CategoriaManager con una lista vacía de categorías.
         """
+        self.data_manager = data_manager
         self.categorias = []
 
     def crear_categoria(self, nombre: str, categoria_id: int, descripcion: str):

@@ -43,7 +43,7 @@ class LectorManager:
         :return: El objeto Lector modificado.
         :raise ValueError: Si el lector no se encuentra.
         """
-        lector = LectorManager.buscar_lector(id)
+        lector = LectorManager.buscar_lector(self, id)
         if lector:
             lector.actualizar_informacion(**kwargs)
             return lector
@@ -103,7 +103,7 @@ class LectorManager:
         Busca un lector desde la consola, solicitando el ID al usuario.
         """
         id_lector = int(input("Ingrese el ID del lector a buscar: "))
-        lectores_encontrados = LectorManager.buscar_lector(id_lector)
+        lectores_encontrados = LectorManager.buscar_lector(self, id_lector)
 
         if lectores_encontrados:
             print(lectores_encontrados)
@@ -117,7 +117,7 @@ class LectorManager:
         Modifica un lector desde la consola, solicitando el ID y los nuevos datos al usuario.
         """
         id_lector = int(input("Ingrese el ID del lector a modificar: "))
-        lector_a_modificar = LectorManager.buscar_lector(id_lector)
+        lector_a_modificar = LectorManager.buscar_lector(self, id_lector)
 
         if lector_a_modificar:
             nuevo_nombre = input("Ingrese el nuevo nombre del lector (dejar en blanco para no cambiar): ")
@@ -132,7 +132,7 @@ class LectorManager:
             if nueva_direccion:
                 kwargs['direccion'] = nueva_direccion
 
-            lector_modificado = LectorManager.modificar_lector(id_lector, **kwargs)
+            lector_modificado = LectorManager.modificar_lector(self, id_lector, **kwargs)
             print("Lector modificado exitosamente.")
         else:
             print("No se encontró ningún lector con ese ID.")
