@@ -7,6 +7,8 @@ class Autor:
         self.nacionalidad = nacionalidad
         self.fecha_nacimiento = fecha_nacimiento
         self.libros = []
+        self.tesis = []
+        self.articulos = []
         self.cantidad_libros = 0
         self.habilitado = True
 

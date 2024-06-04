@@ -16,7 +16,6 @@ class Tesis:
         self._paginas = paginas
         self._id = id_generator()
         
-        
     def id(self):
         return self._id
         
