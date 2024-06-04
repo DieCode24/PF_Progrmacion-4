@@ -21,7 +21,7 @@ class AutorManager:
     def agregar_autor(self, nombre: str, nacionalidad: str, fecha_nacimiento: str):
         fecha_nacimiento = datetime.strptime(fecha_nacimiento, "%Y-%m-%d")
         autor = Autor(nombre, nacionalidad, fecha_nacimiento)
-        for recorrer in self.data_manager.books:
+        for recorrer in self.data_manager.autores:
             if recorrer.nombre() == nombre:
                 print("El autor YA EXISTE la base de datos.")
                 return
