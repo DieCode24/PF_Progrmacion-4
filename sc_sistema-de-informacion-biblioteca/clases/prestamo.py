@@ -18,8 +18,6 @@ class Prestamo:
     def calcular_fecha_entrega(self, dias_prestamo) -> date:
         return self._fecha_prestamo + timedelta(days=dias_prestamo)
     
-
-    
     def IdPrestamo(self):
         return self._id_prestamo
     
