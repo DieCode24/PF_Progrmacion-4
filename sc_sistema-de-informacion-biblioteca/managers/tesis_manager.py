@@ -170,11 +170,14 @@ class TesisManager():
         self.data_manager.autores.append(autor2)
         self.data_manager.autores.append(autor3)
         
-        Tesis1 = Tesis([autor1], "Universidad Nacional", "2020-09-23", "2024-09-23", "Ingenieria", Estado.DISPONIBLE, 100, "123")
-        Tesis2 = Tesis([autor1, autor2], "Universidad de Andes", "2010-09-23", "2024-09-23", "Fisica", Estado.DISPONIBLE, 100, "654")  
-        Tesis3 = Tesis([autor2], "Universidad de los Andes", "2010-09-23", "2024-09-23", "Fisica", Estado.DISPONIBLE, 100, 456)
-        Tesis4 = Tesis([autor3, autor2, autor1], "Universidad de los Andes", "2010-09-23", "2024-09-23", "Matecaticas", Estado.DISPONIBLE, 100, "894")
-        self.data_manager.thesis = [Tesis1, Tesis2, Tesis3, Tesis4]
+        Tesis1 = Tesis([autor1], "Universidad Nacional", "2020-09-23", "2024-09-23", "Ingenieria", Estado.DISPONIBLE, 100)
+        Tesis2 = Tesis([autor1, autor2], "Universidad de Andes", "2010-09-23", "2024-09-23", "Fisica", Estado.DISPONIBLE, 100)  
+        Tesis3 = Tesis([autor2], "Universidad de los Andes", "2010-09-23", "2024-09-23", "Fisica", Estado.DISPONIBLE, 100)
+        Tesis4 = Tesis([autor3, autor2, autor1], "Universidad de los Andes", "2010-09-23", "2024-09-23", "Matecaticas", Estado.DISPONIBLE, 100)
+        self.data_manager.thesis.append(Tesis1)
+        self.data_manager.thesis.append(Tesis2)
+        self.data_manager.thesis.append(Tesis3)
+        self.data_manager.thesis.append(Tesis4)
         
         print("Datos de prueba listos.")
         

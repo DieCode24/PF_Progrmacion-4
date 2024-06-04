@@ -74,8 +74,7 @@ class AutorManager:
             if autor.tesis: 
                 print("Tesis:")
                 for tesis in autor.tesis:
-                    hola = tesis.id()
-                    print(f"ID: {hola}")
+                    print(f"ID: {tesis.id()} - Campo: {tesis.campoEstudio()}\n")
             if autor.articulos:
                 print("Articulos:")
                 for articulo in autor.articulos:
