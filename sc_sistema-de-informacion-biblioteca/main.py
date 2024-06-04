@@ -22,6 +22,7 @@ class DependencyContainer:
         self.lector_manager = LectorManager(data_manager)
         self.copy_manager = CopiaManager(data_manager)
         self.prestamo_manager = PrestamoManager(data_manager)
+        self.lector_manager = LectorManager(data_manager)
 
 def main():
     data_manager = DataManager()
@@ -65,7 +66,7 @@ def main():
             # ReaderMenu(container).show()
             pass
         else:
-            print("\nOpción invalida. Por favor intentalo de nuevo.")
+            print("\n> Opción invalida. Por favor intentalo de nuevo.")
 
 if __name__ == "__main__":
     main()
