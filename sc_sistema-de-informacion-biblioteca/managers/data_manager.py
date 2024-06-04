@@ -7,3 +7,4 @@ class DataManager:
         self.copies = []
         self.lectores = []
         self.prestamos = []
+        self.categorias = []
