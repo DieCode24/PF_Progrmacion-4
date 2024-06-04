@@ -27,7 +27,8 @@ class TesisManager():
                             print("La tesis ya existe en la base de datos.")
                             return
         tesis  = Tesis(autores, institucion, f_investigacion, f_presentacion, campo_estudio, estado, paginas)
-        self.data_manager.thesis.append(tesis)   
+        self.data_manager.thesis.append(tesis)  
+        return tesis
         
     def listado_tesis(self):
         print("\tLISTA DE TESIS\n")
@@ -167,19 +168,27 @@ class TesisManager():
         autor1 = Autor("Juan Perez", "Colombiano", "2000-09-23")
         autor2 = Autor("Maria Rodriguez", "Mexicano", "1990-09-23")
         autor3 = Autor("Pedro Gomez", "Argentino", "1995-09-23")
-        self.data_manager.autores.append(autor1)
-        self.data_manager.autores.append(autor2)
-        self.data_manager.autores.append(autor3)
+        
+        ensamblador = AutorManager(self.data_manager)
         
         Tesis1 = Tesis([autor1], "Universidad Nacional", "2020-09-23", "2024-09-23", "Ingenieria", Estado.DISPONIBLE, 100)
         Tesis2 = Tesis([autor1, autor2], "Universidad de Andes", "2010-09-23", "2024-09-23", "Fisica", Estado.DISPONIBLE, 100)  
         Tesis3 = Tesis([autor2], "Universidad de los Andes", "2010-09-23", "2024-09-23", "Fisica", Estado.DISPONIBLE, 100)
         Tesis4 = Tesis([autor3, autor2, autor1], "Universidad de los Andes", "2010-09-23", "2024-09-23", "Matecaticas", Estado.DISPONIBLE, 100)
+        
+        ensamblador.asociar_tesis([autor1], Tesis1)
+        ensamblador.asociar_tesis([autor1, autor2], Tesis2)
+        ensamblador.asociar_tesis([autor1, autor2, autor3], Tesis4)
+        
         self.data_manager.thesis.append(Tesis1)
         self.data_manager.thesis.append(Tesis2)
         self.data_manager.thesis.append(Tesis3)
         self.data_manager.thesis.append(Tesis4)
         
+        self.data_manager.autores.append(autor1)
+        self.data_manager.autores.append(autor2)
+        self.data_manager.autores.append(autor3)
+
         print("Datos de prueba listos.")
         
     def mostrar_tesis(self, tesis: Tesis):
