@@ -1,7 +1,9 @@
 from utils.helpers import limpiar_consola, pausar_sistema, print_brand_sistema, separador_en_consola
+from managers.data_manager import DataManager
 
 def show_categoria_menu(self):
     categoria_manager = self.container.categoria_manager
+    self.data_manager = DataManager
 
     while True:
         limpiar_consola()
@@ -61,14 +63,9 @@ def show_categoria_menu(self):
 
         elif opcion == "5":
             limpiar_consola()
-            categorias = categoria_manager.categorias
-            if categorias:
-                for categoria in categorias:
-                    print(categoria)
-            else:
-                print("No hay categorías registradas.")
+            categorias = categoria_manager.listar_categorias()
             pausar_sistema()
-
+        
         elif opcion == "0":
             return False
 
