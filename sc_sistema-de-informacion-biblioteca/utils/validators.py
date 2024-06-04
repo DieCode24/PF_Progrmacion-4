@@ -11,6 +11,11 @@ def validar_input(prompt: str, expected_type: type, separator=None):
     while True:
         try:
             user_input = input(prompt)
+            
+            # Verificar si la entrada está vacía
+            if not user_input.strip():
+                raise ValueError("Entrada no válida. El campo no puede estar vacío.")
+            
             if expected_type == int:
                 return int(user_input)
             elif expected_type == list and separator:
