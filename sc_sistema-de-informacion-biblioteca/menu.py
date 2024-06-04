@@ -7,6 +7,8 @@ from menus.articulo_menu import show_articulo_menu
 from menus.lector_menu import show_lector_menu
 from menus.categoria_menu import show_categoria_menu
 
+from utils.validators import validar_input
+
 from utils.helpers import pausar_sistema, print_brand_sistema, separador_en_consola, limpiar_consola
 
 
@@ -98,7 +100,7 @@ class LibrarianMenu(Menu):
             elif choice == "6":
                 show_prestamo_menu(self)
             elif choice == "7":
-                self.show_multa_menu(self)
+                show_multa_menu(self)
             elif choice == "8":
                 show_categoria_menu(self)
             elif choice == "9":
@@ -118,35 +120,60 @@ class ReaderMenu(Menu):
             separador_en_consola()
 
             print("[-- Menú de Lector --]\n")
-            print("[1] Consultar información personal")
-            print("[2] Buscar libros")
-            print("[3] Solicitar préstamo de libro")
-            print("[4] Renovar préstamo")
-            print("[5] Devolver libro")
-            print("[6] Consultar historial de préstamos")
-            print("[7] Pagar multas")
-            print("[8] Actualizar información personal")
+            print("[1] listas")
+            print("[2] busqueda")
+            print("[3] Solicitar préstamos")
+            print("[4] Devolver libro")
+            print("[5] Pagar multas")
             print("[0] Cerrar sesión")
             choice = input("\n\n> Seleccione una opción => ")
 
             if choice == "1":
-                self.consultar_informacion_personal()
+                self.show_listas()
             elif choice == "2":
-                self.buscar_libros()
+                self.show_busqueda()
             elif choice == "3":
-                self.solicitar_prestamo_libro()
+                self.show_solicitar_prestamos()
             elif choice == "4":
-                self.renovar_prestamo()
+                self.show_devolver_libro()
             elif choice == "5":
-                self.devolver_libro()
-            elif choice == "6":
-                self.consultar_historial_prestamos()
-            elif choice == "7":
-                self.pagar_multas()
-            elif choice == "8":
-                self.actualizar_informacion_personal()
+                self.show_pagar_multas()
             elif choice == "0":
                 return False
             else:
                 print("\nOpción inválida. Por favor, intente de nuevo.")
                 pausar_sistema()
+                
+                
+    def show_listas(self):
+        while True:
+            limpiar_consola()
+            print_brand_sistema()
+            separador_en_consola()
+
+            print("[-- Listas --]\n")
+            print("[1] Autores habilitados")
+            print("[2] Libros disponibles")
+            print("[3] Tesis disponibles")
+            print("[4] Artículos disponibles")
+            
+            print("[0] Salir")
+            choice = validar_input("\n\n> Seleccione una opción => ", int)
+            
+            if choice == 1:
+                self.container.autor_manager.see_authors(True, True)
+            elif choice == 2:
+                self.container.libro_manager.listar_libros()
+            elif choice == 3:   
+                self.container.tesis_manager.listar_tesis()
+            elif choice == 4:
+                self.container.articulo_manager.listar_articulos()
+            elif choice == 0:
+                return False
+
+            
+            else:
+                print("\nOpción inválida. Por favor, intente de nuevo.")
+                pausar_sistema()
+                
+    

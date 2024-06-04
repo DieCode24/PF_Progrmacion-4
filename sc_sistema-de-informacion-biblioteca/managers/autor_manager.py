@@ -48,6 +48,7 @@ class AutorManager:
     def asociar_articulo(self, autores, articulo):
         for autor in autores:
             autor.articulos.append(articulo)
+            
     def modificar_autor(self):
         nombre = validar_input("Ingrese el nombre del autor que desea modificar: ", str).title()
         autor = self.buscar_autor(nombre)
