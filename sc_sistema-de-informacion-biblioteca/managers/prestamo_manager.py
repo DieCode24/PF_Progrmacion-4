@@ -46,8 +46,20 @@ class PrestamoManager:
         self.data_manager.prestamos.append(prestamo)
         print("Préstamo registrado exitosamente")
         
+    def registrar_prestamo_tesis(self, lectores, tesis):
+        lector = lectores.seleccionar_lector()
+        tesis = tesis.seleccionar_tesis()
+        if tesis is None:
+            print("La tesis no existe")
+            return
+        prestamo = Prestamo(lector.get_id(), tesis.id())
+        self.data_manager.prestamos.append(prestamo)
+        self.data_manager.thesis.append(tesis.set_Estado("prestado"))
+        print("Préstamo registrado exitosamente")
+        
+        
     def consultar_prestamo(self, id_prestamo: int):
-        for prestamo in self.prestamos:
+        for prestamo in self.data_manager.prestamos:
             if prestamo.get_IdPrestamo() == id_prestamo:
                 return prestamo
         return None

@@ -12,8 +12,8 @@ class Prestamo:
         self.dias_prestamo = 0 #la diferencia que hay entre la fecha de devolucion y la fecha de entrega
         
         self._fecha_prestamo = date.today() #fecha de cuando se hace el prestamo
-        self._fecha_entrega = self.calcular_fecha_entrega(self, 3) #fecha de entrega mas 3 dias
-        self._fecha_devolucion #fecha en cuando se devolvio
+        self._fecha_entrega = self.calcular_fecha_entrega(3) #fecha de entrega mas 3 dias
+        self._fecha_devolucion = 0 #fecha en cuando se devolvio
         
     def calcular_fecha_entrega(self, dias_prestamo) -> date:
         return self._fecha_prestamo + timedelta(days=dias_prestamo)

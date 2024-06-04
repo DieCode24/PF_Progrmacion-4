@@ -39,7 +39,9 @@ def show_prestamo_menu(self):
 
         elif opcion == "3":
             limpiar_consola()
-            prestamo_manager.listar_prestamos()
+            for prestamo in self.data_manager.prestamos:
+                print(prestamo)
+           # prestamo_manager.listar_prestamos()
             pausar_sistema()
 
         elif opcion == "4":

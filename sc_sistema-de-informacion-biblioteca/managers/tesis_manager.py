@@ -189,32 +189,29 @@ class TesisManager():
         print("\n\n")
     
     def seleccionar_tesis(self):
-        tesis_seleccionadas = []
         while True:
             if not self.data_manager.thesis:
                 limpiar_consola()
                 print("No hay tesis registradas.")
                 pausar_sistema()
-                return []
-    
+                return None
+
             limpiar_consola()
-            print(">. Seleccione las tesis que desea (separadas por coma):")
+            print(">. Seleccione una tesis:")
             print("Tesis:")
             for i, tesis in enumerate(self.data_manager.thesis):
                 print(f"{i + 1}. {tesis.campoEstudio()} - {tesis.id()}")
-    
+
             try:
                 seleccion = input("Tesis: ")
-                seleccion = [int(x) for x in seleccion.split(",")]
-                for i in seleccion:
-                    if 1 <= i <= len(self.data_manager.thesis):
-                        tesis_seleccionadas.append(self.data_manager.thesis[i - 1])
-                    else:
-                        print("Opción inválida. Por favor, intente de nuevo.")
-    
-                if tesis_seleccionadas:
+                seleccion = int(seleccion)
+                if 1 <= seleccion <= len(self.data_manager.thesis):
+                    tesis_seleccionada = self.data_manager.thesis[seleccion - 1]
                     pausar_sistema()
-                    return tesis_seleccionadas
-    
+                    limpiar_consola()
+                    return tesis_seleccionada
+                else:
+                    print("Opción inválida. Por favor, intente de nuevo.")
+
             except ValueError:
                 print("Opción inválida. Por favor, intente de nuevo.")
