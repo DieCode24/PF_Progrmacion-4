@@ -26,6 +26,7 @@ def show_lector_menu(self):
 
         elif opcion == "2":
             limpiar_consola()
+            lector_manager.listar_lectores()
             id_lector = int(input("Ingrese el ID del lector a buscar: "))
             lector_manager.buscar_lector(id_lector)
             pausar_sistema()

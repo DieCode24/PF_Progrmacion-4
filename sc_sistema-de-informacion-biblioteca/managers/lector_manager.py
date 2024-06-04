@@ -116,7 +116,7 @@ class LectorManager:
             input("\n> No hay lectores registrados.")
             return
         for lector in self.data_manager.lectores:
-            print(f"\nID: {lector.get_id()}, Nombre: {lector.get_nombre()}, Teléfono: {lector.get_telefono()}, Dirección: {lector.get_direccion()}, Estado: {lector.get_estado()}")
+            print(f"Nombre: {lector.nombre} - ID: {lector.id}")
         pausar_sistema()
 
     def seleccionar_lector(self):
@@ -146,3 +146,10 @@ class LectorManager:
 
             except ValueError:
                 print("Opción inválida. Por favor, intente de nuevo.")
+                
+    def regresar_libro(self, libro):
+        lector = self.seleccionar_lector()
+        lector.regresar_libro(libro)
+        
+        print(f"\nLibro devuelto exitosamente por el lector {lector.nombre}.")
+        pausar_sistema()

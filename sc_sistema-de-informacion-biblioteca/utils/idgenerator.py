@@ -7,3 +7,6 @@ def id_generator():
     random_part = random.randint(100, 999)  # Parte aleatoria de 3 dígitos
     unique_id = f"{short_timestamp}{random_part}"  # Combina el short timestamp y la parte aleatoria
     return unique_id
+
+def id_generator_integer():
+    return int(id_generator())    

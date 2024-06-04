@@ -133,7 +133,7 @@ class ReaderMenu(Menu):
             elif choice == "2":
                 self.show_busqueda()
             elif choice == "3":
-                self.show_solicitar_prestamos()
+                self.show_solicitar_prestamo()
             elif choice == "4":
                 self.show_devolver_libro()
             elif choice == "5":
@@ -176,6 +176,37 @@ class ReaderMenu(Menu):
                 return False
 
             
+            else:
+                print("\nOpción inválida. Por favor, intente de nuevo.")
+                pausar_sistema()
+                
+                
+    def show_busqueda(self):
+        while True:
+            limpiar_consola()
+            print_brand_sistema()
+            separador_en_consola()
+
+            print("[-- Búsqueda --]\n")
+            print("[1] Buscar libro")
+            print("[2] Buscar tesis")
+            print("[3] Buscar artículo")
+            print("[4] Buscar autor")
+            print("[0] Salir")
+            choice = validar_input("\n\n> Seleccione una opción => ", int)
+            
+            if choice == 1:
+                query = validar_input("Buscar libro por ISBN o título: ", str)
+                self.container.libro_manager.buscar_libro(query)
+                pausar_sistema()
+            elif choice == 2:
+                self.container.tesis_manager.buscar_tesis()
+            elif choice == 3:
+                self.container.articulo_manager.buscar_articulo_desde_consola()
+            elif choice == 4:
+                self.container.autor_manager.busqueda_autor()
+            elif choice == 0:
+                return False
             else:
                 print("\nOpción inválida. Por favor, intente de nuevo.")
                 pausar_sistema()
