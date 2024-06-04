@@ -23,7 +23,8 @@ def show_tesis_menu(self):
         if opcion == "1":
             limpiar_consola()
             autores = autor_manager.seleccionar_autores()
-            tesis_manager.agregar_tesis(autores)
+            asociar = tesis_manager.agregar_tesis(autores)
+            autor_manager.asociar_tesis(autores, asociar.id)
             pausar_sistema()
             limpiar_consola()
             

@@ -6,6 +6,7 @@ from managers.autor_manager import AutorManager
 from managers.data_manager import DataManager
 from utils.validators import validar_input
 from utils.helpers import limpiar_consola
+from utils.idgenerator import id_generator
 
 class TesisManager():
 
@@ -20,7 +21,8 @@ class TesisManager():
         estado = Estado.DISPONIBLE
         paginas = validar_input("Ingrese el número de páginas de la tesis: ", int)
         tesis  = Tesis(autores, institucion, f_investigacion, f_presentacion, campo_estudio, estado, paginas)
-        self.data_manager.thesis.append(tesis)             
+        self.data_manager.thesis.append(tesis)   
+        return tesis          
       
         
     def listado_tesis(self):
@@ -168,10 +170,10 @@ class TesisManager():
         self.data_manager.autores.append(autor2)
         self.data_manager.autores.append(autor3)
         
-        Tesis1 = Tesis([autor1], "Universidad Nacional", "2020-09-23", "2024-09-23", "Ingenieria", Estado.DISPONIBLE, 100)
-        Tesis2 = Tesis([autor1, autor2], "Universidad de Andes", "2010-09-23", "2024-09-23", "Fisica", Estado.DISPONIBLE, 100)  
-        Tesis3 = Tesis([autor2], "Universidad de los Andes", "2010-09-23", "2024-09-23", "Fisica", Estado.DISPONIBLE, 100)
-        Tesis4 = Tesis([autor3, autor2, autor1], "Universidad de los Andes", "2010-09-23", "2024-09-23", "Matecaticas", Estado.DISPONIBLE, 100)
+        Tesis1 = Tesis([autor1], "Universidad Nacional", "2020-09-23", "2024-09-23", "Ingenieria", Estado.DISPONIBLE, 100, "123")
+        Tesis2 = Tesis([autor1, autor2], "Universidad de Andes", "2010-09-23", "2024-09-23", "Fisica", Estado.DISPONIBLE, 100, "654")  
+        Tesis3 = Tesis([autor2], "Universidad de los Andes", "2010-09-23", "2024-09-23", "Fisica", Estado.DISPONIBLE, 100, 456)
+        Tesis4 = Tesis([autor3, autor2, autor1], "Universidad de los Andes", "2010-09-23", "2024-09-23", "Matecaticas", Estado.DISPONIBLE, 100, "894")
         self.data_manager.thesis = [Tesis1, Tesis2, Tesis3, Tesis4]
         
         print("Datos de prueba listos.")
