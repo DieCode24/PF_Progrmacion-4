@@ -1,5 +1,6 @@
 from datetime import date
 from typing import List
+from utils.helpers import limpiar_consola, pausar_sistema
 
 from clases.estado import Estado
 
@@ -106,3 +107,39 @@ class ArticuloCientifico:
         :return: Título del artículo.
         """
         return self.titulo
+    
+    def seleccionar_articulos_cientificos(self) -> List[ArticuloCientifico]:
+        """
+        Permite al usuario seleccionar uno o más artículos científicos desde la consola.
+
+        :return: Una lista de objetos ArticuloCientifico seleccionados por el usuario.
+        """
+        articulos_seleccionados = []
+        while True:
+            if not self.data_manager.articulos_cientificos:
+                print("No hay artículos científicos registrados.")
+                pausar_sistema()
+                return []
+
+            limpiar_consola()
+            print(">. Seleccione los artículos científicos que desea (separados por coma):")
+            print("Artículos Científicos:")
+            for i, articulo in enumerate(self.data_manager.articulos_cientificos):
+                print(f"{i + 1}. {articulo.titulo} - {articulo.doi}")
+
+            try:
+                seleccion = input("Artículos Científicos: ")
+                seleccion = [int(x) for x in seleccion.split(",")]
+                for i in seleccion:
+                    if 1 <= i <= len(self.data_manager.articulos_cientificos):
+                        articulos_seleccionados.append(self.data_manager.articulos_cientificos[i - 1])
+                    else:
+                        print("Opción inválida. Por favor, intente de nuevo.")
+
+                if articulos_seleccionados:
+                    pausar_sistema()
+                    limpiar_consola()
+                    return articulos_seleccionados
+
+            except ValueError:
+                print("Opción inválida. Por favor, intente de nuevo.")

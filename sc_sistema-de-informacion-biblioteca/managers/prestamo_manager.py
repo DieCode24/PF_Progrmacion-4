@@ -22,7 +22,6 @@ class PrestamoManager:
         nuevo_prestamo = Prestamo(id_lector, id_libro)
         self.prestamos.append(nuevo_prestamo)
 
-    
     def consultar_prestamo(self, id_prestamo: int):
         for prestamo in self.prestamos:
             if prestamo.get_IdPrestamo() == id_prestamo:

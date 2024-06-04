@@ -5,7 +5,7 @@ from clases.autor import Autor
 from managers.autor_manager import AutorManager
 from managers.data_manager import DataManager
 from utils.validators import validar_input
-from utils.helpers import limpiar_consola
+from utils.helpers import limpiar_consola , pausar_sistema
 
 class TesisManager():
 
@@ -21,8 +21,7 @@ class TesisManager():
         paginas = validar_input("Ingrese el número de páginas de la tesis: ", int)
         tesis  = Tesis(autores, institucion, f_investigacion, f_presentacion, campo_estudio, estado, paginas)
         self.data_manager.thesis.append(tesis)   
-        return tesis          
-      
+        return tesis     
         
     def listado_tesis(self):
         print("\tLISTA DE TESIS\n")
@@ -40,7 +39,6 @@ class TesisManager():
                     print (f"\t{autor.nombre}")
             print("\n\n")
             counter += 1
-
             
     def buscar_tesis(self): 
         print("Como desea buscar la tesis?")
@@ -89,7 +87,6 @@ class TesisManager():
         for tesis in self.data_manager.thesis:
             if campo in tesis.campoEstudio():
                 self.mostrar_tesis(tesis)
-          
                 
     def modificar_tesis(self, autores: AutorManager):
     
@@ -111,7 +108,6 @@ class TesisManager():
         for autor in T_modificar.autores():
             print (f"\t{autor.nombre}")
             
-           
         while True:
             print ("\nModificar Tesis\n")
             print("1. Modifcar campo de estudio")
@@ -191,4 +187,34 @@ class TesisManager():
         for autor in tesis.autores():
             print(f"\t{autor.nombre}")
         print("\n\n")
-        
+    
+    def seleccionar_tesis(self):
+        tesis_seleccionadas = []
+        while True:
+            if not self.data_manager.thesis:
+                limpiar_consola()
+                print("No hay tesis registradas.")
+                pausar_sistema()
+                return []
+    
+            limpiar_consola()
+            print(">. Seleccione las tesis que desea (separadas por coma):")
+            print("Tesis:")
+            for i, tesis in enumerate(self.data_manager.thesis):
+                print(f"{i + 1}. {tesis.campoEstudio()} - {tesis.id()}")
+    
+            try:
+                seleccion = input("Tesis: ")
+                seleccion = [int(x) for x in seleccion.split(",")]
+                for i in seleccion:
+                    if 1 <= i <= len(self.data_manager.thesis):
+                        tesis_seleccionadas.append(self.data_manager.thesis[i - 1])
+                    else:
+                        print("Opción inválida. Por favor, intente de nuevo.")
+    
+                if tesis_seleccionadas:
+                    pausar_sistema()
+                    return tesis_seleccionadas
+    
+            except ValueError:
+                print("Opción inválida. Por favor, intente de nuevo.")

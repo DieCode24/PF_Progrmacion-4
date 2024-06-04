@@ -70,3 +70,5 @@ class Tesis:
     
     def set_Paginas(self, paginas):
         self._paginas = paginas
+        
+    
